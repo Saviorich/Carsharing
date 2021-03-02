@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class NewsServiceImpl implements NewsService {
-    
+
     @Override
     public Optional<News> findNewsById(int id) {
         return null;

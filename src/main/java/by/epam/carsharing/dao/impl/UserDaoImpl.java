@@ -92,14 +92,6 @@ public class UserDaoImpl implements UserDao {
     public void deleteById(int id) throws DaoException {
 
     }
-
-    public static void main(String[] args) {
-        try {
-            new UserDaoImpl().registerUser("admin@mail.com", "admin", 2);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
-    }
 }
 
 

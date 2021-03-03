@@ -28,9 +28,12 @@
         </label>
         <input class="button" type="submit" value="${register}">
     </form>
-    <div id="fail_message">
-        ${error_message}
-    </div>
+    <c:set var="is_register_failed" scope="session" value="${sessionScope.error}"/>
+    <c:if test="${is_register_failed}">
+        <div id="fail_message">
+                ${error_message}
+        </div>
+    </c:if>
     <c:set var="is_login_failed" scope="session" value=""/>
 
 </div>

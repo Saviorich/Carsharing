@@ -5,6 +5,8 @@ import by.epam.carsharing.entity.user.User;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.ServiceFactory;
 import by.epam.carsharing.service.UserService;
+import by.epam.carsharing.util.RequestParameter;
+import by.epam.carsharing.util.SessionAttribute;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,16 +19,21 @@ import java.util.Optional;
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
 
+    private static final String GO_TO_LOGIN_PAGE = "Controller?command=gotologinpage";
+    private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login;
         String password;
 
-        login = request.getParameter("email");
-        password = request.getParameter("password");
+        login = request.getParameter(RequestParameter.EMAIL);
+        password = request.getParameter(RequestParameter.PASSWORD);
 
         ServiceFactory serviceFactory = ServiceFactory.getInstance();
         UserService userService = serviceFactory.getUserService();
+
+        HttpSession session = request.getSession();
 
         Optional<User> user;
 
@@ -34,16 +41,18 @@ public class LoginCommand implements Command {
             user = userService.findUserByEmailAndPassword(login, password);
 
             if (!user.isPresent()) {
-                response.sendRedirect("Controller?command=gotomainpage&message=error1");
+                session.setAttribute(SessionAttribute.ERROR, true);
+                response.sendRedirect(GO_TO_LOGIN_PAGE);
                 return;
             }
 
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user", user);
-            response.sendRedirect("Controller?command=gotomainpage");
+            session.setAttribute(SessionAttribute.USER, user.get());
+            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.error(e.getMessage(), e);
-            response.sendRedirect("Controller?command=gotomainpage&message=error2");
+
+            session.setAttribute(SessionAttribute.ERROR, true);
+            response.sendRedirect(GO_TO_LOGIN_PAGE);
         }
     }
 }

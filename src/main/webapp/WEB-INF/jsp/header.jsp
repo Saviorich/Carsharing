@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="header">
-    <a href="#default" class="header__logo">CarSharing</a>
+    <a href="Controller?command=gotonewspage" class="header__logo">CarSharing</a>
         <div class="header__links">
             <c:choose>
                 <c:when test="${sessionScope.user eq null}">
@@ -28,9 +28,9 @@
                     <a href="Controller?command=gotoregisterpage">${sign_up}</a>
                 </c:when>
                 <c:otherwise>
-                    <a href="Controller?command=gotonews">${news}</a>
-                    <a href="Controller?command=gotocars">${cars}</a>
-                    <a href="Controller?command=gotoabout">${about}</a>
+                    <a href="Controller?command=gotonewspage">${news}</a>
+                    <a href="Controller?command=gotocarspage">${cars}</a>
+                    <a href="Controller?command=gotoaboutpage">${about}</a>
                     <a href="Controller?command=signout">${sign_out}</a>
                 </c:otherwise>
             </c:choose>

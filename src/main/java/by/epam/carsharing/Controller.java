@@ -2,6 +2,7 @@ package by.epam.carsharing;
 
 import by.epam.carsharing.command.Command;
 import by.epam.carsharing.command.CommandFactory;
+import by.epam.carsharing.util.RequestParameter;
 
 import java.io.*;
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class Controller extends HttpServlet {
         String name;
         Command command;
 
-        name = request.getParameter("command");
+        name = request.getParameter(RequestParameter.COMMAND);
         command = factory.takeCommand(name);
 
         command.execute(request, response);

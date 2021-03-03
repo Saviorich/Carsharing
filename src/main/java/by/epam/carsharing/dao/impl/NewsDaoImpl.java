@@ -20,7 +20,7 @@ public class NewsDaoImpl implements NewsDao {
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
     private static final String GET_BY_ID_QUERY = "SELECT * FROM carsharing_news WHERE id=?;";
-    private static final String GET_ALL_QUERY = "SELECT * FROM carsharing_news";
+    private static final String GET_ALL_QUERY = "SELECT * FROM carsharing_news ORDER BY publication_date DESC";
 
     @Override
     public Optional<News> getById(int id) throws DaoException {
@@ -55,9 +55,8 @@ public class NewsDaoImpl implements NewsDao {
         try (Connection connection = pool.takeConnection();
              PreparedStatement statement = connection.prepareStatement(GET_ALL_QUERY);
         ) {
-
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Integer id = resultSet.getInt(1);
                 Integer userId = resultSet.getInt(2);
                 String header = resultSet.getString(3);
@@ -81,16 +80,6 @@ public class NewsDaoImpl implements NewsDao {
     @Override
     public void deleteById(int id) throws DaoException {
         // TODO: add body
-    }
-
-    @Override
-    public List<News> takeAll() {
-        return null;
-    }
-
-    @Override
-    public News findNewsById() {
-        return null;
     }
 
     @Override

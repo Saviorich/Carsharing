@@ -10,8 +10,8 @@ public class CommandFactory {
 
     public CommandFactory() {
         commands.put(CommandName.LOGIN, new LoginCommand());
-        commands.put(CommandName.GOTOLOGINPAGE, new GoToLoginPageCommand());
-        commands.put(CommandName.GOTOMAINPAGE, new GoToMainPage());
+        commands.put(CommandName.GOTOLOGINPAGE, new GoToLoginPage());
+        commands.put(CommandName.GOTONEWSPAGE, new GoToNewsPage());
         commands.put(CommandName.GOTOREGISTERPAGE, new GoToRegisterPage());
         commands.put(CommandName.REGISTER, new RegisterCommand());
         commands.put(CommandName.SIGNOUT, new SignOutCommand());

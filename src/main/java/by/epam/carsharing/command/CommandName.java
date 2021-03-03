@@ -5,6 +5,6 @@ public enum CommandName {
     REGISTER,
     SIGNOUT,
     GOTOLOGINPAGE,
-    GOTOMAINPAGE,
+    GOTONEWSPAGE,
     GOTOREGISTERPAGE,
 }

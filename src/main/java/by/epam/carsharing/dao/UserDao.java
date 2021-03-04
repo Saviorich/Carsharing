@@ -10,6 +10,5 @@ public interface UserDao extends Dao<User> {
     void registerUser(String email, String password) throws DaoException;
     void registerUser(String email, String passowrd, int role) throws DaoException;
 
-    Optional<User> findUserById(Integer id);
     Optional<User> findUserByEmailAndPassword(String email, String password) throws DaoException;
 }

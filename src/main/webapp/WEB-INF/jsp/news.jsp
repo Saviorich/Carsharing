@@ -1,10 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/news.css" type="text/css">
+
     <fmt:bundle basename="content" prefix="admin.">
         <fmt:message key="edit_news" var="edit_news"/>
     </fmt:bundle>
@@ -15,12 +16,6 @@
 <c:forEach var="n" items="${requestScope.news}">
     <div class="news_block">
         <div class="news_block__header">
-
-            <!--
-
-            TODO: FIX USER IN SESSION AFTER REGISTRATION
-
-            -->
 
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <button type="button" name="" value="${edit_news}"></button>

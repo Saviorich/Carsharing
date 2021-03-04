@@ -30,7 +30,7 @@ public class RegisterCommand implements Command {
         try {
             userService.registerUser(email, password);
             response.sendRedirect(GO_TO_NEWS_PAGE);
-            session.setAttribute(SessionAttribute.USER, true);
+            session.setAttribute(SessionAttribute.USER, userService.findUserByEmailAndPassword(email, password).get());
         } catch (ServiceException e) {
             session.setAttribute(SessionAttribute.ERROR, true);
             response.sendRedirect(GO_TO_REGISTER_PAGE);

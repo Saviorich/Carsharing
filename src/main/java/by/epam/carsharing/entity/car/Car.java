@@ -1,10 +1,12 @@
 package by.epam.carsharing.entity.car;
 
+import by.epam.carsharing.entity.Identifiable;
+
 import java.math.BigDecimal;
 import java.time.Year;
 
-public class Car {
-    private Integer id;
+public class Car implements Identifiable {
+    private int id;
     private String brand;
     private String model;
     private String color;
@@ -14,13 +16,13 @@ public class Car {
     private EngineType engineType;
     private BigDecimal pricePerDay;
     private String vin;
-    private String carClass;
+    private CarClass carClass;
     private String imagePath;
 
-    public Car() {}
+    public Car(int id, String brand, String model, String color, int mileage, GearboxType gearboxType, Year year, EngineType engineType, BigDecimal pricePerDay, String vin, String plate, CarClass carClass, String imagePath) {}
 
-    public Car(Integer id, String brand, String model, String color, Integer mileage, GearboxType gearbox,
-               Year manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin, String carClass, String imagePath) {
+    public Car(int id, String brand, String model, String color, Integer mileage, GearboxType gearbox,
+               Year manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin, CarClass carClass, String imagePath) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -35,7 +37,7 @@ public class Car {
         this.imagePath = imagePath;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -75,7 +77,7 @@ public class Car {
         return vin;
     }
 
-    public String getCarClass() {
+    public CarClass getCarClass() {
         return carClass;
     }
 
@@ -90,7 +92,7 @@ public class Car {
 
         Car car = (Car) o;
 
-        if (!id.equals(car.id)) return false;
+        if (id != car.id) return false;
         if (!brand.equals(car.brand)) return false;
         if (!model.equals(car.model)) return false;
         if (!color.equals(car.color)) return false;
@@ -100,13 +102,13 @@ public class Car {
         if (engineType != car.engineType) return false;
         if (!pricePerDay.equals(car.pricePerDay)) return false;
         if (!vin.equals(car.vin)) return false;
-        if (carClass != null ? !carClass.equals(car.carClass) : car.carClass != null) return false;
+        if (carClass != car.carClass) return false;
         return imagePath != null ? imagePath.equals(car.imagePath) : car.imagePath == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id;
         result = 31 * result + brand.hashCode();
         result = 31 * result + model.hashCode();
         result = 31 * result + color.hashCode();

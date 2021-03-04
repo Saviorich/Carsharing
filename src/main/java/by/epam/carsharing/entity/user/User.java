@@ -19,7 +19,7 @@ public class User implements Identifiable {
     }
 
     @Override
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

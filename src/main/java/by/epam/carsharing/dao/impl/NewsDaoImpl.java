@@ -21,6 +21,7 @@ public class NewsDaoImpl implements NewsDao {
 
     private static final String GET_BY_ID_QUERY = "SELECT * FROM carsharing_news WHERE id=?;";
     private static final String GET_ALL_QUERY = "SELECT * FROM carsharing_news ORDER BY publication_date DESC";
+    private static final String DELETE_BY_ID_QUERY = "DELETE FROM carsharing_news WHERE id=?;";
 
     @Override
     public Optional<News> getById(int id) throws DaoException {
@@ -74,12 +75,21 @@ public class NewsDaoImpl implements NewsDao {
 
     @Override
     public void save(News entity) throws DaoException {
-
+        // TODO: add body
     }
 
     @Override
     public void deleteById(int id) throws DaoException {
-        // TODO: add body
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)
+        ) {
+            statement.setInt(1, id);
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Exception in deleteById", e);
+        }
     }
 
     @Override

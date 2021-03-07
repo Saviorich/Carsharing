@@ -5,4 +5,7 @@ public enum CarClass {
     MUSCLE_CAR,
     SEDAN,
     SPORT_CAR,
+    SUV,
+    HATCHBACK,
+    PICKUP
 }

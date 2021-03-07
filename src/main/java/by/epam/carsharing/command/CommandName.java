@@ -7,4 +7,5 @@ public enum CommandName {
     GOTOLOGINPAGE,
     GOTONEWSPAGE,
     GOTOREGISTERPAGE,
+    GOTOCARSPAGE,
 }

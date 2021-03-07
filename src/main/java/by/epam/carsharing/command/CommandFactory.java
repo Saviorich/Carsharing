@@ -15,6 +15,7 @@ public class CommandFactory {
         commands.put(CommandName.GOTOREGISTERPAGE, new GoToRegisterPage());
         commands.put(CommandName.REGISTER, new RegisterCommand());
         commands.put(CommandName.SIGNOUT, new SignOutCommand());
+        commands.put(CommandName.GOTOCARSPAGE, new GoToCarPage());
     }
 
     public Command takeCommand(String command) {

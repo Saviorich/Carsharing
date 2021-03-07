@@ -10,19 +10,20 @@ public class Car implements Identifiable {
     private String brand;
     private String model;
     private String color;
-    private Integer mileage;
+    private int mileage;
     private GearboxType gearbox;
-    private Year manufacturedYear;
+    private String manufacturedYear;
     private EngineType engineType;
     private BigDecimal pricePerDay;
     private String vin;
+    private String plate;
     private CarClass carClass;
     private String imagePath;
 
-    public Car(int id, String brand, String model, String color, int mileage, GearboxType gearboxType, Year year, EngineType engineType, BigDecimal pricePerDay, String vin, String plate, CarClass carClass, String imagePath) {}
+    public Car() {}
 
-    public Car(int id, String brand, String model, String color, Integer mileage, GearboxType gearbox,
-               Year manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin, CarClass carClass, String imagePath) {
+    public Car(int id, String brand, String model, String color, int mileage, GearboxType gearbox,
+               String manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin, String plate,CarClass carClass, String imagePath) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -33,6 +34,7 @@ public class Car implements Identifiable {
         this.engineType = engineType;
         this.pricePerDay = pricePerDay;
         this.vin = vin;
+        this.plate = plate;
         this.carClass = carClass;
         this.imagePath = imagePath;
     }
@@ -61,7 +63,7 @@ public class Car implements Identifiable {
         return gearbox;
     }
 
-    public Year getManufacturedYear() {
+    public String getManufacturedYear() {
         return manufacturedYear;
     }
 
@@ -96,7 +98,7 @@ public class Car implements Identifiable {
         if (!brand.equals(car.brand)) return false;
         if (!model.equals(car.model)) return false;
         if (!color.equals(car.color)) return false;
-        if (!mileage.equals(car.mileage)) return false;
+        if (mileage != car.mileage) return false;
         if (gearbox != car.gearbox) return false;
         if (!manufacturedYear.equals(car.manufacturedYear)) return false;
         if (engineType != car.engineType) return false;
@@ -112,7 +114,7 @@ public class Car implements Identifiable {
         result = 31 * result + brand.hashCode();
         result = 31 * result + model.hashCode();
         result = 31 * result + color.hashCode();
-        result = 31 * result + mileage.hashCode();
+        result = 31 * result + mileage;
         result = 31 * result + gearbox.hashCode();
         result = 31 * result + manufacturedYear.hashCode();
         result = 31 * result + engineType.hashCode();

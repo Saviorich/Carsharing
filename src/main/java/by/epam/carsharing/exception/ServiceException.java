@@ -1,6 +1,6 @@
 package by.epam.carsharing.exception;
 
-public class ServiceException extends Throwable {
+public class ServiceException extends Exception {
 
     public ServiceException() {}
 

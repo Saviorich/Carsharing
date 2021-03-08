@@ -1,8 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="<c:url value="/css/cars.css"/>" type="text/css"/>
+
+    <fmt:bundle basename="content" prefix="car.">
+        <fmt:message key="color" var="color"/>
+        <fmt:message key="class" var="car_class"/>
+        <fmt:message key="year" var="year"/>
+        <fmt:message key="gearbox" var="gearbox"/>
+        <fmt:message key="engine" var="engine"/>
+        <fmt:message key="price" var="price"/>
+        <fmt:message key="mileage" var="mileage"/>
+    </fmt:bundle>
+
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
@@ -16,18 +29,26 @@
                 <img src="${car.imagePath}"/>
             </div>
             <div class="car_block__characteristics">
-                    ${car.color}<br/>
-                    ${car.mileage}<br/>
-                    ${car.gearbox}<br/>
-                    ${car.manufacturedYear}<br/>
-                    ${car.engineType}<br/>
-                    ${car.carClass}<br/>
+                    ${color}: ${car.color}<br/>
+                    ${mileage}: ${car.mileage} KM<br/>
+                    ${gearbox}: ${car.gearbox}<br/>
+                    ${year}: ${car.manufacturedYear}<br/>
+                    ${engine}: ${car.engineType}<br/>
+                    ${car_class}: ${car.carClass}<br/>
             </div>
             <div class="car_block__price">
-                ${car.pricePerDay}
+                ${price}: ${car.pricePerDay} BR
             </div>
             <div class="car_block__button">
-                <button type="button" name="" value="">Order</button>
+                <c:choose>
+                    <c:when test="${sessionScope.user.role eq 'ADMIN'}">
+                        <button id="admin_but1" type="button" name="" value="">Edit</button>
+                        <button id="admin_but2" type="button" name="" value="">Delete</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="button" name="" value="">Order</button>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </c:forEach>

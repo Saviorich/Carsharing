@@ -2,9 +2,9 @@ package by.epam.carsharing.entity.car;
 
 public enum CarClass {
     WAGON,
-    MUSCLE_CAR,
+    MUSCLE,
     SEDAN,
-    SPORT_CAR,
+    SPORT,
     SUV,
     HATCHBACK,
     PICKUP

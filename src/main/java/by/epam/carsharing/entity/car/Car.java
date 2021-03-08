@@ -79,6 +79,10 @@ public class Car implements Identifiable {
         return vin;
     }
 
+    public String getPlate() {
+        return plate;
+    }
+
     public CarClass getCarClass() {
         return carClass;
     }

@@ -31,10 +31,10 @@
             <div class="car_block__characteristics">
                     ${color}: ${car.color}<br/>
                     ${mileage}: ${car.mileage} KM<br/>
-                    ${gearbox}: ${car.gearbox}<br/>
+                    ${gearbox}: ${car.gearbox.toString().toLowerCase()}<br/>
                     ${year}: ${car.manufacturedYear}<br/>
-                    ${engine}: ${car.engineType}<br/>
-                    ${car_class}: ${car.carClass}<br/>
+                    ${engine}: ${car.engineType.toString().toLowerCase()}<br/>
+                    ${car_class}: ${car.carClass.toString().toLowerCase()}<br/>
             </div>
             <div class="car_block__price">
                 ${price}: ${car.pricePerDay} BR

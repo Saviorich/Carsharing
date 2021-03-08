@@ -1,6 +1,7 @@
 package by.epam.carsharing.service;
 
 import by.epam.carsharing.entity.car.Car;
+import by.epam.carsharing.entity.car.CarClass;
 import by.epam.carsharing.exception.ServiceException;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface CarService {
 
     List<Car> getCarsByBrand(String brand) throws ServiceException;
     List<Car> getCarsByYear(String year) throws ServiceException;
-    List<Car> getCarsByClass(String year) throws ServiceException;
+    List<Car> getCarsByClass(CarClass carClass) throws ServiceException;
 }

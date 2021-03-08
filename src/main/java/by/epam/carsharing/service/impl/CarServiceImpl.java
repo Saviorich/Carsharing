@@ -3,6 +3,7 @@ package by.epam.carsharing.service.impl;
 import by.epam.carsharing.dao.CarDao;
 import by.epam.carsharing.dao.DaoFactory;
 import by.epam.carsharing.entity.car.Car;
+import by.epam.carsharing.entity.car.CarClass;
 import by.epam.carsharing.exception.DaoException;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.CarService;
@@ -42,16 +43,43 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCarsByBrand(String brand) throws ServiceException {
-        return null;
+        List<Car> cars;
+        CarDao carDao = daoFactory.getCarDao();
+
+        try {
+            cars = carDao.getCarsByBrand(brand);
+        } catch (DaoException e) {
+            throw new ServiceException("DaoException in getCarsByBrand", e);
+        }
+
+        return cars;
     }
 
     @Override
     public List<Car> getCarsByYear(String year) throws ServiceException {
-        return null;
+        List<Car> cars;
+        CarDao carDao = daoFactory.getCarDao();
+
+        try {
+            cars = carDao.getCarsByBrand(year);
+        } catch (DaoException e) {
+            throw new ServiceException("DaoException in getCarsByBrand", e);
+        }
+
+        return cars;
     }
 
     @Override
-    public List<Car> getCarsByClass(String year) throws ServiceException {
-        return null;
+    public List<Car> getCarsByClass(CarClass carClass) throws ServiceException {
+        List<Car> cars;
+        CarDao carDao = daoFactory.getCarDao();
+
+        try {
+            cars = carDao.getCarsByClass(carClass);
+        } catch (DaoException e) {
+            throw new ServiceException("DaoException in getCarsByBrand", e);
+        }
+
+        return cars;
     }
 }

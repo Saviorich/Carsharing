@@ -6,6 +6,7 @@
     <title></title>
     <link rel="stylesheet" href="<c:url value="/css/register.css"/>" type="text/css"/>
 
+    <fmt:setLocale value="${sessionScope.language}"/>
     <fmt:bundle basename="content" prefix="register.">
         <fmt:message key="password" var="password"/>
         <fmt:message key="sign_up" var="register"/>

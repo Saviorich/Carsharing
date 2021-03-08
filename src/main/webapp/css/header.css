@@ -106,14 +106,14 @@
 .languages {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
-.languages a {
+.modal__content a {
     color: rgba(71, 71, 71, 0.8);
 }
 
-.languages a:hover {
+.modal__content a:hover {
     color: black;
 }
 

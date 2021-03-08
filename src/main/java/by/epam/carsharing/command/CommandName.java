@@ -8,4 +8,5 @@ public enum CommandName {
     GOTONEWSPAGE,
     GOTOREGISTERPAGE,
     GOTOCARSPAGE,
+    CHANGELANG,
 }

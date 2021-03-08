@@ -6,6 +6,7 @@
     <title></title>
     <link rel="stylesheet" href="<c:url value="/css/login.css"/>" type="text/css"/>
 
+
     <fmt:bundle basename="content" prefix="login.">
         <fmt:message key="password" var="password"/>
         <fmt:message key="log_in" var="log_in"/>

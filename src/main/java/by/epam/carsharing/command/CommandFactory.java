@@ -16,6 +16,7 @@ public class CommandFactory {
         commands.put(CommandName.REGISTER, new RegisterCommand());
         commands.put(CommandName.SIGNOUT, new SignOutCommand());
         commands.put(CommandName.GOTOCARSPAGE, new GoToCarPage());
+        commands.put(CommandName.CHANGELANG, new ChangeLanguageCommand());
     }
 
     public Command takeCommand(String command) {

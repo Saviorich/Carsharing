@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <fmt:setLocale value="${sessionScope.locale}"/>
-    <fmt:setBundle basename="content" var="loc"/>
-
     <fmt:bundle basename="content" prefix="header.">
         <fmt:message key="log_in" var="log_in"/>
         <fmt:message key="sign_up" var="sign_up"/>
@@ -50,9 +48,9 @@
 
                 <a href="#" class="modal__close">&times;</a>
                 <div class="languages">
-                    <a id="en" href="Controller?command=changelang&lang=en_EN">EN</a>
-                    <a id="ru" href="Controller?command=changelang&lang=ru_RU">RU</a>
-                    <a id="be" href="Controller?command=changelang&lang=be_BE">BE</a>
+                    <a id="en" href="Controller?command=changelang&locale=en">EN</a>
+                    <a id="ru" href="Controller?command=changelang&locale=ru">RU</a>
+                    <a id="be" href="Controller?command=changelang&locale=be">BE</a>
                 </div>
             </div>
         </div>

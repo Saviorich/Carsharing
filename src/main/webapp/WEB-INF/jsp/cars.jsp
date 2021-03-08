@@ -6,6 +6,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="<c:url value="/css/cars.css"/>" type="text/css"/>
 
+    <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content" prefix="car.">
         <fmt:message key="color" var="color"/>
         <fmt:message key="class" var="car_class"/>

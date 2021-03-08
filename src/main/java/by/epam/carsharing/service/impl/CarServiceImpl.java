@@ -61,7 +61,7 @@ public class CarServiceImpl implements CarService {
         CarDao carDao = daoFactory.getCarDao();
 
         try {
-            cars = carDao.getCarsByBrand(year);
+            cars = carDao.getCarsByYear(year);
         } catch (DaoException e) {
             throw new ServiceException("DaoException in getCarsByBrand", e);
         }

@@ -6,8 +6,6 @@ import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.CarService;
 import by.epam.carsharing.service.ServiceFactory;
 import by.epam.carsharing.util.RequestParameter;
-import by.epam.carsharing.util.SessionAttribute;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,18 +28,11 @@ public class GoToCarPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
         try {
-            if (session.getAttribute(SessionAttribute.USER) != null) {
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher(CARS_PAGE);
-                CarService carService = serviceFactory.getCarService();
-                List<Car> cars = carService.getAll();
-                request.setAttribute(RequestParameter.CARS, cars);
-                requestDispatcher.forward(request, response);
-            }
-            // Forwards user to login page if he isn't logged yet
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(CARS_PAGE);
+            CarService carService = serviceFactory.getCarService();
+            List<Car> cars = carService.getAll();
+            request.setAttribute(RequestParameter.CARS, cars);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
             logger.error(e.getMessage(), e);

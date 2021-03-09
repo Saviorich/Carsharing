@@ -1,12 +1,12 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="<c:url value="/css/login.css"/>" type="text/css"/>
+    <link rel="stylesheet" href="css/login.css" type="text/css"/>
 
-
+    <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content" prefix="login.">
         <fmt:message key="password" var="password"/>
         <fmt:message key="log_in" var="log_in"/>

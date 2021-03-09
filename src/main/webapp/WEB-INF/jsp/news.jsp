@@ -5,7 +5,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="css/news.css" type="text/css">
-    <fmt:setLocale value="${sessionScope.language}"/>
+    <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content" prefix="admin.">
         <fmt:message key="edit_news" var="edit_news"/>
     </fmt:bundle>

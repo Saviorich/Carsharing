@@ -20,7 +20,6 @@
     </servlet>
 
     <servlet>
-        <display-name>cars</display-name>
         <servlet-name>cars</servlet-name>
         <jsp-file>/WEB-INF/jsp/cars.jsp</jsp-file>
     </servlet>

@@ -2,6 +2,8 @@ package by.epam.carsharing.command.impl;
 
 import by.epam.carsharing.command.Command;
 import by.epam.carsharing.util.RequestParameter;
+import by.epam.carsharing.util.SessionAttribute;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,10 +24,10 @@ public class ChangeLanguageCommand implements Command {
         Locale.Builder builder = new Locale.Builder();
         builder.setLanguageTag(localeParameter);
         Locale locale = builder.build();
-        request.getSession().setAttribute(RequestParameter.LOCALE, locale);
+        request.getSession().setAttribute(SessionAttribute.LANGUAGE, locale);
         String header = request.getHeader(REFERER);
         String serverUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +
                 request.getContextPath();
-        response.sendRedirect(serverUrl);
+        response.sendRedirect(header);
     }
 }

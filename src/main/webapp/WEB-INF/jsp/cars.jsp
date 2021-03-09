@@ -47,7 +47,7 @@
                     ${car_class}: ${car.carClass.toString().toLowerCase()}<br/>
             </div>
             <div class="car_block__price">
-                ${price}: ${car.pricePerDay} BR
+                ${price}: ${car.pricePerDay} BYN
             </div>
             <div class="car_block__button">
                 <c:choose>

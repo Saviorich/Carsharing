@@ -41,7 +41,17 @@
 }
 
 .car_block__characteristics {
-    font-size: 14px;
+    margin-left: 7px;
+    font-size: 22px;
+}
+
+
+.car_block__price {
+    color: #ff9d26;
+    margin-right: 7px;
+    text-align: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 .car_block__button {
     margin: 10px 5px 10px 10px;

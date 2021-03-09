@@ -7,19 +7,28 @@
     <link rel="stylesheet" href="css/cars.css" type="text/css"/>
 
     <fmt:setLocale value="${sessionScope.locale}"/>
-    <fmt:bundle basename="content" prefix="car.">
-        <fmt:message key="color" var="color"/>
-        <fmt:message key="class" var="car_class"/>
-        <fmt:message key="year" var="year"/>
-        <fmt:message key="gearbox" var="gearbox"/>
-        <fmt:message key="engine" var="engine"/>
-        <fmt:message key="price" var="price"/>
-        <fmt:message key="mileage" var="mileage"/>
+    <fmt:bundle basename="content">
+        <fmt:message key="car.order" var="order"/>
+        <fmt:message key="car.color" var="color"/>
+        <fmt:message key="car.class" var="car_class"/>
+        <fmt:message key="car.year" var="year"/>
+        <fmt:message key="car.gearbox" var="gearbox"/>
+        <fmt:message key="car.engine" var="engine"/>
+        <fmt:message key="car.price" var="price"/>
+        <fmt:message key="car.mileage" var="mileage"/>
+        <fmt:message key="admin.delete" var="delete"/>
+        <fmt:message key="admin.edit" var="edit"/>
+        <fmt:message key="admin.add_car" var="add_car"/>
     </fmt:bundle>
 
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
+<div class="admin_button_panel">
+    <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+        <button id="admin_but_add_car">${add_car}</button>
+    </c:if>
+</div>
 <div class="main_block">
     <c:forEach var="car" items="${requestScope.cars}">
         <div class="car_block">
@@ -43,11 +52,11 @@
             <div class="car_block__button">
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'ADMIN'}">
-                        <button id="admin_but1" type="button" name="" value="">Edit</button>
-                        <button id="admin_but2" type="button" name="" value="">Delete</button>
+                        <button id="admin_but_edit" type="button" name="" value="">${edit}</button>
+                        <button id="admin_but_delete" type="button" name="" value="">${delete}</button>
                     </c:when>
                     <c:otherwise>
-                        <button type="button" name="" value="">Order</button>
+                        <button type="button" name="" value="">${order}</button>
                     </c:otherwise>
                 </c:choose>
             </div>

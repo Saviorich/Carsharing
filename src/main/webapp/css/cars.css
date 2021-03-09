@@ -1,3 +1,16 @@
+#admin_but_add_car {
+    background: limegreen;
+    border: none;
+    text-align: center;
+    font-size: 28px;
+    height: auto;
+    width: 100%;
+}
+
+#admin_but_add_car:hover {
+    opacity: .8;
+}
+
 .main_block {
     display: flex;
     flex-wrap: wrap;
@@ -28,7 +41,7 @@
 }
 
 .car_block__characteristics {
-
+    font-size: 14px;
 }
 .car_block__button {
     margin: 10px 5px 10px 10px;
@@ -37,18 +50,19 @@
 
 .car_block__button button {
     height: auto;
-    width: 100px;
+    width: auto;
+    min-width: 100px;
     background: transparent;
     border: 1px solid #ff9d26;
     border-radius: 5px;
     font-size: 25px;
 }
 
-#admin_but2 {
+#admin_but_delete {
     border: 2px solid red;
 }
 
-#admin_but2:hover {
+#admin_but_delete:hover {
     background: red;
 }
 

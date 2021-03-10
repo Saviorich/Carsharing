@@ -18,6 +18,7 @@
 }
 
 .news_block__header__date {
+    margin-top: 7px;
     float: right;
     text-align: right;
     font-size: 16px;
@@ -36,19 +37,19 @@
     max-height: 100%;
 }
 
-.news_block__header__button {
+.news_block__admin_panel {
     float: right;
 }
 
-.news_block__header__button button {
+.news_block__admin_panel button {
     height: auto;
-    width: 100px;
+    width: auto;
     background: transparent;
     border: 1px solid #ff9d26;
     border-radius: 5px;
     font-size: 25px;
 }
 
-.news_block__header__button button:hover {
+.news_block__admin_panel button:hover {
     background: #ff9d26;
 }

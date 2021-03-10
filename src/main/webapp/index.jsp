@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title></title>
 </head>
 <body>
     <c:redirect url="/Controller?command=gotonewspage"/>

@@ -30,9 +30,13 @@
                 <img src="${n.imagePath}" alt="${n.header}"/>
             </div>
         </c:if>
-        <div class="news_block__header__button">
+        <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                <button type="button" name="" value="${edit_news}">${edit_news}</button>
+                <form action="Controller" method="post">
+                    <button type="submit" name="" value="" data-collapse="">${edit_news}</button>
+                    <input type="hidden" name="data_id" value="${n.id}">
+                    <input type="hidden" name="command" value="gotonewseditpage"/>
+                </form>
             </c:if>
         </div>
 

@@ -18,4 +18,6 @@ public class RequestParameter {
     public static final String COMMAND = "command";
 
     public static final String CARS = "cars";
+
+    public static final String DATA_ID = "data_id";
 }

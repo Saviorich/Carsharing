@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+         pageEncoding="UTF-8" %>
 <html>
 <head>
     <title></title>
@@ -23,12 +24,12 @@
 <body>
 <jsp:include page="../jsp/header.jsp"/>
 <c:set var="n" value="${requestScope.data_id}"/>
-<form action="Controller" method="post">
+<form action="Upload" method="post" enctype='multipart/form-data'>
     <div class="container">
         <div class="editor_block">
             <div class="editor_block__header">
                 <h5>${editor_header}</h5>
-                <input id="header_editor" type="text" value="${n.header}">
+                <input name="header_editor" id="header_editor" type="text" value="${n.header}">
             </div>
             <div class="editor_block__content">
                 <h5>${content}</h5>
@@ -37,13 +38,22 @@
                 </textarea>
             </div>
             <div class="editor_block__image">
-                <input type='file' onchange="readURL(this);"/>
+                <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>
                 <img id="blah" src="${n.imagePath}" alt="your image"/>
             </div>
             <div class="navigation">
                 <a id="view" href="#preview">${preview}</a>
                 <input type="submit" value="${submit}">
-                <input type="hidden" name="command" value="editnews">
+                <c:choose>
+                    <c:when test="${n ne null}">
+                        <input type="hidden" name="command" value="editnews">
+                        <input type="hidden" name="data_id" value="${n.id}">
+                        <input type="hidden" name="image_path" value="${n.imagePath}">
+                    </c:when>
+                    <c:otherwise>
+                        <input type="hidden" name="command" value="addnews">
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
@@ -58,7 +68,7 @@
 
             </div>
             <div class="news_block__content">
-                <p>${n.content}</p>
+                ${n.content}
             </div>
             <div class="news_block__img">
                 <img src="${n.imagePath}" alt="${n.header}"/>

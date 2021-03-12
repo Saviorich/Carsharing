@@ -35,10 +35,13 @@ public class GoToNewsEditPage implements Command {
         try {
             NewsService newsService = ServiceFactory.getInstance().getNewsService();
 
-            Optional<News> news = newsService.findNewsById(
-                    Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
-
-            request.setAttribute(RequestParameter.DATA_ID, news.get());
+            String data_id = request.getParameter(RequestParameter.DATA_ID);
+            logger.log(Level.DEBUG, data_id);
+            if (data_id != null) {
+                Optional<News> news = newsService.findNewsById(
+                        Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
+                request.setAttribute(RequestParameter.DATA_ID, news.get());
+            }
 
             if (user.getRole() == Role.ADMIN) {
                 requestDispatcher.forward(request, response);

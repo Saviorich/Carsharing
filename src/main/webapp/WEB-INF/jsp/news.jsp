@@ -5,14 +5,21 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="css/news.css" type="text/css">
+    <link rel="stylesheet" href="css/cars.css" type="text/css">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content" prefix="admin.">
+        <fmt:message key="add_news" var="add_news"/>
         <fmt:message key="edit" var="edit_news"/>
     </fmt:bundle>
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
 
+<div class="admin_button_panel">
+    <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+        <a id="admin_but_add" href="Controller?command=gotonewseditpage">${add_news}</a>
+    </c:if>
+</div>
 <c:forEach var="n" items="${requestScope.news}">
     <div class="news_block">
         <div class="news_block__header">
@@ -33,7 +40,7 @@
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <form action="Controller" method="post">
-                    <button type="submit" name="" value="" data-collapse="">${edit_news}</button>
+                    <button type="submit" name="" value="">${edit_news}</button>
                     <input type="hidden" name="data_id" value="${n.id}">
                     <input type="hidden" name="command" value="gotonewseditpage"/>
                 </form>

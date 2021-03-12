@@ -43,4 +43,20 @@ public class NewsServiceImpl implements NewsService {
         }
         return news;
     }
+
+    @Override
+    public void update(int id, String header, String content, String imagePath) throws ServiceException {
+        NewsDao newsDao = daoFactory.getNewsDao();
+        try {
+            newsDao.update(id, header, content, imagePath);
+        } catch (DaoException e){
+            throw new ServiceException("Exception in update", e);
+        }
+    }
+
+    @Override
+    public void save(int userId, String header, String content, String imagePath) throws ServiceException {
+
+    }
+
 }

@@ -1,10 +1,13 @@
 package by.epam.carsharing.dao.impl;
 
+import by.epam.carsharing.FileUploadingServlet;
 import by.epam.carsharing.connection.ConnectionPool;
 import by.epam.carsharing.dao.NewsDao;
 import by.epam.carsharing.entity.News;
 import by.epam.carsharing.exception.ConnectionPoolException;
 import by.epam.carsharing.exception.DaoException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,11 +20,14 @@ import java.util.Optional;
 
 public class NewsDaoImpl implements NewsDao {
 
+    private static final Logger logger = LogManager.getLogger(NewsDaoImpl.class);
+
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
     private static final String GET_BY_ID_QUERY = "SELECT * FROM carsharing_news WHERE id=?;";
     private static final String GET_ALL_QUERY = "SELECT * FROM carsharing_news ORDER BY publication_date DESC";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM carsharing_news WHERE id=?;";
+    private static final String UPDATE_NEWS_QUERY = "UPDATE carsharing_news SET header=?, content=?, image_path=? WHERE id=?";
 
     @Override
     public Optional<News> getById(int id) throws DaoException {
@@ -93,7 +99,19 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public void update(String header, String content, String imagePath) {
-        // TODO: add body
+    public void update(int id, String header, String content, String imagePath) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_NEWS_QUERY)
+        ){
+            statement.setString(1, header);
+            statement.setString(2, content);
+            statement.setString(3, imagePath);
+            statement.setInt(4, id);
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Exception in update", e);
+        }
     }
 }

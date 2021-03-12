@@ -20,4 +20,10 @@ public class RequestParameter {
     public static final String CARS = "cars";
 
     public static final String DATA_ID = "data_id";
+
+    public static final String HEADER_EDITOR = "header_editor";
+
+    public static final String CONTENT_EDITOR = "content_editor";
+
+    public static final String IMAGE_PATH = "image_path";
 }

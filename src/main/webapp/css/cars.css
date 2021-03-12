@@ -1,14 +1,19 @@
-#admin_but_add_car {
+.admin_button_panel {
     background: limegreen;
-    border: none;
+    border-radius: 5px;
     text-align: center;
-    font-size: 28px;
-    height: auto;
-    width: 100%;
+    margin: 10px auto 0;
+    width: 90%;
 }
 
-#admin_but_add_car:hover {
-    opacity: .8;
+#admin_but_add {
+    font-size: 28px;
+    color: white;
+    text-decoration: none;
+}
+
+#admin_but_add:hover {
+    opacity: .7;
 }
 
 .main_block {

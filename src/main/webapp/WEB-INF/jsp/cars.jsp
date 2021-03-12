@@ -26,7 +26,7 @@
 <jsp:include page="../jsp/header.jsp"/>
 <div class="admin_button_panel">
     <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-        <button id="admin_but_add_car">${add_car}</button>
+        <a id="admin_but_add">${add_car}</a>
     </c:if>
 </div>
 <div class="main_block">

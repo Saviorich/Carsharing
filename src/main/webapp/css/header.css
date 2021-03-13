@@ -44,32 +44,12 @@
     float: right;
 }
 
+#globe {
+    margin-top: 1px;
+}
+
 #globe:hover {
     background: rgba(255, 157, 38, 0.8);
-}
-
-
-
-.globe {
-    height: 100vh;
-    /* This part is important for centering the content */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* End center */
-    background: -webkit-linear-gradient(to right, #834d9b, #d04ed6);
-    background: linear-gradient(to right, #834d9b, #d04ed6);
-}
-
-.globe a {
-    display: inline-block;
-    text-decoration: none;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 3px;
-    text-transform: uppercase;
-    color: #585858;
-    font-family: 'Roboto', sans-serif;
 }
 
 .modal {

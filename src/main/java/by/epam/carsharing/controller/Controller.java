@@ -1,7 +1,7 @@
 package by.epam.carsharing.controller;
 
-import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.controller.command.CommandFactory;
+import by.epam.carsharing.command.Command;
+import by.epam.carsharing.command.CommandFactory;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

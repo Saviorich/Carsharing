@@ -1,6 +1,6 @@
 package by.epam.carsharing.controller;
 
-import by.epam.carsharing.controller.command.CommandFactory;
+import by.epam.carsharing.command.CommandFactory;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.NewsService;
 import by.epam.carsharing.service.ServiceFactory;

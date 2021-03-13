@@ -1,6 +1,6 @@
-package by.epam.carsharing.command.impl;
+package by.epam.carsharing.controller.command.impl;
 
-import by.epam.carsharing.command.Command;
+import by.epam.carsharing.controller.command.Command;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

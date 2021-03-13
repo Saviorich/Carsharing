@@ -1,6 +1,6 @@
-package by.epam.carsharing.command;
+package by.epam.carsharing.controller.command;
 
-import by.epam.carsharing.command.impl.*;
+import by.epam.carsharing.controller.command.impl.*;
 
 import java.util.HashMap;
 import java.util.Map;

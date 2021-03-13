@@ -1,6 +1,6 @@
-package by.epam.carsharing.command.impl;
+package by.epam.carsharing.controller.command.impl;
 
-import by.epam.carsharing.command.Command;
+import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.util.SessionAttribute;
 
 import javax.servlet.ServletException;

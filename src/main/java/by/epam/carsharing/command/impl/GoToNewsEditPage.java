@@ -26,10 +26,10 @@ public class GoToNewsEditPage implements Command {
     private static final Logger logger = LogManager.getLogger(GoToNewsEditPage.class);
 
     private static final String NEWS_EDIT_PAGE = "/WEB-INF/jsp/news_edit.jsp";
+    private static final String LOGIN_PAGE = "/login";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(NEWS_EDIT_PAGE);
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
         try {
@@ -42,10 +42,13 @@ public class GoToNewsEditPage implements Command {
                         Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
                 request.setAttribute(RequestParameter.DATA_ID, news.get());
             }
-
-            if (user.getRole() == Role.ADMIN) {
-                requestDispatcher.forward(request, response);
+            RequestDispatcher requestDispatcher;
+            if (user != null && user.getRole() == Role.ADMIN) {
+                requestDispatcher = request.getRequestDispatcher(NEWS_EDIT_PAGE);
+            } else {
+                requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
             }
+            requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
         }

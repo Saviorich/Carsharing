@@ -32,7 +32,7 @@
         <div class="news_block__content">
             <p>${n.content}</p>
         </div>
-        <c:if test="${n.imagePath != null}">
+        <c:if test="${not empty n.imagePath}">
             <div class="news_block__img">
                 <img src="${n.imagePath}" alt="${n.header}"/>
             </div>

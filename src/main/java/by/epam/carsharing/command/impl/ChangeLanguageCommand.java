@@ -26,8 +26,6 @@ public class ChangeLanguageCommand implements Command {
         Locale locale = builder.build();
         request.getSession().setAttribute(SessionAttribute.LANGUAGE, locale);
         String header = request.getHeader(REFERER);
-        String serverUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() +
-                request.getContextPath();
         response.sendRedirect(header);
     }
 }

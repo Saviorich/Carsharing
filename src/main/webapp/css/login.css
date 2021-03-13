@@ -57,6 +57,21 @@ body {
     margin-bottom: 20px;
 }
 
+label {
+    font-size: inherit;
+}
+
+.login a{
+    text-decoration: none;
+    font-size: inherit;
+    color: #ff9d26;
+}
+
+.login a:hover {
+    opacity: .9;
+}
+
+
 #fail_message {
     line-height: normal;
     margin-bottom: 10px;

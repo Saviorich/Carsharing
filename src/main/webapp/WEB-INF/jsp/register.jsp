@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="<c:url value="/css/register.css"/>" type="text/css"/>
 
     <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
-    <fmt:bundle basename="content" prefix="register.">
-        <fmt:message key="password" var="password"/>
-        <fmt:message key="sign_up" var="register"/>
-        <fmt:message key="error_message" var="error_message"/>
+    <fmt:bundle basename="content">
+        <fmt:message key="register.password" var="password"/>
+        <fmt:message key="register.sign_up" var="register"/>
+        <fmt:message key="register.error_message" var="error_message"/>
+        <fmt:message key="register.have_account" var="have_account"/>
+        <fmt:message key="header.log_in" var="log_in"/>
     </fmt:bundle>
 </head>
 <body>
@@ -28,6 +30,8 @@
             <input type="password" name="password" required>
         </label>
         <input class="button" type="submit" value="${register}">
+        <label>${have_account}</label>
+        <a href="login">${log_in}</a>
     </form>
     <c:set var="is_register_failed" scope="session" value="${sessionScope.error}"/>
     <c:if test="${is_register_failed}">

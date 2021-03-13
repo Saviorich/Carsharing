@@ -61,3 +61,17 @@ body {
     line-height: normal;
     margin-bottom: 10px;
 }
+
+label {
+    font-size: inherit;
+}
+
+.register a {
+    text-decoration: none;
+    font-size: inherit;
+    color: #ff9d26;
+}
+
+.register a:hover {
+    opacity: .8;
+}

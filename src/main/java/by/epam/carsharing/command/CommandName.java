@@ -10,6 +10,5 @@ public enum CommandName {
     GOTOCARSPAGE,
     CHANGELANG,
     GOTONEWSEDITPAGE,
-    EDITNEWS,
     ADDNEWS,
 }

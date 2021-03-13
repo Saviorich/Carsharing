@@ -18,7 +18,6 @@ public class CommandFactory {
         commands.put(CommandName.GOTOCARSPAGE, new GoToCarPage());
         commands.put(CommandName.CHANGELANG, new ChangeLanguageCommand());
         commands.put(CommandName.GOTONEWSEDITPAGE, new GoToNewsEditPage());
-        commands.put(CommandName.EDITNEWS, new EditNewsCommand());
         commands.put(CommandName.ADDNEWS, new AddNewsCommand());
     }
 

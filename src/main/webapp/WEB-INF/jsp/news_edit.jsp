@@ -68,7 +68,7 @@
 
             </div>
             <div class="news_block__content">
-                ${n.content}
+                <span>${n.content}</span>
             </div>
             <div class="news_block__img">
                 <img src="${n.imagePath}" alt="${n.header}"/>

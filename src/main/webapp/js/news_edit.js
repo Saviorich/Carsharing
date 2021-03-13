@@ -15,7 +15,7 @@ $(document).ready(function(){
     $("#view").click(function(){
         var data = CKEDITOR.instances['content_editor'].getData();
         $('.news_block__header span').text($("#header_editor").val());
-        $('.news_block__content p').html(data);
+        $('.news_block__content span').html(data);
         $('.news_block__img img').attr('src', $('.editor_block__image img').attr('src'))
     });
 });

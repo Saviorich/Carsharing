@@ -28,7 +28,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> findNewsByUser(int userId) {
+    public List<News> findNewsByUser(int userId) throws ServiceException {
         return null;
     }
 
@@ -42,6 +42,16 @@ public class NewsServiceImpl implements NewsService {
             throw new ServiceException(e.getMessage(), e);
         }
         return news;
+    }
+
+    @Override
+    public void deleteById(int id) throws ServiceException {
+        NewsDao newsDao = daoFactory.getNewsDao();
+        try {
+            newsDao.deleteById(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Exception in update", e);
+        }
     }
 
     @Override

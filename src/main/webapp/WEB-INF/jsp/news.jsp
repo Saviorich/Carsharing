@@ -39,11 +39,22 @@
         </c:if>
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                <a href="gotonewseditpage">${edit_news}</a>
-                <a id="admin_but_delete" href="deletenews">Delete</a>
+                <a href="Controller?command=gotonewseditpage">${edit_news}</a>
+                <a href="#delete_dialog">Delete</a>
             </c:if>
         </div>
 
+        <div id="delete_dialog" class="delete_dialog">
+            <div class="delete_dialog__content">
+                <div class="delete_dialog__message">
+                    <h1>Are you sure you want to delete this news?</h1>
+                </div>
+                <div class="delete_dialog__options">
+                    <a id="delete_dialog__yes" href="Controller?command=deletenews&data_id=${n.id}">Yes</a>
+                    <a href="#">No</a>
+                </div>
+            </div>
+        </div>
 
     </div>
 </c:forEach>

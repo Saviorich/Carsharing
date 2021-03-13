@@ -19,6 +19,7 @@ public class CommandFactory {
         commands.put(CommandName.CHANGELANG, new ChangeLanguageCommand());
         commands.put(CommandName.GOTONEWSEDITPAGE, new GoToNewsEditPage());
         commands.put(CommandName.ADDNEWS, new AddNewsCommand());
+        commands.put(CommandName.DELETENEWS, new DeleteNewsCommand());
     }
 
     public Command takeCommand(String command) {

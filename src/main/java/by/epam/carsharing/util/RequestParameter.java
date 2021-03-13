@@ -1,6 +1,6 @@
 package by.epam.carsharing.util;
 
-public class RequestParameter {
+public final class RequestParameter {
     public static final String NEWS = "news";
 
     public static final String LOGIN = "login";
@@ -26,4 +26,6 @@ public class RequestParameter {
     public static final String CONTENT_EDITOR = "content_editor";
 
     public static final String IMAGE_PATH = "image_path";
+
+    private RequestParameter() {}
 }

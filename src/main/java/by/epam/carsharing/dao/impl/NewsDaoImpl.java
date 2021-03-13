@@ -1,6 +1,5 @@
 package by.epam.carsharing.dao.impl;
 
-import by.epam.carsharing.FileUploadingServlet;
 import by.epam.carsharing.connection.ConnectionPool;
 import by.epam.carsharing.dao.NewsDao;
 import by.epam.carsharing.entity.News;

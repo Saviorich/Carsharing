@@ -1,4 +1,4 @@
-package by.epam.carsharing.command;
+package by.epam.carsharing.controller.command;
 
 public enum CommandName {
     LOGIN,

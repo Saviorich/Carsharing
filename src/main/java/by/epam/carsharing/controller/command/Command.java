@@ -1,4 +1,4 @@
-package by.epam.carsharing.command;
+package by.epam.carsharing.controller.command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

@@ -1,15 +1,12 @@
-package by.epam.carsharing;
+package by.epam.carsharing.controller;
 
-import by.epam.carsharing.command.Command;
-import by.epam.carsharing.command.CommandFactory;
-import by.epam.carsharing.entity.News;
+import by.epam.carsharing.controller.command.Command;
+import by.epam.carsharing.controller.command.CommandFactory;
 import by.epam.carsharing.util.RequestParameter;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
-import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;

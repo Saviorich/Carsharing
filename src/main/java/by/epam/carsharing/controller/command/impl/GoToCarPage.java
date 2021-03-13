@@ -1,6 +1,6 @@
-package by.epam.carsharing.command.impl;
+package by.epam.carsharing.controller.command.impl;
 
-import by.epam.carsharing.command.Command;
+import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.entity.car.Car;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.CarService;
@@ -13,7 +13,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 

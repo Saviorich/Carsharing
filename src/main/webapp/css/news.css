@@ -38,18 +38,22 @@
 }
 
 .news_block__admin_panel {
+    margin-top: 10px;
     float: right;
 }
 
-.news_block__admin_panel button {
+.news_block__admin_panel a {
+    text-decoration: none;
+    color: black;
     height: auto;
     width: auto;
+    padding: 5px;
     background: transparent;
     border: 1px solid #ff9d26;
     border-radius: 5px;
     font-size: 25px;
 }
 
-.news_block__admin_panel button:hover {
+.news_block__admin_panel a:hover {
     background: #ff9d26;
 }

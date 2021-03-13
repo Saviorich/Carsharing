@@ -39,11 +39,8 @@
         </c:if>
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                <form action="Controller" method="post">
-                    <button type="submit" name="" value="">${edit_news}</button>
-                    <input type="hidden" name="data_id" value="${n.id}">
-                    <input type="hidden" name="command" value="gotonewseditpage"/>
-                </form>
+                <a href="gotonewseditpage">${edit_news}</a>
+                <a id="admin_but_delete" href="deletenews">Delete</a>
             </c:if>
         </div>
 

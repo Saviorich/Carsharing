@@ -11,6 +11,9 @@
         <fmt:message key="admin.add_news" var="add_news"/>
         <fmt:message key="admin.edit" var="edit_news"/>
         <fmt:message key="admin.delete" var="delete"/>
+        <fmt:message key="delete_dialog.message" var="message"/>
+        <fmt:message key="delete_dialog.yes" var="yes"/>
+        <fmt:message key="delete_dialog.no" var="no"/>
     </fmt:bundle>
 </head>
 <body>
@@ -48,11 +51,11 @@
         <div id="delete_dialog" class="delete_dialog">
             <div class="delete_dialog__content">
                 <div class="delete_dialog__message">
-                    <h1>Are you sure you want to delete this news?</h1>
+                    <h1>${message}</h1>
                 </div>
                 <div class="delete_dialog__options">
-                    <a id="delete_dialog__yes" href="Controller?command=deletenews&data_id=${n.id}">Yes</a>
-                    <a href="#">No</a>
+                    <a id="delete_dialog__yes" href="Controller?command=deletenews&data_id=${n.id}">${yes}</a>
+                    <a href="#">${no}</a>
                 </div>
             </div>
         </div>

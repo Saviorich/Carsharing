@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="css/news.css" type="text/css">
     <link rel="stylesheet" href="css/cars.css" type="text/css">
     <fmt:setLocale value="${sessionScope.locale}"/>
-    <fmt:bundle basename="content" prefix="admin.">
-        <fmt:message key="add_news" var="add_news"/>
-        <fmt:message key="edit" var="edit_news"/>
+    <fmt:bundle basename="content">
+        <fmt:message key="admin.add_news" var="add_news"/>
+        <fmt:message key="admin.edit" var="edit_news"/>
+        <fmt:message key="admin.delete" var="delete"/>
     </fmt:bundle>
 </head>
 <body>
@@ -40,7 +41,7 @@
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <a href="Controller?command=gotonewseditpage">${edit_news}</a>
-                <a href="#delete_dialog">Delete</a>
+                <a href="#delete_dialog">${delete}</a>
             </c:if>
         </div>
 

@@ -13,6 +13,13 @@ public class News implements Identifiable {
     public News() {
     }
 
+    public News(Integer userId, String header, String content, String imagePath) {
+        this.userId = userId;
+        this.header = header;
+        this.content = content;
+        this.imagePath = imagePath;
+    }
+
     public News(Integer id, Integer userId, String header, String content, Date publicationDate, String imagePath) {
         this.id = id;
         this.userId = userId;

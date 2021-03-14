@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
     <link rel="stylesheet" href="css/news.css" type="text/css">
     <link rel="stylesheet" href="css/cars.css" type="text/css">
     <fmt:setLocale value="${sessionScope.locale}"/>
@@ -14,7 +13,9 @@
         <fmt:message key="delete_dialog.message" var="message"/>
         <fmt:message key="delete_dialog.yes" var="yes"/>
         <fmt:message key="delete_dialog.no" var="no"/>
+        <fmt:message key="header.news" var="news"/>
     </fmt:bundle>
+    <title>${news}</title>
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>

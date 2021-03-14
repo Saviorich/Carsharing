@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
     <link rel="stylesheet" href="<c:url value="/css/register.css"/>" type="text/css"/>
 
     <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
@@ -13,7 +12,9 @@
         <fmt:message key="register.error_message" var="error_message"/>
         <fmt:message key="register.have_account" var="have_account"/>
         <fmt:message key="header.log_in" var="log_in"/>
+        <fmt:message key="header.sign_up" var="sign_up"/>
     </fmt:bundle>
+    <title>${sign_up}</title>
 </head>
 <body>
 

@@ -2,6 +2,7 @@
 ## Business use case
 
 A **client** fills out an **application**, specifying the car.
+
 The administrator:
 
 - manages cars, cars information, news;

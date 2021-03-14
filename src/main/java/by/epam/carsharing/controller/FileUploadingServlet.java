@@ -1,21 +1,23 @@
 package by.epam.carsharing.controller;
 
 import by.epam.carsharing.controller.command.CommandFactory;
+import by.epam.carsharing.controller.command.CommandName;
+import by.epam.carsharing.entity.News;
+import by.epam.carsharing.entity.user.User;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.NewsService;
 import by.epam.carsharing.service.ServiceFactory;
 import by.epam.carsharing.util.RequestParameter;
+import by.epam.carsharing.util.SessionAttribute;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class FileUploadingServlet extends HttpServlet {
 
 
     private static final Logger logger = LogManager.getLogger(FileUploadingServlet.class);
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final NewsService newsService = ServiceFactory.getInstance().getNewsService();
     private static final CommandFactory factory = new CommandFactory();
     private static final String IMAGE_EDITOR_PART = "image_editor";
     private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
@@ -59,12 +61,19 @@ public class FileUploadingServlet extends HttpServlet {
             }
             if (isSuccess) {
                 try {
-                    int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
                     String header = request.getParameter(RequestParameter.HEADER_EDITOR);
                     String content = request.getParameter(RequestParameter.CONTENT_EDITOR);
 
-                    NewsService newsService = serviceFactory.getNewsService();
-                    newsService.update(id, header, content, imagePath);
+                    String command = request.getParameter(RequestParameter.COMMAND);
+                    logger.log(Level.DEBUG, command);
+                    if (command.equals(CommandName.ADDNEWS.toString().toLowerCase())) {
+                        HttpSession session = request.getSession();
+                        int userId = ((User)session.getAttribute(SessionAttribute.USER)).getId();
+                        addNews(userId, header, content, imagePath);
+                    } else {
+                        int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
+                        updateNews(id, header, content, imagePath);
+                    }
                 } catch (ServiceException e) {
                     throw new ServletException(e);
                 }
@@ -86,5 +95,14 @@ public class FileUploadingServlet extends HttpServlet {
             throw new ServletException(e);
         }
         return true;
+    }
+
+    private void updateNews(int id, String header, String content, String imagePath) throws ServiceException {
+        newsService.update(id, header, content, imagePath);
+    }
+
+    private void addNews(int userId, String header, String content, String imagePath) throws ServiceException {
+        News news = new News(userId, header, content, imagePath);
+        newsService.add(news);
     }
 }

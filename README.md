@@ -1,7 +1,7 @@
 # Carsharing
 ## Business use case
 
-A **client** fills out an **application**, specifying the car.
+A **client** fills out an **order**, specifying the car.
 
 The administrator:
 

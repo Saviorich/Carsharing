@@ -43,7 +43,7 @@
         </c:if>
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                <a href="Controller?command=gotonewseditpage">${edit_news}</a>
+                <a href="Controller?command=gotonewseditpage&data_id=${n.id}">${edit_news}</a>
                 <a href="#delete_dialog">${delete}</a>
             </c:if>
         </div>

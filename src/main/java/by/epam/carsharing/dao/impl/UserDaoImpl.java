@@ -123,8 +123,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void save(User entity) throws DaoException {
-        // TODO: add body
+    public void add(User entity) throws DaoException {
+
     }
 
     @Override

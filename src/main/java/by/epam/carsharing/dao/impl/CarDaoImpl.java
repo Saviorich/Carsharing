@@ -102,8 +102,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void save(Car entity) throws DaoException {
-
+    public void add(Car entity) throws DaoException {
     }
 
     @Override

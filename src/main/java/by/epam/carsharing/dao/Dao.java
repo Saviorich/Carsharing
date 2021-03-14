@@ -11,14 +11,7 @@ public interface Dao<T extends Identifiable> {
 
     List<T> getAll() throws DaoException;
 
-    /**
-     * Saves an entity to the storage, if there is no entry with such id or id is null.
-     * If the entry with such id already exists, then the information of this object is updated.
-     *
-     * @param entity an instance of a class, which implements {@link Identifiable}
-     * @throws DaoException if the object couldn't be saved to the dao.
-     */
-    void save(T entity) throws DaoException;
+    void add(T entity) throws DaoException;
 
     void deleteById(int id) throws DaoException;
 }

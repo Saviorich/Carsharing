@@ -12,6 +12,6 @@ public interface NewsService {
     List<News> findNewsByUser(int userId) throws ServiceException;
     List<News> getAll() throws ServiceException;
     void update(int id, String header, String content, String imagePath) throws ServiceException;
-    void save(int userId, String header, String content, String imagePath) throws ServiceException;
+    void add(News news) throws ServiceException;
     void deleteById(int id) throws ServiceException;
 }

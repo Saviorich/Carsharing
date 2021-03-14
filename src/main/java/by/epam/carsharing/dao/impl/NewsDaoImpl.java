@@ -27,6 +27,8 @@ public class NewsDaoImpl implements NewsDao {
     private static final String GET_ALL_QUERY = "SELECT * FROM carsharing_news ORDER BY publication_date DESC";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM carsharing_news WHERE id=?;";
     private static final String UPDATE_NEWS_QUERY = "UPDATE carsharing_news SET header=?, content=?, image_path=? WHERE id=?";
+    private static final String ADD_NEWS_QUERY = "INSERT INTO carsharing_news (user_id, header, content, publication_date, image_path) " +
+            "VALUE (?, ?, ?, CURRENT_DATE, ?)";
 
     @Override
     public Optional<News> getById(int id) throws DaoException {
@@ -79,8 +81,20 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public void save(News entity) throws DaoException {
-        // TODO: add body
+    public void add(News entity) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(ADD_NEWS_QUERY);
+        ){
+            statement.setInt(1, entity.getUserId());
+            statement.setString(2, entity.getHeader());
+            statement.setString(3, entity.getContent());
+            statement.setString(4, entity.getImagePath());
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException("Exception in DAO add()", e);
+        }
     }
 
     @Override

@@ -65,8 +65,13 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void save(int userId, String header, String content, String imagePath) throws ServiceException {
-
+    public void add(News entity) throws ServiceException {
+        NewsDao newsDao = daoFactory.getNewsDao();
+        try {
+            newsDao.add(entity);
+        } catch (DaoException e){
+            throw new ServiceException("Exception in add", e);
+        }
     }
 
 }

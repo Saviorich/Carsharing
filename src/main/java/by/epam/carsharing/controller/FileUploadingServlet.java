@@ -42,10 +42,6 @@ public class FileUploadingServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // TODO: add Filter
-        request.setCharacterEncoding("UTF-8");
-
-
         if (ServletFileUpload.isMultipartContent(request)) {
             Part part = request.getPart(IMAGE_EDITOR_PART);
             String filename = part.getSubmittedFileName();

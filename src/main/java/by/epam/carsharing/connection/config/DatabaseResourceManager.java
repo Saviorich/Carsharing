@@ -1,5 +1,8 @@
 package by.epam.carsharing.connection.config;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -7,26 +10,28 @@ import java.util.Properties;
 public class DatabaseResourceManager {
 
     private static DatabaseResourceManager instance = new DatabaseResourceManager();
+    private static final Logger logger = LogManager.getLogger(DatabaseResourceManager.class);
+
+    private static final String PROPERTIES = "database.properties";
 
     private Properties properties;
 
     /**
     * Initialize a {@link Properties} object
-    * Read properties from database.properties file with using ClassLoader
+    * Read properties from database.properties file with using {@link ClassLoader}
     */
     {
         ClassLoader loader = DatabaseResourceManager.class.getClassLoader();
-        try (InputStream inputStream = loader.getResourceAsStream("database.properties")) {
-            if (inputStream == null) {
-                // LOGGER.error("database.properties not found");
-                // throw exception
+        try (InputStream inputStream = loader.getResourceAsStream(PROPERTIES)) {
+            if (inputStream != null) {
+                Properties properties = new Properties();
+                properties.load(inputStream);
+                this.properties = properties;
+            } else {
+                logger.fatal("database.properties not found");
             }
-            Properties properties = new Properties();
-            properties.load(inputStream);
-            this.properties = properties;
         } catch (IOException e) {
-            // TODO: add logger
-            //  throw Exception;
+            logger.fatal("IOException in DatabaseResourceManager class");
         }
     }
 

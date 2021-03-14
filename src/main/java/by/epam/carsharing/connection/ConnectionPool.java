@@ -3,6 +3,8 @@ package by.epam.carsharing.connection;
 import by.epam.carsharing.connection.config.DatabaseParameter;
 import by.epam.carsharing.connection.config.DatabaseResourceManager;
 import by.epam.carsharing.exception.ConnectionPoolException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
@@ -14,6 +16,8 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
 public class ConnectionPool {
+
+    private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
 
     private static final ConnectionPool pool = new ConnectionPool();
 
@@ -45,7 +49,7 @@ public class ConnectionPool {
         try {
             initPoolData();
         } catch (ConnectionPoolException e) {
-            e.printStackTrace();
+            logger.fatal("Unable to initialize pool  data", e);
         }
     }
 
@@ -84,7 +88,7 @@ public class ConnectionPool {
             closeConnectionsQueue(givenAwayConnectionQueue);
             closeConnectionsQueue(connectionQueue);
         } catch (SQLException e) {
-            // TODO: Add logs;
+            logger.fatal("Unable to clear connection queue due SQLException", e);
         }
     }
 
@@ -104,19 +108,19 @@ public class ConnectionPool {
         try {
             connection.close();
         } catch (SQLException e) {
-            // LOGGER.log(Level.ERROR, "Connection isn't return to the pool");
+            logger.error("Connection isn't return to the pool", e);
         }
 
         try {
             resultSet.close();
         } catch (SQLException e) {
-            // LOGGER.log(Level.ERROR, "ResultSet isn't close");
+           logger.error("ResultSet isn't close");
         }
 
         try {
             statement.close();
         } catch (SQLException e) {
-            // LOGGER.log(Level.ERROR, "Statement isn't close");
+            logger.error("Statement isn't close");
         }
     }
 
@@ -124,13 +128,13 @@ public class ConnectionPool {
         try {
             connection.close();
         } catch (SQLException e) {
-            // LOGGER.log(Level.ERROR, "Connection isn't return to the pool");
+            logger.error("Connection isn't return to the pool");
         }
 
         try {
             statement.close();
         } catch (SQLException e) {
-            // LOGGER.log(Level.ERROR, "Statement isn't close");
+            logger.error("Statement isn't close");
         }
     }
 

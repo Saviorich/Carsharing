@@ -20,6 +20,7 @@ public class CommandFactory {
         commands.put(CommandName.GOTONEWSEDITPAGE, new GoToNewsEditPage());
         commands.put(CommandName.ADDNEWS, new AddNewsCommand());
         commands.put(CommandName.DELETENEWS, new DeleteNewsCommand());
+        commands.put(CommandName.EDITNEWS, new EditNewsCommand());
     }
 
     public Command takeCommand(String command) {

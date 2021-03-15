@@ -11,5 +11,6 @@ public enum CommandName {
     CHANGELANG,
     GOTONEWSEDITPAGE,
     ADDNEWS,
+    EDITNEWS,
     DELETENEWS,
 }

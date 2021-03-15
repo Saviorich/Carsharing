@@ -6,12 +6,14 @@ import by.epam.carsharing.entity.user.User;
 import by.epam.carsharing.exception.DaoException;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.UserService;
+import by.epam.carsharing.validation.impl.UserValidator;
 
 import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
     private static final DaoFactory daoFactory = DaoFactory.getInstance();
+    private static final UserValidator validator = new UserValidator();
 
     @Override
     public User findUserById(Integer id) {
@@ -20,9 +22,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserByEmailAndPassword(String email, String password) throws ServiceException {
-        // TODO: add validator;
-        if (email == null || email.isEmpty()) {
-            throw new ServiceException();
+        if (!validator.isValidEmail(email) || !validator.isValidPassword(password)) {
+            throw new ServiceException(validator.getMessage());
         }
 
         UserDao userDao = daoFactory.getUserDao();
@@ -39,9 +40,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(String email, String password) throws ServiceException {
-        // TODO: add validator;
-        if (email == null || email.isEmpty()) {
-            throw new ServiceException();
+        if (!validator.isValidEmail(email) || !validator.isValidPassword(password)) {
+            throw new ServiceException(validator.getMessage());
         }
 
         UserDao userDao = daoFactory.getUserDao();

@@ -1,5 +1,6 @@
 package by.epam.carsharing.controller;
 
+import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.controller.command.CommandFactory;
 import by.epam.carsharing.controller.command.CommandName;
 import by.epam.carsharing.entity.News;
@@ -60,23 +61,8 @@ public class FileUploadingServlet extends HttpServlet {
                 isSuccess = uploadFile(inputStream, upload_path);
             }
             if (isSuccess) {
-                try {
-                    String header = request.getParameter(RequestParameter.HEADER_EDITOR);
-                    String content = request.getParameter(RequestParameter.CONTENT_EDITOR);
-
-                    String command = request.getParameter(RequestParameter.COMMAND);
-                    logger.log(Level.DEBUG, command);
-                    if (command.equals(CommandName.ADDNEWS.toString().toLowerCase())) {
-                        HttpSession session = request.getSession();
-                        int userId = ((User)session.getAttribute(SessionAttribute.USER)).getId();
-                        addNews(userId, header, content, imagePath);
-                    } else {
-                        int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
-                        updateNews(id, header, content, imagePath);
-                    }
-                } catch (ServiceException e) {
-                    throw new ServletException(e);
-                }
+                request.setAttribute(RequestParameter.IMAGE_PATH, imagePath);
+                process(request, response);
             }
         }
         response.sendRedirect(GO_TO_NEWS_PAGE);
@@ -97,12 +83,13 @@ public class FileUploadingServlet extends HttpServlet {
         return true;
     }
 
-    private void updateNews(int id, String header, String content, String imagePath) throws ServiceException {
-        newsService.update(id, header, content, imagePath);
-    }
+    private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name;
+        Command command;
 
-    private void addNews(int userId, String header, String content, String imagePath) throws ServiceException {
-        News news = new News(userId, header, content, imagePath);
-        newsService.add(news);
+        name = request.getParameter(RequestParameter.COMMAND);
+        command = factory.takeCommand(name);
+
+        command.execute(request, response);
     }
 }

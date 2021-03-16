@@ -7,6 +7,7 @@ import by.epam.carsharing.exception.DaoException;
 import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.UserService;
 import by.epam.carsharing.validation.impl.UserValidator;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Optional;
 
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
         Optional<User> user = Optional.empty();
         try {
+            password = DigestUtils.md5Hex(password);
             user = userDao.findUserByEmailAndPassword(email, password);
         } catch (DaoException e) {
             throw new ServiceException();
@@ -46,6 +48,7 @@ public class UserServiceImpl implements UserService {
 
         UserDao userDao = daoFactory.getUserDao();
         try {
+            password = DigestUtils.md5Hex(password);
             userDao.registerUser(email, password);
         } catch (DaoException e) {
             throw new ServiceException();

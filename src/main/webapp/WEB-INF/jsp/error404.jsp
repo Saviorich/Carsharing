@@ -2,9 +2,13 @@
 <html>
 <head>
     <title>Error</title>
+    <link rel="stylesheet" href="css/error.css" type="text/css">
 </head>
 <body>
-<h1>ERROR PAGE</h1>
-<h2>404</h2>
+<div class="error_box">
+    <h2>ERROR PAGE</h2>
+    <h4>Page not found</h4>
+    <a href="Controller?command=gotonewspage">Go to main page</a>
+</div>
 </body>
 </html>

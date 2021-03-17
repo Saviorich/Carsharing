@@ -4,6 +4,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/cars.css" type="text/css"/>
+    <link rel="stylesheet" href="css/news.css" type="text/css"/>
 
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content">
@@ -19,6 +20,9 @@
         <fmt:message key="admin.edit" var="edit"/>
         <fmt:message key="admin.add_car" var="add_car"/>
         <fmt:message key="header.cars" var="cars"/>
+        <fmt:message key="delete_dialog.message" var="message"/>
+        <fmt:message key="delete_dialog.yes" var="yes"/>
+        <fmt:message key="delete_dialog.no" var="no"/>
     </fmt:bundle>
     <title>${cars}</title>
 </head>
@@ -52,14 +56,27 @@
             <div class="car_block__button">
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'ADMIN'}">
-                        <button id="admin_but_edit" type="button" name="" value="">${edit}</button>
-                        <button id="admin_but_delete" type="button" name="" value="">${delete}</button>
+                        <a href="Controller?command=gotocareditpage&data_id=${car.id}">${edit}</a>
+                        <a href="#delete_dialog">${delete}</a>
                     </c:when>
                     <c:otherwise>
-                        <button type="button" name="" value="">${order}</button>
+                        <a href="Controller?command=gotoorderpage&data_id=${car.id}">${order}</a>
                     </c:otherwise>
                 </c:choose>
             </div>
+
+            <div id="delete_dialog" class="delete_dialog">
+                <div class="delete_dialog__content">
+                    <div class="delete_dialog__message">
+                        <h1>${message}</h1>
+                    </div>
+                    <div class="delete_dialog__options">
+                        <a id="delete_dialog__yes" href="Controller?command=deletenews&data_id=${car.id}">${yes}</a>
+                        <a href="#">${no}</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </c:forEach>
 </div>

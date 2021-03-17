@@ -17,10 +17,12 @@ public class CommandFactory {
         commands.put(CommandName.SIGNOUT, new SignOutCommand());
         commands.put(CommandName.GOTOCARSPAGE, new GoToCarPage());
         commands.put(CommandName.CHANGELANG, new ChangeLanguageCommand());
-        commands.put(CommandName.GOTONEWSEDITPAGE, new GoToNewsEditPage());
+        commands.put(CommandName.GOTONEWSEDITPAGE, new GoToEditPage());
+        commands.put(CommandName.GOTOCAREDITPAGE, new GoToEditPage());
         commands.put(CommandName.ADDNEWS, new AddNewsCommand());
         commands.put(CommandName.DELETENEWS, new DeleteNewsCommand());
         commands.put(CommandName.EDITNEWS, new EditNewsCommand());
+        commands.put(CommandName.GOTOORDERPAGE, new GoToOrderPage());
     }
 
     public Command takeCommand(String command) {

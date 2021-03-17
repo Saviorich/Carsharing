@@ -13,4 +13,5 @@ public enum CommandName {
     ADDNEWS,
     EDITNEWS,
     DELETENEWS,
+    GOTOCAREDITPAGE, GOTOORDERPAGE,
 }

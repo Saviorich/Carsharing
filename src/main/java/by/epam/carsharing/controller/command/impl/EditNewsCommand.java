@@ -18,6 +18,7 @@ public class EditNewsCommand implements Command {
 
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static final Logger logger = LogManager.getLogger(EditNewsCommand.class);
+    private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,8 +30,9 @@ public class EditNewsCommand implements Command {
         try {
             NewsService newsService = serviceFactory.getNewsService();
             newsService.update(id, header, content, imagePath);
+            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
-            logger.log(Level.DEBUG, e);
+            logger.log(Level.ERROR, e);
         }
     }
 }

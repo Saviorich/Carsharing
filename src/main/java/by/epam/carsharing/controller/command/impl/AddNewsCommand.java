@@ -22,6 +22,7 @@ public class AddNewsCommand implements Command {
 
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static final Logger logger = LogManager.getLogger(AddNewsCommand.class);
+    private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,17 +32,13 @@ public class AddNewsCommand implements Command {
         String content = request.getParameter(RequestParameter.CONTENT_EDITOR);
         String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
-        logger.log(Level.DEBUG, request.getParameter("image_path"));
-        logger.log(Level.DEBUG, request.getParameter("content_editor"));
-        logger.log(Level.DEBUG, request.getParameter("header_editor"));
-        logger.log(Level.DEBUG, request.getParameter("command"));
-
         try {
             NewsService newsService = serviceFactory.getNewsService();
             News news = new News(userId, header, content, imagePath);
             newsService.add(news);
+            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
-            logger.log(Level.DEBUG, e);
+            logger.log(Level.ERROR, e);
         }
     }
 }

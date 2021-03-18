@@ -23,7 +23,7 @@
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
-<c:set var="n" value="${requestScope.data_id}"/>
+<c:set var="n" value="${requestScope.data}"/>
 <form action="Upload" method="post" enctype='multipart/form-data'>
     <div class="container">
         <div class="editor_block">
@@ -39,7 +39,7 @@
             </div>
             <div class="editor_block__image">
                 <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>
-                <img id="blah" src="${n.imagePath}" alt="your image"/>
+                <img id="loaded_image" src="${n.imagePath}" alt="your image"/>
             </div>
             <div class="navigation">
                 <a id="view" href="#preview">${preview}</a>

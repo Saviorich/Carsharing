@@ -30,7 +30,7 @@
 <jsp:include page="../jsp/header.jsp"/>
 <div class="admin_button_panel">
     <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-        <a id="admin_but_add">${add_car}</a>
+        <a id="admin_but_add" href="Controller?command=gotocareditpage">${add_car}</a>
     </c:if>
 </div>
 <div class="main_block">

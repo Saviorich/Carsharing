@@ -3,8 +3,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <link rel="stylesheet" href="css/news.css" type="text/css">
-    <link rel="stylesheet" href="css/cars.css" type="text/css">
+    <link rel="stylesheet" href="<c:url value="/css/news.css"/>" type="text/css">
+    <link rel="stylesheet" href="<c:url value="/css/cars.css"/>" type="text/css">
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content">
         <fmt:message key="admin.add_news" var="add_news"/>

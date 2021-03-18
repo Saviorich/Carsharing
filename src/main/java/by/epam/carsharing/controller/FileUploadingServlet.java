@@ -65,7 +65,6 @@ public class FileUploadingServlet extends HttpServlet {
                 process(request, response);
             }
         }
-        response.sendRedirect(GO_TO_NEWS_PAGE);
     }
 
     private boolean uploadFile(InputStream inputStream, String path) throws ServletException {

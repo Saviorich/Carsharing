@@ -59,7 +59,7 @@ public class CarDaoImpl implements CarDao {
                         engineType, pricePerDay, vin, plate, carClass, imagePath));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getById", e);
+            throw new DaoException(e);
         }
 
         return car;
@@ -96,7 +96,7 @@ public class CarDaoImpl implements CarDao {
                 cars.add(car);
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getAll", e);
+            throw new DaoException(e);
         }
         return cars;
     }
@@ -141,7 +141,7 @@ public class CarDaoImpl implements CarDao {
                 cars.add(car);
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getCarsByBrand", e);
+            throw new DaoException(e);
         }
 
         return cars;
@@ -178,7 +178,7 @@ public class CarDaoImpl implements CarDao {
                 cars.add(car);
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getCarsByBrand", e);
+            throw new DaoException(e);
         }
 
         return cars;
@@ -215,7 +215,7 @@ public class CarDaoImpl implements CarDao {
                 cars.add(car);
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getCarsByBrand", e);
+            throw new DaoException(e);
         }
 
         return cars;

@@ -51,7 +51,7 @@ public class NewsDaoImpl implements NewsDao {
                 news = Optional.of(new News(id, userId, header, content, date, imagePath));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e.getMessage(), e);
+            throw new DaoException(e);
         }
         return news;
     }
@@ -75,7 +75,7 @@ public class NewsDaoImpl implements NewsDao {
                 news.add(new News(id, userId, header, content, date, imagePath));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e.getMessage(), e);
+            throw new DaoException(e);
         }
         return news;
     }
@@ -93,7 +93,7 @@ public class NewsDaoImpl implements NewsDao {
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in DAO add()", e);
+            throw new DaoException(e);
         }
     }
 
@@ -107,7 +107,7 @@ public class NewsDaoImpl implements NewsDao {
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in deleteById", e);
+            throw new DaoException(e);
         }
     }
 
@@ -124,7 +124,7 @@ public class NewsDaoImpl implements NewsDao {
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in update", e);
+            throw new DaoException(e);
         }
     }
 }

@@ -41,7 +41,7 @@ public class UserDaoImpl implements UserDao {
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e){
-            throw new DaoException(e.getMessage(), e);
+            throw new DaoException(e);
         }
     }
 
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
                 user = Optional.of(new User(id, email, password, role));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e.getMessage(), e);
+            throw new DaoException(e);
         }
         return user;
     }
@@ -92,7 +92,7 @@ public class UserDaoImpl implements UserDao {
                 user = Optional.of(new User(id, email, password, role));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getByID", e);
+            throw new DaoException(e);
         }
         return user;
     }
@@ -116,7 +116,7 @@ public class UserDaoImpl implements UserDao {
                 users.add(new User(id, email, password, role));
             }
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in getAll", e);
+            throw new DaoException(e);
         }
 
         return users;
@@ -137,7 +137,7 @@ public class UserDaoImpl implements UserDao {
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException("Exception in deleteById", e);
+            throw new DaoException(e);
         }
     }
 }

@@ -78,7 +78,7 @@
     <div class="preview" id="preview">
         <div class="car_block">
             <div class="car_block__brand">
-                ${car.brand} ${car.model}
+                <span>${car.brand} ${car.model}</span>
             </div>
             <div class="car_block__img">
                 <img src="${car.imagePath}"/>

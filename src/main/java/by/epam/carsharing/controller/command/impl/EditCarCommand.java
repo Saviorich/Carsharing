@@ -37,7 +37,9 @@ public class EditCarCommand implements Command {
         EngineType engineType = EngineType.valueOf(request.getParameter(RequestParameter.ENGINE_EDITOR).toUpperCase());
         CarClass carClass = CarClass.valueOf(request.getParameter(RequestParameter.CLASS_EDITOR).toUpperCase());
         BigDecimal price = new BigDecimal(request.getParameter(RequestParameter.PRICE_EDITOR));
-        String imagePath = request.getParameter(RequestParameter.IMAGE_PATH);
+        // TODO: FIX BUG WITH IMAGES;
+        logger.log(Level.DEBUG, (String) request.getAttribute(RequestParameter.IMAGE_PATH));
+        String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {
             CarService carService = serviceFactor.getCarService();

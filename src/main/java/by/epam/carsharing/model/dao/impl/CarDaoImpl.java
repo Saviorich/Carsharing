@@ -25,7 +25,7 @@ public class CarDaoImpl implements CarDao {
     private static final String GET_BY_BRAND = "SELECT * FROM cars WHERE LOWER(brand)=?;";
     private static final String GET_BY_YEAR = "SELECT * FROM cars WHERE manufactured_year=?;";
     private static final String GET_BY_CLASS = "SELECT * FROM cars WHERE class=?;";
-
+    private static final String UPDATE_CAR_QUERY = "UPDATE cars SET brand=?, model=?, color=?, mileage=?, gearbox=?, manufactured_year=?, engine_type=?, class=?, price_per_day=?, image_path=? WHERE id=?;";
 
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
@@ -222,7 +222,27 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void update() throws DaoException {
+    public void update(int id, String brand, String model, String color, int mileage, GearboxType gearbox,
+                       String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(UPDATE_CAR_QUERY)
+        ) {
+            statement.setString(1, brand);
+            statement.setString(2, model);
+            statement.setString(3, color);
+            statement.setInt(4, mileage);
+            statement.setString(5, gearbox.toString().toLowerCase());
+            statement.setString(6, year);
+            statement.setString(7, engineType.toString().toLowerCase());
+            statement.setString(8, carClass.toString().toLowerCase());
+            statement.setBigDecimal(9, price);
+            statement.setString(10, imagePath);
+            statement.setInt(11, id);
 
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
     }
 }

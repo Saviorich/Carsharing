@@ -60,11 +60,11 @@ public class GoToEditPage implements Command {
         if (data_id != null) {
             Optional<Car> car = carService.getById(
                     Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
-            request.setAttribute(RequestParameter.DATA_ID, car.get());
+            request.setAttribute(RequestParameter.DATA, car.get());
         }
         RequestDispatcher requestDispatcher;
         if (user != null && user.getRole() == Role.ADMIN) {
-            requestDispatcher = request.getRequestDispatcher(NEWS_EDIT_PAGE);
+            requestDispatcher = request.getRequestDispatcher(CAR_EDIT_PAGE);
         } else {
             requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
         }
@@ -80,7 +80,7 @@ public class GoToEditPage implements Command {
         if (data_id != null) {
             Optional<News> news = newsService.findNewsById(
                     Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
-            request.setAttribute(RequestParameter.DATA_ID, news.get());
+            request.setAttribute(RequestParameter.DATA, news.get());
         }
         RequestDispatcher requestDispatcher;
         if (user != null && user.getRole() == Role.ADMIN) {

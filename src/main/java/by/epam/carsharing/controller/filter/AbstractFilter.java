@@ -1,6 +1,6 @@
 package by.epam.carsharing.controller.filter;
 
-import by.epam.carsharing.entity.user.User;
+import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.util.SessionAttribute;
 
 import javax.servlet.Filter;

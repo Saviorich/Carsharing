@@ -1,7 +1,7 @@
 package by.epam.carsharing.controller.filter.impl;
 
 import by.epam.carsharing.controller.filter.AbstractFilter;
-import by.epam.carsharing.entity.user.User;
+import by.epam.carsharing.model.entity.user.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

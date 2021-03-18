@@ -1,7 +1,7 @@
 package by.epam.carsharing.controller.listener;
 
-import by.epam.carsharing.connection.ConnectionPool;
-import by.epam.carsharing.connection.exception.ConnectionPoolException;
+import by.epam.carsharing.model.connection.ConnectionPool;
+import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

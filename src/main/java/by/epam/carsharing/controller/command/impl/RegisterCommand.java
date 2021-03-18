@@ -1,9 +1,9 @@
 package by.epam.carsharing.controller.command.impl;
 
 import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.service.exception.ServiceException;
-import by.epam.carsharing.service.ServiceFactory;
-import by.epam.carsharing.service.UserService;
+import by.epam.carsharing.model.service.exception.ServiceException;
+import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
 import org.apache.logging.log4j.Level;

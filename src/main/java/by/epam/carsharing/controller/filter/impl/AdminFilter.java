@@ -1,9 +1,8 @@
 package by.epam.carsharing.controller.filter.impl;
 
-import by.epam.carsharing.controller.command.impl.GoToNewsPage;
 import by.epam.carsharing.controller.filter.AbstractFilter;
-import by.epam.carsharing.entity.Role;
-import by.epam.carsharing.entity.user.User;
+import by.epam.carsharing.model.entity.Role;
+import by.epam.carsharing.model.entity.user.User;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

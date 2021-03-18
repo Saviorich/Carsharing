@@ -1,4 +1,4 @@
-package by.epam.carsharing.exception;
+package by.epam.carsharing.service.exception;
 
 public class ServiceException extends Exception {
 
@@ -13,6 +13,6 @@ public class ServiceException extends Exception {
     }
 
     public ServiceException(String message, Exception e) {
-
+        super(message, e);
     }
 }

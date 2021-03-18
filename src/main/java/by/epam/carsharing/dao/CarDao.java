@@ -2,7 +2,7 @@ package by.epam.carsharing.dao;
 
 import by.epam.carsharing.entity.car.Car;
 import by.epam.carsharing.entity.car.CarClass;
-import by.epam.carsharing.exception.DaoException;
+import by.epam.carsharing.dao.exception.DaoException;
 import java.util.List;
 
 public interface CarDao extends Dao<Car> {

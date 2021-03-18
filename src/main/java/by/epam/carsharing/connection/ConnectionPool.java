@@ -2,11 +2,10 @@ package by.epam.carsharing.connection;
 
 import by.epam.carsharing.connection.config.DatabaseParameter;
 import by.epam.carsharing.connection.config.DatabaseResourceManager;
-import by.epam.carsharing.exception.ConnectionPoolException;
+import by.epam.carsharing.connection.exception.ConnectionPoolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 import java.util.Locale;
 import java.util.Map;

@@ -4,8 +4,8 @@ import by.epam.carsharing.connection.ConnectionPool;
 import by.epam.carsharing.dao.UserDao;
 import by.epam.carsharing.entity.Role;
 import by.epam.carsharing.entity.user.User;
-import by.epam.carsharing.exception.ConnectionPoolException;
-import by.epam.carsharing.exception.DaoException;
+import by.epam.carsharing.connection.exception.ConnectionPoolException;
+import by.epam.carsharing.dao.exception.DaoException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -3,8 +3,8 @@ package by.epam.carsharing.dao.impl;
 import by.epam.carsharing.connection.ConnectionPool;
 import by.epam.carsharing.dao.NewsDao;
 import by.epam.carsharing.entity.News;
-import by.epam.carsharing.exception.ConnectionPoolException;
-import by.epam.carsharing.exception.DaoException;
+import by.epam.carsharing.connection.exception.ConnectionPoolException;
+import by.epam.carsharing.dao.exception.DaoException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

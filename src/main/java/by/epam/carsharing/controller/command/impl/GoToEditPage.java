@@ -6,7 +6,7 @@ import by.epam.carsharing.entity.News;
 import by.epam.carsharing.entity.Role;
 import by.epam.carsharing.entity.car.Car;
 import by.epam.carsharing.entity.user.User;
-import by.epam.carsharing.exception.ServiceException;
+import by.epam.carsharing.service.exception.ServiceException;
 import by.epam.carsharing.service.CarService;
 import by.epam.carsharing.service.NewsService;
 import by.epam.carsharing.service.ServiceFactory;

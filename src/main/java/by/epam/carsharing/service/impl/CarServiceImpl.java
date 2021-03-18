@@ -4,11 +4,10 @@ import by.epam.carsharing.dao.CarDao;
 import by.epam.carsharing.dao.DaoFactory;
 import by.epam.carsharing.entity.car.Car;
 import by.epam.carsharing.entity.car.CarClass;
-import by.epam.carsharing.exception.DaoException;
-import by.epam.carsharing.exception.ServiceException;
+import by.epam.carsharing.dao.exception.DaoException;
+import by.epam.carsharing.service.exception.ServiceException;
 import by.epam.carsharing.service.CarService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

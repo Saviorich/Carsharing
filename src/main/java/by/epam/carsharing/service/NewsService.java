@@ -1,8 +1,7 @@
 package by.epam.carsharing.service;
 
 import by.epam.carsharing.entity.News;
-import by.epam.carsharing.exception.DaoException;
-import by.epam.carsharing.exception.ServiceException;
+import by.epam.carsharing.service.exception.ServiceException;
 
 import java.util.List;
 import java.util.Optional;

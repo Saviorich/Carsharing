@@ -6,8 +6,8 @@ import by.epam.carsharing.entity.car.Car;
 import by.epam.carsharing.entity.car.CarClass;
 import by.epam.carsharing.entity.car.EngineType;
 import by.epam.carsharing.entity.car.GearboxType;
-import by.epam.carsharing.exception.ConnectionPoolException;
-import by.epam.carsharing.exception.DaoException;
+import by.epam.carsharing.connection.exception.ConnectionPoolException;
+import by.epam.carsharing.dao.exception.DaoException;
 
 import java.math.BigDecimal;
 import java.sql.Connection;

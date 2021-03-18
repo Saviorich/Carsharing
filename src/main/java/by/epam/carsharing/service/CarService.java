@@ -2,7 +2,7 @@ package by.epam.carsharing.service;
 
 import by.epam.carsharing.entity.car.Car;
 import by.epam.carsharing.entity.car.CarClass;
-import by.epam.carsharing.exception.ServiceException;
+import by.epam.carsharing.service.exception.ServiceException;
 
 import java.util.List;
 import java.util.Optional;

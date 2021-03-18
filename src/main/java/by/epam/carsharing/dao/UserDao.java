@@ -1,7 +1,7 @@
 package by.epam.carsharing.dao;
 
 import by.epam.carsharing.entity.user.User;
-import by.epam.carsharing.exception.DaoException;
+import by.epam.carsharing.dao.exception.DaoException;
 
 import java.util.Optional;
 

@@ -3,8 +3,8 @@ package by.epam.carsharing.service.impl;
 import by.epam.carsharing.dao.DaoFactory;
 import by.epam.carsharing.dao.NewsDao;
 import by.epam.carsharing.entity.News;
-import by.epam.carsharing.exception.DaoException;
-import by.epam.carsharing.exception.ServiceException;
+import by.epam.carsharing.dao.exception.DaoException;
+import by.epam.carsharing.service.exception.ServiceException;
 import by.epam.carsharing.service.NewsService;
 
 import java.util.List;

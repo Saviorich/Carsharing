@@ -8,6 +8,6 @@ import java.io.IOException;
 public class GoToOrderPage implements by.epam.carsharing.controller.command.Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // TODO: add body
     }
 }

@@ -45,12 +45,6 @@ public class ConnectionPool {
         } catch (NumberFormatException e) {
             poolSize = DEFAULT_POOL_SIZE;
         }
-
-        try {
-            initPoolData();
-        } catch (ConnectionPoolException e) {
-            logger.fatal("Unable to initialize pool  data", e);
-        }
     }
 
     public static ConnectionPool getInstance() {

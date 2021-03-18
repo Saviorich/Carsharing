@@ -2,23 +2,20 @@ package by.epam.carsharing.controller;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.controller.command.CommandFactory;
-import by.epam.carsharing.controller.command.CommandName;
-import by.epam.carsharing.entity.News;
-import by.epam.carsharing.entity.user.User;
-import by.epam.carsharing.exception.ServiceException;
 import by.epam.carsharing.service.NewsService;
 import by.epam.carsharing.service.ServiceFactory;
 import by.epam.carsharing.util.RequestParameter;
-import by.epam.carsharing.util.SessionAttribute;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -2,6 +2,7 @@ package by.epam.carsharing.model.dao;
 
 import by.epam.carsharing.model.dao.impl.CarDaoImpl;
 import by.epam.carsharing.model.dao.impl.NewsDaoImpl;
+import by.epam.carsharing.model.dao.impl.OrderDaoImpl;
 import by.epam.carsharing.model.dao.impl.UserDaoImpl;
 
 public final class DaoFactory {
@@ -14,6 +15,7 @@ public final class DaoFactory {
     private final UserDao userDao = new UserDaoImpl();
     private final NewsDao newsDao = new NewsDaoImpl();
     private final CarDao carDao = new CarDaoImpl();
+    private final OrderDao orderDao = new OrderDaoImpl();
 
 
     public NewsDao getNewsDao() {
@@ -24,5 +26,11 @@ public final class DaoFactory {
         return userDao;
     }
 
-    public CarDao getCarDao() {return carDao;}
+    public CarDao getCarDao() {
+        return carDao;
+    }
+
+    public OrderDao getOrderDao() {
+        return orderDao;
+    }
 }

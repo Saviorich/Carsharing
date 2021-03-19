@@ -2,11 +2,11 @@ package by.epam.carsharing.model.entity;
 
 import java.util.Date;
 
-public class Order {
-    private Integer id;
-    private Integer userId;
-    private Integer carId;
-    private Integer statusId;
+public class Order implements Identifiable {
+    private int id;
+    private int userId;
+    private int carId;
+    private int statusId;
     private Date startDate;
     private Date endDate;
     private String rejectionComment;
@@ -14,7 +14,7 @@ public class Order {
 
     public Order() {}
 
-    public Order(Integer id, Integer userId, Integer carId, Integer statusId,
+    public Order(int id, int userId, int carId, int statusId,
                  Date startDate, Date endDate, String rejectionComment, String returnComment) {
         this.id = id;
         this.userId = userId;
@@ -26,7 +26,7 @@ public class Order {
         this.returnComment = returnComment;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -65,10 +65,10 @@ public class Order {
 
         Order order = (Order) o;
 
-        if (!id.equals(order.id)) return false;
-        if (!userId.equals(order.userId)) return false;
-        if (!carId.equals(order.carId)) return false;
-        if (!statusId.equals(order.statusId)) return false;
+        if (id != order.id) return false;
+        if (userId != order.userId) return false;
+        if (carId != order.carId) return false;
+        if (statusId != order.statusId) return false;
         if (!startDate.equals(order.startDate)) return false;
         if (!endDate.equals(order.endDate)) return false;
         if (rejectionComment != null ? !rejectionComment.equals(order.rejectionComment) : order.rejectionComment != null)
@@ -78,10 +78,10 @@ public class Order {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + userId.hashCode();
-        result = 31 * result + carId.hashCode();
-        result = 31 * result + statusId.hashCode();
+        int result = id;
+        result = 31 * result + userId;
+        result = 31 * result + carId;
+        result = 31 * result + statusId;
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         result = 31 * result + (rejectionComment != null ? rejectionComment.hashCode() : 0);

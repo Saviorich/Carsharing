@@ -24,6 +24,7 @@ public final class RequestParameter {
     public static final String ENGINE_EDITOR = "engine_editor";
     public static final String CLASS_EDITOR = "class_editor";
     public static final String PRICE_EDITOR = "price_editor";
+    public static final String ORDERS = "orders";
 
     private RequestParameter() {}
 }

@@ -18,6 +18,7 @@
         <fmt:message key="locale.ru" var="ru"/>
         <fmt:message key="locale.be" var="be"/>
         <fmt:message key="locale.en" var="en"/>
+        <fmt:message key="header.orders" var="orders"/>
     </fmt:bundle>
 
     <title>${news}</title>
@@ -34,6 +35,9 @@
             <c:otherwise>
                 <a href="Controller?command=gotonewspage">${news}</a>
                 <a href="Controller?command=gotocarspage">${cars}</a>
+                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+                    <a href="Controller?command=gotoorderspage">${orders}</a>
+                </c:if>
                 <a href="Controller?command=gotoaboutpage">${about}</a>
                 <a href="Controller?command=signout">${log_out}</a>
             </c:otherwise>

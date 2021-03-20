@@ -1,0 +1,29 @@
+.form {
+    display: block;
+
+    align-items: center;
+
+    border: 1px solid rgba(71, 71 ,71, 0.6);
+    border-radius: 5px;
+
+    width: 440px;
+    margin: 10px auto 10px auto;
+
+    height: auto;
+
+    font-size: 30px;
+    text-align: center;
+}
+
+.form input {
+    font-size: 30px;
+    width: 90%;
+    height: 50px;
+}
+
+.form button {
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    float: right;
+}

@@ -27,18 +27,18 @@
 <div class="header">
     <a href="Controller?command=gotonewspage" class="header__logo">CarSharing</a>
     <div class="header__links">
+        <a href="Controller?command=gotonewspage">${news}</a>
+        <a href="Controller?command=gotocarspage">${cars}</a>
+        <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+            <a href="Controller?command=gotoorderspage">${orders}</a>
+        </c:if>
+        <a href="Controller?command=gotoaboutpage">${about}</a>
         <c:choose>
             <c:when test="${sessionScope.user eq null}">
                 <a href="Controller?command=gotologinpage">${log_in}</a>
                 <a href="Controller?command=gotoregisterpage">${sign_up}</a>
             </c:when>
             <c:otherwise>
-                <a href="Controller?command=gotonewspage">${news}</a>
-                <a href="Controller?command=gotocarspage">${cars}</a>
-                <c:if test="${sessionScope.user.role eq 'ADMIN'}">
-                    <a href="Controller?command=gotoorderspage">${orders}</a>
-                </c:if>
-                <a href="Controller?command=gotoaboutpage">${about}</a>
                 <a href="Controller?command=signout">${log_out}</a>
             </c:otherwise>
         </c:choose>

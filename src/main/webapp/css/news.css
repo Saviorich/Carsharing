@@ -104,3 +104,9 @@
 #delete_dialog__yes {
     color: red;
 }
+
+@media screen and (max-width: 700px) {
+    .news_block {
+        width: 500px;
+    }
+}

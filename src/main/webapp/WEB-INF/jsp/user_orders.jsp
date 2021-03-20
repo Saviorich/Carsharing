@@ -4,11 +4,16 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" href="css/user_orders.css" type="text/css"/>
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
-<c:forEach var="order" items="${requestScope.orders}">
-    <c:out value="${order}"/>
-</c:forEach>
+<div class="main_block">
+    <c:forEach var="order" items="${requestScope.orders}">
+        <div class="order_block">
+            <c:out value="${order}"/>
+        </div>
+    </c:forEach>
+</div>
 </body>
 </html>

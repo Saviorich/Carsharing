@@ -9,6 +9,7 @@ public final class RequestParameter {
     public static final String LOCALE = "locale";
     public static final String ERROR = "error";
     public static final String COMMAND = "command";
+    public static final String CAR = "car";
     public static final String CARS = "cars";
     public static final String DATA = "data";
     public static final String DATA_ID = "data_id";

@@ -45,22 +45,9 @@
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <a href="Controller?command=gotonewseditpage&data_id=${n.id}">${edit_news}</a>
-                <a href="#delete_dialog">${delete}</a>
+                <a href="Controller?command=deletenews&data_id=${n.id}">${delete}</a>
             </c:if>
         </div>
-
-        <div id="delete_dialog" class="delete_dialog">
-            <div class="delete_dialog__content">
-                <div class="delete_dialog__message">
-                    <h1>${message}</h1>
-                </div>
-                <div class="delete_dialog__options">
-                    <a id="delete_dialog__yes" href="Controller?command=deletenews&data_id=${n.id}">${yes}</a>
-                    <a href="#">${no}</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 </c:forEach>
 

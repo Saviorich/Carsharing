@@ -57,26 +57,13 @@
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'ADMIN'}">
                         <a href="Controller?command=gotocareditpage&data_id=${car.id}">${edit}</a>
-                        <a href="#delete_dialog">${delete}</a>
+                        <a href="Controller?command=deletecar&data_id=${car.id}">${delete}</a>
                     </c:when>
                     <c:otherwise>
                         <a href="Controller?command=gotoorderpage&data_id=${car.id}">${order}</a>
                     </c:otherwise>
                 </c:choose>
             </div>
-
-            <div id="delete_dialog" class="delete_dialog">
-                <div class="delete_dialog__content">
-                    <div class="delete_dialog__message">
-                        <h1>${message}</h1>
-                    </div>
-                    <div class="delete_dialog__options">
-                        <a id="delete_dialog__yes" href="Controller?command=deletecar&data_id=${car.id}">${yes}</a>
-                        <a href="#">${no}</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </c:forEach>
 </div>

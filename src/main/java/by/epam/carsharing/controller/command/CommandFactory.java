@@ -21,6 +21,7 @@ public class CommandFactory {
         commands.put(CommandName.GOTOCAREDITPAGE, new GoToEditPage());
         commands.put(CommandName.ADDCAR, new AddCarCommand());
         commands.put(CommandName.EDITCAR, new EditCarCommand());
+        commands.put(CommandName.DELETECAR, new DeleteCarCommand());
         commands.put(CommandName.ADDNEWS, new AddNewsCommand());
         commands.put(CommandName.DELETENEWS, new DeleteNewsCommand());
         commands.put(CommandName.EDITNEWS, new EditNewsCommand());

@@ -17,5 +17,6 @@ public enum CommandName {
     GOTOORDERPAGE,
     ADDCAR,
     EDITCAR,
+    DELETECAR,
     GOTOORDERSPAGE,
 }

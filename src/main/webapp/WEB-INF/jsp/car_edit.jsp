@@ -22,6 +22,7 @@
         <fmt:message key="car.engine" var="engine"/>
         <fmt:message key="car.price" var="price"/>
         <fmt:message key="car.mileage" var="mileage"/>
+        <fmt:message key="car.plate" var="plate"/>
         <fmt:message key="editor.content" var="content"/>
         <fmt:message key="editor.header" var="editor_header"/>
         <fmt:message key="admin.submit" var="submit"/>
@@ -46,12 +47,14 @@
                     ${color}: <input class="content_editor" name="color_editor" value="${car.color}"/><br/>
                     ${mileage}: <input class="content_editor" name="mileage_editor" type="number" value="${car.mileage}"/>KM<br/>
                     ${gearbox}: <input class="content_editor" name="gearbox_editor" value="${car.gearbox.toString().toLowerCase()}"/><br/>
-                    ${year}: <input class="content_editor" name="year_editor" value="${car.manufacturedYear}"/><br/>
+                    ${year}: <input class="content_editor" name="year_editor" type="number" value="${car.manufacturedYear}"/><br/>
                     ${engine}: <input class="content_editor" name="engine_editor" value="${car.engineType.toString().toLowerCase()}"/><br/>
                     ${car_class}: <input class="content_editor" name="class_editor" value="${car.carClass.toString().toLowerCase()}"/><br/>
+                    VIN: <input class="content_editor" name="vin_editor" value="${car.vin}"><br/>
+                    ${plate}: <input class="content_editor" name="plate_editor" value="${car.plate}"><br/>
             </div>
             <div class="editor_block__car_price">
-                ${price}: <input class="content_editor" name="price_editor" type="number" value="${car.pricePerDay}">
+                ${price}: <input class="content_editor" name="price_editor" type="number" min="0" step="any" value="${car.pricePerDay}">
             </div>
             <div class="editor_block__image">
                 <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>

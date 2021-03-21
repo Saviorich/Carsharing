@@ -11,8 +11,6 @@
         <fmt:message key="admin.edit" var="edit_news"/>
         <fmt:message key="admin.delete" var="delete"/>
         <fmt:message key="delete_dialog.message" var="message"/>
-        <fmt:message key="delete_dialog.yes" var="yes"/>
-        <fmt:message key="delete_dialog.no" var="no"/>
         <fmt:message key="header.news" var="news"/>
     </fmt:bundle>
     <title>${news}</title>
@@ -45,7 +43,7 @@
         <div class="news_block__admin_panel">
             <c:if test="${sessionScope.user.role eq 'ADMIN'}">
                 <a href="Controller?command=gotonewseditpage&data_id=${n.id}">${edit_news}</a>
-                <a href="Controller?command=deletenews&data_id=${n.id}">${delete}</a>
+                <a href="Controller?command=deletenews&data_id=${n.id}" onclick="return confirm('${message}')">${delete}</a>
             </c:if>
         </div>
     </div>

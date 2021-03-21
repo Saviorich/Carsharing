@@ -21,8 +21,6 @@
         <fmt:message key="admin.add_car" var="add_car"/>
         <fmt:message key="header.cars" var="cars"/>
         <fmt:message key="delete_dialog.message" var="message"/>
-        <fmt:message key="delete_dialog.yes" var="yes"/>
-        <fmt:message key="delete_dialog.no" var="no"/>
     </fmt:bundle>
     <title>${cars}</title>
 </head>
@@ -57,7 +55,7 @@
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'ADMIN'}">
                         <a href="Controller?command=gotocareditpage&data_id=${car.id}">${edit}</a>
-                        <a href="Controller?command=deletecar&data_id=${car.id}">${delete}</a>
+                        <a href="Controller?command=deletecar&data_id=${car.id}" onclick="return confirm('${message}')">${delete}</a>
                     </c:when>
                     <c:otherwise>
                         <a href="Controller?command=gotoorderpage&data_id=${car.id}">${order}</a>

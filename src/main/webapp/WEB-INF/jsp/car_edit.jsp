@@ -54,7 +54,7 @@
                     ${plate}: <input class="content_editor" name="plate_editor" value="${car.plate}"><br/>
             </div>
             <div class="editor_block__car_price">
-                ${price}: <input class="content_editor" name="price_editor" type="number" min="0" step="any" value="${car.pricePerDay}">
+                ${price}: <input class="content_editor" name="price_editor" type="number" min="0" step="0.1" value="${car.pricePerDay}">
             </div>
             <div class="editor_block__image">
                 <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>

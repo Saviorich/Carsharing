@@ -38,6 +38,23 @@ public class Car implements Identifiable {
         this.imagePath = imagePath;
     }
 
+    public Car(String brand, String model, String color, int mileage, GearboxType gearbox,
+               String manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin, String plate,CarClass carClass, String imagePath) {
+        this.brand = brand;
+        this.model = model;
+        this.color = color;
+        this.mileage = mileage;
+        this.gearbox = gearbox;
+        this.manufacturedYear = manufacturedYear;
+        this.engineType = engineType;
+        this.pricePerDay = pricePerDay;
+        this.vin = vin;
+        this.plate = plate;
+        this.carClass = carClass;
+        this.imagePath = imagePath;
+    }
+
+
     public int getId() {
         return id;
     }

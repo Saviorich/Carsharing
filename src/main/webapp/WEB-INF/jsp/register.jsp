@@ -11,6 +11,10 @@
         <fmt:message key="register.sign_up" var="register"/>
         <fmt:message key="register.error_message" var="error_message"/>
         <fmt:message key="register.have_account" var="have_account"/>
+        <fmt:message key="register.first_name" var="first_name"/>
+        <fmt:message key="register.second_name" var="second_name"/>
+        <fmt:message key="register.middle_name" var="middle_name"/>
+        <fmt:message key="register.phone_number" var="phone_number"/>
         <fmt:message key="header.log_in" var="log_in"/>
         <fmt:message key="header.sign_up" var="sign_up"/>
     </fmt:bundle>
@@ -31,32 +35,20 @@
             <input type="password" name="password" required>
         </label>
         <label>
-            First name
+            ${first_name}
             <input name="first_name" required>
         </label>
         <label>
-            Second name
+            ${second_name}
             <input name="second_name" required>
         </label>
         <label>
-            Middle name
+            ${middle_name}
             <input name="middle_name">
         </label>
         <label>
-            Phone number
-            <input type="tel" name="phone_number" required>
-        </label>
-        <label>
-            Passport number
-            <input name="passport_number" placeholder="АА1234567" pattern="[A-Z][A-Z]([0-9]{7})" required>
-        </label>
-        <label>
-            Identification number
-            <input name="identification_number" required>
-        </label>
-        <label>
-            Issue date
-            <input type="date" name="issue_date" required>
+            ${phone_number}
+            <input type="tel" name="phone_number" size="13" pattern="[+]([0-9]{12})" required>
         </label>
         <input class="button" type="submit" value="${register}">
         <label>${have_account}</label>

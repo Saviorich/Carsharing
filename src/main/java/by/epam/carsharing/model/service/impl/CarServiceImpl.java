@@ -95,4 +95,15 @@ public class CarServiceImpl implements CarService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void add(Car car) throws ServiceException {
+        CarDao carDao = daoFactory.getCarDao();
+
+        try {
+            carDao.add(car);
+        } catch (DaoException e){
+            throw new ServiceException(e);
+        }
+    }
 }

@@ -20,4 +20,6 @@ public interface CarService {
 
     void update(int id, String brand, String model, String color, int mileage, GearboxType gearbox,
                 String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws ServiceException;
+
+    void add(Car car) throws ServiceException;
 }

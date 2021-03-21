@@ -26,6 +26,8 @@ public class CarDaoImpl implements CarDao {
     private static final String GET_BY_YEAR = "SELECT * FROM cars WHERE manufactured_year=?;";
     private static final String GET_BY_CLASS = "SELECT * FROM cars WHERE class=?;";
     private static final String UPDATE_CAR_QUERY = "UPDATE cars SET brand=?, model=?, color=?, mileage=?, gearbox=?, manufactured_year=?, engine_type=?, class=?, price_per_day=?, image_path=? WHERE id=?;";
+    private static final String ADD_CAR_QUERY = "INSERT INTO cars (brand, model, color, mileage, gearbox, manufactured_year, engine_type, price_per_day, vin, plate, class, image_path) " +
+            "VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
@@ -103,6 +105,27 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void add(Car entity) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(ADD_CAR_QUERY);
+        ){
+            statement.setString(1, entity.getBrand());
+            statement.setString(2, entity.getModel());
+            statement.setString(3, entity.getColor());
+            statement.setInt(4, entity.getMileage());
+            statement.setString(5, entity.getGearbox().toString().toLowerCase());
+            statement.setString(6, entity.getManufacturedYear());
+            statement.setString(7, entity.getEngineType().toString().toLowerCase());
+            statement.setBigDecimal(8, entity.getPricePerDay());
+            statement.setString(9, entity.getVin());
+            statement.setString(10, entity.getPlate());
+            statement.setString(11, entity.getCarClass().toString().toLowerCase());
+            statement.setString(12, entity.getImagePath());
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

@@ -26,6 +26,7 @@ public class CarDaoImpl implements CarDao {
     private static final String GET_BY_YEAR = "SELECT * FROM cars WHERE manufactured_year=?;";
     private static final String GET_BY_CLASS = "SELECT * FROM cars WHERE class=?;";
     private static final String UPDATE_CAR_QUERY = "UPDATE cars SET brand=?, model=?, color=?, mileage=?, gearbox=?, manufactured_year=?, engine_type=?, class=?, price_per_day=?, image_path=? WHERE id=?;";
+    private static final String DELETE_BY_ID_QUERY = "DELETE FROM cars WHERE id=?;";
     private static final String ADD_CAR_QUERY = "INSERT INTO cars (brand, model, color, mileage, gearbox, manufactured_year, engine_type, price_per_day, vin, plate, class, image_path) " +
             "VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -130,7 +131,16 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public void deleteById(int id) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)
+        ) {
+            statement.setInt(1, id);
 
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
     }
 
     @Override

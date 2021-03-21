@@ -106,4 +106,15 @@ public class CarServiceImpl implements CarService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void deleteById(int id) throws ServiceException {
+        CarDao carDao = daoFactory.getCarDao();
+
+        try {
+            carDao.deleteById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

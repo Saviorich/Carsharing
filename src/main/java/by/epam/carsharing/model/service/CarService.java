@@ -22,4 +22,6 @@ public interface CarService {
                 String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws ServiceException;
 
     void add(Car car) throws ServiceException;
+
+    void deleteById(int id) throws ServiceException;
 }

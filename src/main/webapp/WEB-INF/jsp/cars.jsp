@@ -71,7 +71,7 @@
                         <h1>${message}</h1>
                     </div>
                     <div class="delete_dialog__options">
-                        <a id="delete_dialog__yes" href="Controller?command=deletenews&data_id=${car.id}">${yes}</a>
+                        <a id="delete_dialog__yes" href="Controller?command=deletecar&data_id=${car.id}">${yes}</a>
                         <a href="#">${no}</a>
                     </div>
                 </div>

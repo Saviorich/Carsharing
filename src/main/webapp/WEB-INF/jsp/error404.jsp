@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="error_box">
-    <h2>ERROR PAGE</h2>
+    <h2>ERROR 404</h2>
     <h4>Page not found</h4>
     <a href="Controller?command=gotonewspage">Go to main page</a>
 </div>

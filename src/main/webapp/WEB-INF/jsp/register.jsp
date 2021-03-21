@@ -30,6 +30,34 @@
             ${password}
             <input type="password" name="password" required>
         </label>
+        <label>
+            First name
+            <input name="first_name" required>
+        </label>
+        <label>
+            Second name
+            <input name="second_name" required>
+        </label>
+        <label>
+            Middle name
+            <input name="middle_name">
+        </label>
+        <label>
+            Phone number
+            <input type="tel" name="phone_number" required>
+        </label>
+        <label>
+            Passport number
+            <input name="passport_number" placeholder="АА1234567" pattern="[A-Z][A-Z]([0-9]{7})" required>
+        </label>
+        <label>
+            Identification number
+            <input name="identification_number" required>
+        </label>
+        <label>
+            Issue date
+            <input type="date" name="issue_date" required>
+        </label>
         <input class="button" type="submit" value="${register}">
         <label>${have_account}</label>
         <a href="login">${log_in}</a>

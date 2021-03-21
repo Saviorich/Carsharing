@@ -32,7 +32,6 @@
         <c:if test="${sessionScope.user.role eq 'ADMIN'}">
             <a href="Controller?command=gotoorderspage">${orders}</a>
         </c:if>
-        <a href="Controller?command=gotoaboutpage">${about}</a>
         <c:choose>
             <c:when test="${sessionScope.user eq null}">
                 <a href="Controller?command=gotologinpage">${log_in}</a>

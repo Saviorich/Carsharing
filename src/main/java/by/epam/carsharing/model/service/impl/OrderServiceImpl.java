@@ -24,4 +24,13 @@ public class OrderServiceImpl implements OrderService {
         }
         return orders;
     }
+
+    @Override
+    public void add(Order entity) throws ServiceException {
+        try {
+            orderDao.add(entity);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

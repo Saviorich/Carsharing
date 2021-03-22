@@ -25,7 +25,7 @@
 
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="<c:url value="/js/price_calc.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/js/order.js"/>"></script>
     <title></title>
 </head>
 <body>
@@ -61,7 +61,7 @@
                 <input name="identification_number" value="" placeholder="1234567A123PB1"
                        pattern="([0-9]{7})[A-ZА-Я]([0-9]{3})[A-ZА-Я][A-ZА-Я][0-9]" required/><br/>
                 ${issue_date}<br/>
-                <input name="issue_date" type="date" value="" required/><br/>
+                <input name="issue_date" type="date" value="" placeholder="dd/mm/yyyy" min="01/01/1970" max="01/01/2100" required/><br/>
             </div>
         </div>
 
@@ -73,6 +73,7 @@
                 <input id="end" name="end_date" type="date" value="" required/><br/>
                 <div class="total_price">
                     <input id="total_price" type="hidden" name="total_price" value="" readonly="readonly" required/>
+                    <input type="hidden" name="data_id" value="${car.id}">
                     <p>Total price: <span>0</span> BYN</p>
                 </div>
             </div>

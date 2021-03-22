@@ -32,6 +32,12 @@ public final class RequestParameter {
     public static final String SECOND_NAME = "second_name";
     public static final String MIDDLE_NAME = "middle_name";
     public static final String PHONE_NUMBER = "phone_number";
+    public static final String PASSPORT_NUMBER = "passport_number";
+    public static final String IDENTIFICATION_NUMBER = "identification_number";
+    public static final String ISSUE_DATE = "issue_date";
+    public static final String START_DATE = "start_date";
+    public static final String END_DATE = "end_date";
 
-    private RequestParameter() {}
+    private RequestParameter() {
+    }
 }

@@ -27,6 +27,7 @@ public class CommandFactory {
         commands.put(CommandName.EDITNEWS, new EditNewsCommand());
         commands.put(CommandName.GOTOORDERPAGE, new GoToOrderPage());
         commands.put(CommandName.GOTOORDERSPAGE, new GoToUsersOrdersPage());
+        commands.put(CommandName.MAKEORDER, new MakeOrderCommand());
     }
 
     public Command takeCommand(String command) {

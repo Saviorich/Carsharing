@@ -22,7 +22,8 @@ public class Car implements Identifiable {
     public Car() {}
 
     public Car(int id, String brand, String model, String color, int mileage, GearboxType gearbox,
-               String manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin, String plate,CarClass carClass, String imagePath) {
+               String manufacturedYear, EngineType engineType, BigDecimal pricePerDay,
+               String vin, String plate,CarClass carClass, String imagePath) {
         this.id = id;
         this.brand = brand;
         this.model = model;

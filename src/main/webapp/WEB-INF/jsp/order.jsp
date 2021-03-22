@@ -5,6 +5,7 @@
 <head>
     <link rel="stylesheet" href="css/cars.css" type="text/css"/>
     <link rel="stylesheet" href="css/order.css" type="text/css"/>
+    <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content">
         <fmt:message key="car.order" var="order"/>
         <fmt:message key="car.color" var="color"/>
@@ -19,6 +20,7 @@
     <title></title>
 </head>
 <body>
+<jsp:include page="../jsp/header.jsp"/>
 <c:set var="car" value="${requestScope.car}"/>
 <div class="order_main_block">
     <div class="car_block" style="width: 440px;">
@@ -40,16 +42,32 @@
             ${price}: ${car.pricePerDay} BYN
         </div>
     </div>
-    <div class="form">
-        <form name="Controller" method="get">
-            Start Date<br/>
-            <input name="start_date" type="date" value=""><br/>
-            End Date<br/>
-            <input name="end_date" type="date" value=""><br/>
+    <form name="Controller" method="get">
+        <div class="form">
+            <div class="content">
+                Passport number<br/>
+                <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required><br/>
+                Passport indetification number<br/>
+                <input name="identification_number" value="" placeholder="1234567A123PB1"
+                       pattern="([0-9]{7})[A-Z]([0-9]{3})[A-Z][A-Z][0-9]" required><br/>
+                Passport issue date<br/>
+                <input name="issue_date" type="date" value="" required><br/>
+            </div>
+        </div>
 
+        <div class="form">
+            <div class="content">
+                Start Date<br/>
+                <input name="start_date" type="date" value="" required><br/>
+                End Date<br/>
+                <input name="end_date" type="date" value="" required><br/>
+            </div>
+        </div>
+        <div class="but">
             <button type="submit" value="">${submit}</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
+<jsp:include page="../jsp/footer.jsp"/>
 </body>
 </html>

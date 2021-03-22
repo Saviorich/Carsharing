@@ -14,6 +14,7 @@ public final class DaoFactory {
     private final CarDao carDao = new CarDaoImpl();
     private final OrderDao orderDao = new OrderDaoImpl();
     private final UserDetailsDao detailsDao = new UserDetailsDaoImpl();
+    private final PassportDao passportDao = new PassportDaoImpl();
 
 
     public NewsDao getNewsDao() {
@@ -34,5 +35,9 @@ public final class DaoFactory {
 
     public UserDetailsDao getUserDetailsDao() {
         return detailsDao;
+    }
+
+    public PassportDao getPassportDao() {
+        return passportDao;
     }
 }

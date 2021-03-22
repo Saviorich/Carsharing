@@ -13,6 +13,7 @@ public final class ServiceFactory {
     private final CarService carService = new CarServiceImpl();
     private final OrderService orderService = new OrderServiceImpl();
     private final UserDetailsService detailsService = new UserDetailsServiceImpl();
+    private final PassportService passportService = new PassportServiceImpl();
 
     public static ServiceFactory getInstance() {
         return instance;
@@ -34,5 +35,9 @@ public final class ServiceFactory {
 
     public UserDetailsService getUserDetailsService() {
         return detailsService;
+    }
+
+    public PassportService getPassportService() {
+        return passportService;
     }
 }

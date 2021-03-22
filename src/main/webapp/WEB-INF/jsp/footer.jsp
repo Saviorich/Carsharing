@@ -14,7 +14,7 @@
 <div class="footer">
     <c:set var="user" scope="session" value="${sessionScope.user}"/>
     <c:if test="${not empty user and user.role eq 'ADMIN'}">
-        <span>Administrator</span>
+        <span>${administrator}</span>
     </c:if>
     <p>Epam, 2021</p>
 </div>

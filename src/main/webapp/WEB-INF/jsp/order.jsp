@@ -16,7 +16,16 @@
         <fmt:message key="car.price" var="price"/>
         <fmt:message key="car.mileage" var="mileage"/>
         <fmt:message key="admin.submit" var="submit"/>
+        <fmt:message key="order.start_date" var="start_date"/>
+        <fmt:message key="order.end_date" var="end_date"/>
+        <fmt:message key="order.passport_number" var="passport_number"/>
+        <fmt:message key="order.identification_number" var="identification_number"/>
+        <fmt:message key="order.issue_date" var="issue_date"/>
     </fmt:bundle>
+
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="<c:url value="/js/price_calc.js"/>"></script>
     <title></title>
 </head>
 <body>
@@ -39,28 +48,33 @@
             ${car_class}: ${car.carClass.toString().toLowerCase()}<br/>
         </div>
         <div class="car_block__price">
-            ${price}: ${car.pricePerDay} BYN
+            ${price}: <span>${car.pricePerDay}</span> BYN
         </div>
     </div>
-    <form name="Controller" method="get">
+    <form name="Controller" method="get" onsubmit="return validateDate()">
+        <input type="hidden" name="command" value="makeorder">
         <div class="form">
             <div class="content">
-                Passport number<br/>
-                <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required><br/>
-                Passport indetification number<br/>
+                ${passport_number}<br/>
+                <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required/><br/>
+                ${identification_number}<br/>
                 <input name="identification_number" value="" placeholder="1234567A123PB1"
-                       pattern="([0-9]{7})[A-Z]([0-9]{3})[A-Z][A-Z][0-9]" required><br/>
-                Passport issue date<br/>
-                <input name="issue_date" type="date" value="" required><br/>
+                       pattern="([0-9]{7})[A-ZА-Я]([0-9]{3})[A-ZА-Я][A-ZА-Я][0-9]" required/><br/>
+                ${issue_date}<br/>
+                <input name="issue_date" type="date" value="" required/><br/>
             </div>
         </div>
 
         <div class="form">
             <div class="content">
-                Start Date<br/>
-                <input name="start_date" type="date" value="" required><br/>
-                End Date<br/>
-                <input name="end_date" type="date" value="" required><br/>
+                ${start_date}<br/>
+                <input id="start" name="start_date" type="date" value="" required/><br/>
+                ${end_date}<br/>
+                <input id="end" name="end_date" type="date" value="" required/><br/>
+                <div class="total_price">
+                    <input id="total_price" type="hidden" name="total_price" value="" readonly="readonly" required/>
+                    <p>Total price: <span>0</span> BYN</p>
+                </div>
             </div>
         </div>
         <div class="but">

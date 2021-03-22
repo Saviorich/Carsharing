@@ -44,3 +44,12 @@ button[type=submit]:hover {
     opacity: .8;
     transition: all .4s;
 }
+
+.total_price {
+    background: white;
+    color: black;
+}
+
+.total_price span {
+    font-size: inherit;
+}

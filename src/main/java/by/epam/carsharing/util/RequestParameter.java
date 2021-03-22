@@ -28,6 +28,10 @@ public final class RequestParameter {
     public static final String ORDERS = "orders";
     public static final String VIN = "vin_editor";
     public static final String PLATE = "plate_editor";
+    public static final String FIRST_NAME = "first_name";
+    public static final String SECOND_NAME = "second_name";
+    public static final String MIDDLE_NAME = "middle_name";
+    public static final String PHONE_NUMBER = "phone_number";
 
     private RequestParameter() {}
 }

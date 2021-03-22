@@ -1,32 +1,36 @@
 package by.epam.carsharing.model.entity.user;
 
-public class UserDetails {
-    private Integer id;
-    private Integer userId;
+import by.epam.carsharing.model.entity.Identifiable;
+
+public class UserDetails implements Identifiable {
+    private int id;
+    private int userId;
     private String phoneNumber;
     private String firstName;
     private String secondName;
     private String middleName;
-    private String passportNumber;
 
     public UserDetails() {}
 
-    public UserDetails(Integer id, Integer userId, String phoneNumber,
-                       String firstName, String secondName, String middleName, String passportNumber) {
+    public UserDetails(int id, int userId, String phoneNumber,
+                       String firstName, String secondName, String middleName) {
         this.id = id;
         this.userId = userId;
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
-        this.passportNumber = passportNumber;
     }
 
-    public Integer getId() {
+    public UserDetails (int userId, String phoneNumber, String firstName, String secondName, String middleName) {
+        this(-1, userId, phoneNumber, firstName, secondName, middleName);
+    }
+
+    public int getId() {
         return id;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 
@@ -46,10 +50,6 @@ public class UserDetails {
         return middleName;
     }
 
-    public String getPassportNumber() {
-        return passportNumber;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,24 +57,22 @@ public class UserDetails {
 
         UserDetails that = (UserDetails) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (phoneNumber != null ? !phoneNumber.equals(that.phoneNumber) : that.phoneNumber != null) return false;
-        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        if (secondName != null ? !secondName.equals(that.secondName) : that.secondName != null) return false;
-        if (middleName != null ? !middleName.equals(that.middleName) : that.middleName != null) return false;
-        return passportNumber != null ? passportNumber.equals(that.passportNumber) : that.passportNumber == null;
+        if (id != that.id) return false;
+        if (userId != that.userId) return false;
+        if (!phoneNumber.equals(that.phoneNumber)) return false;
+        if (!firstName.equals(that.firstName)) return false;
+        if (!secondName.equals(that.secondName)) return false;
+        return middleName != null ? middleName.equals(that.middleName) : that.middleName == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (phoneNumber != null ? phoneNumber.hashCode() : 0);
-        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
-        result = 31 * result + (secondName != null ? secondName.hashCode() : 0);
+        int result = id;
+        result = 31 * result + userId;
+        result = 31 * result + phoneNumber.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + secondName.hashCode();
         result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
-        result = 31 * result + (passportNumber != null ? passportNumber.hashCode() : 0);
         return result;
     }
 
@@ -87,7 +85,6 @@ public class UserDetails {
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", secondName='").append(secondName).append('\'');
         sb.append(", middleName='").append(middleName).append('\'');
-        sb.append(", passportNumber='").append(passportNumber).append('\'');
         sb.append('}');
         return sb.toString();
     }

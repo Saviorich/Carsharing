@@ -1,6 +1,9 @@
 package by.epam.carsharing.controller.command.impl;
 
 import by.epam.carsharing.controller.command.Command;
+import by.epam.carsharing.model.entity.user.User;
+import by.epam.carsharing.model.entity.user.UserDetails;
+import by.epam.carsharing.model.service.UserDetailsService;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.model.service.UserService;
@@ -27,13 +30,22 @@ public class RegisterCommand implements Command {
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);
 
+        String firstName = request.getParameter(RequestParameter.FIRST_NAME);
+        String secondName = request.getParameter(RequestParameter.SECOND_NAME);
+        String middleName = request.getParameter(RequestParameter.MIDDLE_NAME);
+        String phoneNumber = request.getParameter(RequestParameter.PHONE_NUMBER);
+
         HttpSession session = request.getSession();
         UserService userService = serviceFactory.getUserService();
+        UserDetailsService detailsService = serviceFactory.getUserDetailsService();
 
         try {
             userService.registerUser(email, password);
+            User user = userService.findUserByEmailAndPassword(email, password).get();
+            session.setAttribute(SessionAttribute.USER, user);
+            UserDetails details = new UserDetails(user.getId(), phoneNumber, firstName, secondName, middleName);
+            detailsService.add(details);
             response.sendRedirect(GO_TO_NEWS_PAGE);
-            session.setAttribute(SessionAttribute.USER, userService.findUserByEmailAndPassword(email, password).get());
         } catch (ServiceException e) {
             logger.log(Level.DEBUG, e);
             session.setAttribute(SessionAttribute.ERROR, true);

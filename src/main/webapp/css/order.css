@@ -1,4 +1,6 @@
 .form {
+    background: #ff9d26;
+
     display: block;
 
     align-items: center;
@@ -16,14 +18,29 @@
 }
 
 .form input {
-    font-size: 30px;
+    margin: 5px auto 5px auto;
+    font-size: 24px;
     width: 90%;
     height: 50px;
 }
 
-.form button {
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 16px;
+.but {
+    display: flex;
+    justify-content: center;
+}
+
+button[type=submit] {
     float: right;
+    color: black;
+    margin: 0 auto;
+    padding: 5px;
+    background: #34cb3c;
+    border: 0;
+    border-radius: 5px;
+    font-size: 25px;
+}
+
+button[type=submit]:hover {
+    opacity: .8;
+    transition: all .4s;
 }

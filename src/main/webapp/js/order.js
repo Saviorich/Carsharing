@@ -36,7 +36,7 @@ function validateDate() {
     let days = (secondDate - firstDate) / (1000 * 3600 * 24);
 
     if (days < 0) {
-        alert("This element needs data");
+        alert("Wrong dates");
         return false;
     }
     return true;

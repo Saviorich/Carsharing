@@ -29,7 +29,7 @@
     <div class="header__links">
         <a href="Controller?command=gotonewspage">${news}</a>
         <a href="Controller?command=gotocarspage">${cars}</a>
-        <c:if test="${sessionScope.user.role eq 'ADMIN'}">
+        <c:if test="${sessionScope.user != null}">
             <a href="Controller?command=gotoorderspage">${orders}</a>
         </c:if>
         <c:choose>

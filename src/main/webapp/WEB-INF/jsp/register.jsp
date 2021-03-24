@@ -15,6 +15,9 @@
         <fmt:message key="register.second_name" var="second_name"/>
         <fmt:message key="register.middle_name" var="middle_name"/>
         <fmt:message key="register.phone_number" var="phone_number"/>
+        <fmt:message key="register.passport_number" var="passport_number"/>
+        <fmt:message key="register.identification_number" var="identification_number"/>
+        <fmt:message key="register.issue_date" var="issue_date"/>
         <fmt:message key="header.log_in" var="log_in"/>
         <fmt:message key="header.sign_up" var="sign_up"/>
     </fmt:bundle>
@@ -49,6 +52,19 @@
         <label>
             ${phone_number}
             <input type="tel" name="phone_number" size="13" pattern="[+]([0-9]{12})" required>
+        </label>
+        <label>
+            ${passport_number}
+            <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required/><br/>
+        </label>
+        <label>
+            ${identification_number}
+            <input name="identification_number" value="" placeholder="1234567A123PB1"
+                       pattern="([0-9]{7})[A-ZА-Я]([0-9]{3})[A-ZА-Я][A-ZА-Я][0-9]" required/><br/>
+        </label>
+        <label>
+            ${issue_date}
+            <input name="issue_date" type="date" value="" placeholder="dd/mm/yyyy" min="01/01/1970" max="01/01/2100" required/><br/>
         </label>
         <input class="button" type="submit" value="${register}">
         <label>${have_account}</label>

@@ -1,3 +1,50 @@
-.main_block {
-    display: block;
+* {
+    font-size: 20px;
+}
+
+.order_block {
+    background: #ff9d26;
+    width: 95%;
+    height: 75px;
+    margin: 10px auto 10px auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+table {
+    width: 100%;
+    border: 1px solid black;
+}
+
+th {
+    background: #ff9d26;
+    border: 1px solid black;
+}
+
+td {
+    text-align: center;
+    width: 1%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.button_panel {
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+.button_panel a {
+    margin-left: 3px;
+    text-decoration: none;
+    color: #ff9d26;
+}
+
+.button_panel a:hover {
+    opacity: .6;
+    transition: .4s;
+}
+
+.pagelinks {
+    margin: 10px auto 10px auto;
 }

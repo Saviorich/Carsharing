@@ -18,9 +18,6 @@
         <fmt:message key="admin.submit" var="submit"/>
         <fmt:message key="order.start_date" var="start_date"/>
         <fmt:message key="order.end_date" var="end_date"/>
-        <fmt:message key="order.passport_number" var="passport_number"/>
-        <fmt:message key="order.identification_number" var="identification_number"/>
-        <fmt:message key="order.issue_date" var="issue_date"/>
     </fmt:bundle>
 
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -53,18 +50,6 @@
     </div>
     <form name="Controller" method="get" onsubmit="return validateDate()">
         <input type="hidden" name="command" value="makeorder">
-        <div class="form">
-            <div class="content">
-                ${passport_number}<br/>
-                <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required/><br/>
-                ${identification_number}<br/>
-                <input name="identification_number" value="" placeholder="1234567A123PB1"
-                       pattern="([0-9]{7})[A-ZА-Я]([0-9]{3})[A-ZА-Я][A-ZА-Я][0-9]" required/><br/>
-                ${issue_date}<br/>
-                <input name="issue_date" type="date" value="" placeholder="dd/mm/yyyy" min="01/01/1970" max="01/01/2100" required/><br/>
-            </div>
-        </div>
-
         <div class="form">
             <div class="content">
                 ${start_date}<br/>

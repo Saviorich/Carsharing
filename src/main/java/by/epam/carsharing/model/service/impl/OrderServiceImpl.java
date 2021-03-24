@@ -19,9 +19,22 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders;
         try {
             orders = orderDao.getAll();
-        } catch (DaoException e){
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
+        return orders;
+    }
+
+    @Override
+    public List<Order> getAllByUserId(int userId) throws ServiceException {
+        List<Order> orders = new ArrayList<>();
+
+        try {
+            orders = orderDao.getAllByUserId(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+
         return orders;
     }
 

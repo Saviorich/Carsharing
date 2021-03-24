@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface OrderDao extends Dao<Order>{
     List<Order> getAll() throws DaoException;
+    List<Order> getAllByUserId(int userId) throws DaoException;
 }

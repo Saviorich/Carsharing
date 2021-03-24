@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface OrderService {
     List<Order> getAll() throws ServiceException;
+    List<Order> getAllByUserId(int userId) throws ServiceException;
     void add(Order entity) throws ServiceException;
 }

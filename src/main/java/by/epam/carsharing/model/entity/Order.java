@@ -11,12 +11,11 @@ public class Order implements Identifiable {
     private Date endDate;
     private String rejectionComment;
     private String returnComment;
-    private String passportNumber;
 
     public Order() {}
 
     public Order(int id, int userId, int carId, int statusId,
-                 Date startDate, Date endDate, String rejectionComment, String returnComment, String passportNumber) {
+                 Date startDate, Date endDate, String rejectionComment, String returnComment) {
         this.id = id;
         this.userId = userId;
         this.carId = carId;
@@ -25,12 +24,11 @@ public class Order implements Identifiable {
         this.endDate = endDate;
         this.rejectionComment = rejectionComment;
         this.returnComment = returnComment;
-        this.passportNumber = passportNumber;
     }
 
     public Order (int userId, int carId, int statusId,
-                  Date startDate, Date endDate, String rejectionComment, String returnComment, String passportNumber) {
-        this(-1, userId, carId, statusId, startDate, endDate, rejectionComment, returnComment, passportNumber);
+                  Date startDate, Date endDate, String rejectionComment, String returnComment) {
+        this(-1, userId, carId, statusId, startDate, endDate, rejectionComment, returnComment);
     }
 
     public int getId() {
@@ -65,10 +63,6 @@ public class Order implements Identifiable {
         return returnComment;
     }
 
-    public String getPassportNumber() {
-        return passportNumber;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,9 +78,7 @@ public class Order implements Identifiable {
         if (!endDate.equals(order.endDate)) return false;
         if (rejectionComment != null ? !rejectionComment.equals(order.rejectionComment) : order.rejectionComment != null)
             return false;
-        if (returnComment != null ? !returnComment.equals(order.returnComment) : order.returnComment != null)
-            return false;
-        return passportNumber.equals(order.passportNumber);
+        return returnComment != null ? returnComment.equals(order.returnComment) : order.returnComment == null;
     }
 
     @Override
@@ -99,7 +91,6 @@ public class Order implements Identifiable {
         result = 31 * result + endDate.hashCode();
         result = 31 * result + (rejectionComment != null ? rejectionComment.hashCode() : 0);
         result = 31 * result + (returnComment != null ? returnComment.hashCode() : 0);
-        result = 31 * result + passportNumber.hashCode();
         return result;
     }
 
@@ -114,7 +105,6 @@ public class Order implements Identifiable {
         sb.append(", endDate=").append(endDate);
         sb.append(", rejectionComment='").append(rejectionComment).append('\'');
         sb.append(", returnComment='").append(returnComment).append('\'');
-        sb.append(", passportNumber='").append(passportNumber).append('\'');
         sb.append('}');
         return sb.toString();
     }

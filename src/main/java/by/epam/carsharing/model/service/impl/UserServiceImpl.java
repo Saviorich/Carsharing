@@ -17,8 +17,14 @@ public class UserServiceImpl implements UserService {
     private static final UserValidator validator = new UserValidator();
 
     @Override
-    public User findUserById(Integer id) {
-        return null;
+    public Optional<User> getById(Integer id) throws ServiceException {
+        Optional<User> user;
+        try {
+            user = daoFactory.getUserDao().getById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return user;
     }
 
     @Override

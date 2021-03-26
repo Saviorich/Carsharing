@@ -1,12 +1,16 @@
 package by.epam.carsharing.model.entity;
 
+import by.epam.carsharing.model.entity.car.Car;
+import by.epam.carsharing.model.entity.status.OrderStatus;
+import by.epam.carsharing.model.entity.user.User;
+
 import java.util.Date;
 
 public class Order implements Identifiable {
     private int id;
-    private int userId;
-    private int carId;
-    private int statusId;
+    private User user;
+    private Car car;
+    private OrderStatus status;
     private Date startDate;
     private Date endDate;
     private String rejectionComment;
@@ -14,37 +18,37 @@ public class Order implements Identifiable {
 
     public Order() {}
 
-    public Order(int id, int userId, int carId, int statusId,
-                 Date startDate, Date endDate, String rejectionComment, String returnComment) {
+    public Order(int id, User user, Car car, OrderStatus status, Date startDate, Date endDate,
+                 String rejectionComment, String returnComment) {
         this.id = id;
-        this.userId = userId;
-        this.carId = carId;
-        this.statusId = statusId;
+        this.user = user;
+        this.car = car;
+        this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.rejectionComment = rejectionComment;
         this.returnComment = returnComment;
     }
 
-    public Order (int userId, int carId, int statusId,
+    public Order (User user, Car car, OrderStatus status,
                   Date startDate, Date endDate, String rejectionComment, String returnComment) {
-        this(-1, userId, carId, statusId, startDate, endDate, rejectionComment, returnComment);
+        this(-1, user, car, status, startDate, endDate, rejectionComment, returnComment);
     }
 
     public int getId() {
         return id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public Integer getCarId() {
-        return carId;
+    public Car getCar() {
+        return car;
     }
 
-    public Integer getStatusId() {
-        return statusId;
+    public OrderStatus getStatus() {
+        return status;
     }
 
     public Date getStartDate() {
@@ -71,9 +75,9 @@ public class Order implements Identifiable {
         Order order = (Order) o;
 
         if (id != order.id) return false;
-        if (userId != order.userId) return false;
-        if (carId != order.carId) return false;
-        if (statusId != order.statusId) return false;
+        if (!user.equals(order.user)) return false;
+        if (!car.equals(order.car)) return false;
+        if (status != order.status) return false;
         if (!startDate.equals(order.startDate)) return false;
         if (!endDate.equals(order.endDate)) return false;
         if (rejectionComment != null ? !rejectionComment.equals(order.rejectionComment) : order.rejectionComment != null)
@@ -84,9 +88,9 @@ public class Order implements Identifiable {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + userId;
-        result = 31 * result + carId;
-        result = 31 * result + statusId;
+        result = 31 * result + user.hashCode();
+        result = 31 * result + car.hashCode();
+        result = 31 * result + status.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         result = 31 * result + (rejectionComment != null ? rejectionComment.hashCode() : 0);
@@ -98,9 +102,9 @@ public class Order implements Identifiable {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Order{");
         sb.append("id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", carId=").append(carId);
-        sb.append(", statusId=").append(statusId);
+        sb.append(", user=").append(user);
+        sb.append(", car=").append(car);
+        sb.append(", status=").append(status);
         sb.append(", startDate=").append(startDate);
         sb.append(", endDate=").append(endDate);
         sb.append(", rejectionComment='").append(rejectionComment).append('\'');

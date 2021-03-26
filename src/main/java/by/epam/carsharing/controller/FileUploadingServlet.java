@@ -6,6 +6,7 @@ import by.epam.carsharing.model.service.NewsService;
 import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,10 +32,8 @@ public class FileUploadingServlet extends HttpServlet {
 
 
     private static final Logger logger = LogManager.getLogger(FileUploadingServlet.class);
-    private static final NewsService newsService = ServiceFactory.getInstance().getNewsService();
     private static final CommandFactory factory = new CommandFactory();
     private static final String IMAGE_EDITOR_PART = "image_editor";
-    private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
     private static final String IMAGES_DIRECTORY_NAME = "images";
     private static final String UPLOAD_DIR = "D:\\java_projects\\jwd_final_project\\Carsharing\\src\\main\\webapp\\"
             + IMAGES_DIRECTORY_NAME;
@@ -74,6 +73,7 @@ public class FileUploadingServlet extends HttpServlet {
                 }
             }
         } catch (IOException e) {
+            logger.log(Level.ERROR, e);
             throw new ServletException(e);
         }
         return true;

@@ -1,6 +1,8 @@
 package by.epam.carsharing.util;
 
 import by.epam.carsharing.model.entity.car.CarClass;
+import by.epam.carsharing.model.entity.car.EngineType;
+import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.service.ServiceFactory;
 import org.apache.logging.log4j.Level;
@@ -136,11 +138,41 @@ public class ConstantFormatTag extends TagSupport {
     }
 
     private String formatGearboxType() {
-        return null;
+        final String manualGearbox = "manual_gearbox";
+        final String automaticGearbox = "automatic_gearbox";
+
+        String gearbox = null;
+        GearboxType gearboxType = GearboxType.valueOf(constant);
+        switch (gearboxType) {
+            case MANUAL:
+                gearbox = manualGearbox;
+                break;
+            case AUTOMATIC:
+                gearbox = automaticGearbox;
+                break;
+        }
+        return gearbox;
     }
 
     private String formatEngineType() {
-        return null;
+        final String dieselEngine = "diesel_engine";
+        final String gasEngine = "gas_engine";
+        final String petrolEngine = "petrol_engine";
+
+        String engine = null;
+        EngineType engineType = EngineType.valueOf(constant);
+        switch (engineType) {
+            case DIESEL:
+                engine = dieselEngine;
+                break;
+            case GAS:
+                engine = gasEngine;
+                break;
+            case PETROL:
+                engine = petrolEngine;
+                break;
+        }
+        return engine;
     }
 
     private String formatPaymentStatus() {

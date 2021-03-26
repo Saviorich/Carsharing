@@ -4,7 +4,8 @@ import by.epam.carsharing.model.entity.Identifiable;
 
 public class UserDetails implements Identifiable {
     private int id;
-    private int userId;
+    private User user;
+    private String passportNumber;
     private String phoneNumber;
     private String firstName;
     private String secondName;
@@ -12,26 +13,28 @@ public class UserDetails implements Identifiable {
 
     public UserDetails() {}
 
-    public UserDetails(int id, int userId, String phoneNumber,
+    public UserDetails(int id, User user, String passportNumber, String phoneNumber,
                        String firstName, String secondName, String middleName) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
+        this.passportNumber = passportNumber;
         this.phoneNumber = phoneNumber;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
     }
 
-    public UserDetails (int userId, String phoneNumber, String firstName, String secondName, String middleName) {
-        this(-1, userId, phoneNumber, firstName, secondName, middleName);
+    public UserDetails(User user, String passportNumber, String phoneNumber,
+                       String firstName, String secondName, String middleName) {
+        this(-1, user, passportNumber, phoneNumber, firstName, secondName, middleName);
     }
 
     public int getId() {
         return id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public String getPhoneNumber() {
@@ -50,25 +53,31 @@ public class UserDetails implements Identifiable {
         return middleName;
     }
 
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserDetails that = (UserDetails) o;
+        UserDetails details = (UserDetails) o;
 
-        if (id != that.id) return false;
-        if (userId != that.userId) return false;
-        if (!phoneNumber.equals(that.phoneNumber)) return false;
-        if (!firstName.equals(that.firstName)) return false;
-        if (!secondName.equals(that.secondName)) return false;
-        return middleName != null ? middleName.equals(that.middleName) : that.middleName == null;
+        if (id != details.id) return false;
+        if (!user.equals(details.user)) return false;
+        if (!passportNumber.equals(details.passportNumber)) return false;
+        if (!phoneNumber.equals(details.phoneNumber)) return false;
+        if (!firstName.equals(details.firstName)) return false;
+        if (!secondName.equals(details.secondName)) return false;
+        return middleName != null ? middleName.equals(details.middleName) : details.middleName == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + userId;
+        result = 31 * result + user.hashCode();
+        result = 31 * result + passportNumber.hashCode();
         result = 31 * result + phoneNumber.hashCode();
         result = 31 * result + firstName.hashCode();
         result = 31 * result + secondName.hashCode();
@@ -80,7 +89,8 @@ public class UserDetails implements Identifiable {
     public String toString() {
         final StringBuilder sb = new StringBuilder("UserDetails{");
         sb.append("id=").append(id);
-        sb.append(", userId=").append(userId);
+        sb.append(", user=").append(user);
+        sb.append(", passportNumber='").append(passportNumber).append('\'');
         sb.append(", phoneNumber='").append(phoneNumber).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", secondName='").append(secondName).append('\'');

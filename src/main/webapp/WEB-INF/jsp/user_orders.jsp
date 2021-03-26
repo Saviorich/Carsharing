@@ -21,11 +21,11 @@
     <display:table name="requestScope.orders" uid="order" class="table" pagesize="8" requestURI=""
                    sort="list" defaultorder="ascending">
         <c:if test="${is_admin}">
-            <display:column title="User" sortable="true" sortProperty="userId">
+            <display:column title="User" sortable="true" sortProperty="user.email">
                 ${order.user.email}
             </display:column>
         </c:if>
-        <display:column title="Car" sortable="true" sortProperty="carId">
+        <display:column title="Car" sortable="true" sortProperty="car.brand">
             ${order.car.brand} ${order.car.model}
         </display:column>
         <display:column title="Start date" sortable="true" sortProperty="startDate">
@@ -34,7 +34,7 @@
         <display:column title="End date" sortable="true" sortProperty="endDate">
             ${order.endDate}
         </display:column>
-        <display:column title="Status" sortable="true" sortProperty="statusId">
+        <display:column title="Status" sortable="true" sortProperty="status">
             <sharing:ConstantFormatTag constant="${order.status}" enumeration="OrderStatus"/>
         </display:column>
         <display:column title="Rejection comment">

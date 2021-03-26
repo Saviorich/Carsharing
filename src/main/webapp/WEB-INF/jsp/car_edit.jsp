@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/news_edit.css" type="text/css"/>
     <link rel="stylesheet" href="css/news.css" type="text/css"/>
     <link rel="stylesheet" href="css/cars.css" type="text/css">
+    <link rel="stylesheet" href="css/car_edit.css" type="text/css">
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/news_edit.js"></script>
@@ -60,9 +61,9 @@
             <div class="editor_block__header">
                 <h5>${editor_header}</h5>
                 <label for="brand_editor">Brand</label>
-                <input id="brand_editor" name="brand_editor" type="text" value="${car.brand}"/>
+                <input id="brand_editor" class="content_editor" name="brand_editor" type="text" value="${car.brand}"/>
                 <label for="model_editor" draggable="true">Model</label>
-                <input id="model_editor" name="model_editor" type="text" value="${car.model}"/>
+                <input id="model_editor" class="content_editor" name="model_editor" type="text" value="${car.model}"/>
             </div>
             <div class="editor_block__content">
                 <h5>${content}</h5>
@@ -94,10 +95,8 @@
                 <option value="hatchback">${hatchback_class}</option>
                 <option value="pickup">${pickup_class}</option>
             </select><br/>
-                    VIN: <input class="content_editor" name="vin_editor" value="${car.vin}"><br/>
+                    VIN: <input id="vin_editor" class="content_editor" name="vin_editor" value="${car.vin}"><br/>
                     ${plate}: <input class="content_editor" name="plate_editor" value="${car.plate}"><br/>
-            </div>
-            <div class="editor_block__car_price">
                 ${price}: <input class="content_editor" name="price_editor" type="number" min="0" step="0.1" value="${car.pricePerDay}">
             </div>
             <div class="editor_block__image">
@@ -121,7 +120,6 @@
         </div>
     </div>
 
-    <%--    TODO: change to car block--%>
     <div class="preview" id="preview">
         <div class="car_block">
             <div class="car_block__brand">

@@ -27,6 +27,28 @@
         <fmt:message key="editor.header" var="editor_header"/>
         <fmt:message key="admin.submit" var="submit"/>
         <fmt:message key="admin.preview" var="preview"/>
+
+        <fmt:message key="car.class_hatchback" var="hatchback_class"/>
+        <fmt:message key="car.class_muscle" var="muscle_class"/>
+        <fmt:message key="car.class_pickup" var="pickup_class"/>
+        <fmt:message key="car.class_sedan" var="sedan_class"/>
+        <fmt:message key="car.class_sport" var="sport_class"/>
+        <fmt:message key="car.class_suv" var="suv_class"/>
+        <fmt:message key="car.class_wagon" var="wagon_class"/>
+
+        <fmt:message key="car.engine_diesel" var="diesel_engine"/>
+        <fmt:message key="car.engine_gas" var="gas_engine"/>
+        <fmt:message key="car.engine_petrol" var="petrol_engine"/>
+
+        <fmt:message key="car.gearbox_manual" var="manual_gearbox"/>
+        <fmt:message key="car.gearbox_automatic" var="automatic_gearbox"/>
+
+        <fmt:message key="car.color_black" var="black_color"/>
+        <fmt:message key="car.color_blue" var="blue_color"/>
+        <fmt:message key="car.color_grey" var="grey_color"/>
+        <fmt:message key="car.color_red" var="red_color"/>
+        <fmt:message key="car.color_yellow" var="yellow_color"/>
+        <fmt:message key="car.color_white" var="white_color"/>
     </fmt:bundle>
 </head>
 <body>
@@ -44,12 +66,34 @@
             </div>
             <div class="editor_block__content">
                 <h5>${content}</h5>
-                    ${color}: <input class="content_editor" name="color_editor" value="${car.color}"/><br/>
+                    ${color}:  <select class="content_editor" name="color_editor">
+                <option value="black">${black_color}</option>
+                <option value="yellow">${yellow_color}</option>
+                <option value="blue">${blue_color}</option>
+                <option value="grey">${grey_color}</option>
+                <option value="red">${red_color}</option>
+                <option value="white">${white_color}</option>
+            </select><br/>
                     ${mileage}: <input class="content_editor" name="mileage_editor" type="number" value="${car.mileage}"/>KM<br/>
-                    ${gearbox}: <input class="content_editor" name="gearbox_editor" value="${car.gearbox.toString().toLowerCase()}"/><br/>
+                    ${gearbox}: <select class="content_editor" name="gearbox_editor">
+                <option value="manual">${manual_gearbox}</option>
+                <option value="automatic">${automatic_gearbox}</option>
+            </select><br/>
                     ${year}: <input class="content_editor" name="year_editor" type="number" value="${car.manufacturedYear}"/><br/>
-                    ${engine}: <input class="content_editor" name="engine_editor" value="${car.engineType.toString().toLowerCase()}"/><br/>
-                    ${car_class}: <input class="content_editor" name="class_editor" value="${car.carClass.toString().toLowerCase()}"/><br/>
+                    ${engine}: <select class="content_editor" name="engine_editor">
+                <option value="petrol">${petrol_engine}</option>
+                <option value="diesel">${diesel_engine}</option>
+                <option value="gas">${gas_engine}</option>
+            </select><br/>
+                    ${car_class}: <select class="content_editor" name="class_editor">
+                <option value="wagon">${wagon_class}</option>
+                <option value="muscle">${muscle_class}</option>
+                <option value="sedan">${sedan_class}</option>
+                <option value="sport">${sport_class}</option>
+                <option value="suv">${suv_class}</option>
+                <option value="hatchback">${hatchback_class}</option>
+                <option value="pickup">${pickup_class}</option>
+            </select><br/>
                     VIN: <input class="content_editor" name="vin_editor" value="${car.vin}"><br/>
                     ${plate}: <input class="content_editor" name="plate_editor" value="${car.plate}"><br/>
             </div>

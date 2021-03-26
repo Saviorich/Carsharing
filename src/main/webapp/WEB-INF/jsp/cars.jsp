@@ -30,6 +30,13 @@
         <fmt:message key="car.class_sport" var="sport_class"/>
         <fmt:message key="car.class_suv" var="suv_class"/>
         <fmt:message key="car.class_wagon" var="wagon_class"/>
+
+        <fmt:message key="car.engine_diesel" var="diesel_engine"/>
+        <fmt:message key="car.engine_gas" var="gas_engine"/>
+        <fmt:message key="car.engine_petrol" var="petrol_engine"/>
+
+        <fmt:message key="car.gearbox_manual" var="manual_gearbox"/>
+        <fmt:message key="car.gearbox_automatic" var="automatic_gearbox"/>
     </fmt:bundle>
     <title>${cars}</title>
 </head>
@@ -52,9 +59,9 @@
             <div class="car_block__characteristics">
                     ${color}: ${car.color}<br/>
                     ${mileage}: ${car.mileage} KM<br/>
-                    ${gearbox}: ${car.gearbox.toString().toLowerCase()}<br/>
+                    ${gearbox}: <sharing:ConstantFormatTag constant="${car.gearbox}" enumeration="GearboxType"/><br/>
                     ${year}: ${car.manufacturedYear}<br/>
-                    ${engine}: ${car.engineType.toString().toLowerCase()}<br/>
+                    ${engine}: <sharing:ConstantFormatTag constant="${car.engineType}" enumeration="EngineType"/><br/>
                     ${car_class}: <sharing:ConstantFormatTag constant="${car.carClass}" enumeration="CarClass"/><br/>
             </div>
             <div class="car_block__price">

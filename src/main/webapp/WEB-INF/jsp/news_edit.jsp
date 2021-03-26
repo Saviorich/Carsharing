@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/news.css" type="text/css"/>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/news_edit.js"></script>
+    <script type="text/javascript" src="js/edit.js"></script>
     <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 
     <fmt:setLocale value="${sessionScope.locale}"/>

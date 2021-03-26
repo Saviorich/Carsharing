@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/car_edit.css" type="text/css">
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/news_edit.js"></script>
+    <script type="text/javascript" src="js/edit.js"></script>
     <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 
     <fmt:setLocale value="${sessionScope.locale}"/>
@@ -67,7 +67,7 @@
             </div>
             <div class="editor_block__content">
                 <h5>${content}</h5>
-                    ${color}:  <select class="content_editor" name="color_editor">
+                    ${color}:  <select id="ce" class="content_editor" name="color_editor">
                 <option value="black">${black_color}</option>
                 <option value="yellow">${yellow_color}</option>
                 <option value="blue">${blue_color}</option>
@@ -76,17 +76,17 @@
                 <option value="white">${white_color}</option>
             </select><br/>
                     ${mileage}: <input class="content_editor" name="mileage_editor" type="number" value="${car.mileage}"/>KM<br/>
-                    ${gearbox}: <select class="content_editor" name="gearbox_editor">
+                    ${gearbox}: <select id="ge" class="content_editor" name="gearbox_editor">
                 <option value="manual">${manual_gearbox}</option>
                 <option value="automatic">${automatic_gearbox}</option>
             </select><br/>
-                    ${year}: <input class="content_editor" name="year_editor" type="number" value="${car.manufacturedYear}"/><br/>
-                    ${engine}: <select class="content_editor" name="engine_editor">
+                    ${year}: <input id="ye" class="content_editor" name="year_editor" type="number" value="${car.manufacturedYear}"/><br/>
+                    ${engine}: <select id="ee" class="content_editor" name="engine_editor">
                 <option value="petrol">${petrol_engine}</option>
                 <option value="diesel">${diesel_engine}</option>
                 <option value="gas">${gas_engine}</option>
             </select><br/>
-                    ${car_class}: <select class="content_editor" name="class_editor">
+                    ${car_class}: <select id="cce" class="content_editor" name="class_editor">
                 <option value="wagon">${wagon_class}</option>
                 <option value="muscle">${muscle_class}</option>
                 <option value="sedan">${sedan_class}</option>
@@ -95,9 +95,9 @@
                 <option value="hatchback">${hatchback_class}</option>
                 <option value="pickup">${pickup_class}</option>
             </select><br/>
-                    VIN: <input id="vin_editor" class="content_editor" name="vin_editor" value="${car.vin}"><br/>
-                    ${plate}: <input class="content_editor" name="plate_editor" value="${car.plate}"><br/>
-                ${price}: <input class="content_editor" name="price_editor" type="number" min="0" step="0.1" value="${car.pricePerDay}">
+                    VIN: <input id="ve" id="vin_editor" class="content_editor" name="vin_editor" value="${car.vin}"><br/>
+                    ${plate}: <input id="pe" class="content_editor" name="plate_editor" value="${car.plate}"><br/>
+                ${price}: <input id="pre" class="content_editor" name="price_editor" type="number" min="0" step="0.1" value="${car.pricePerDay}">
             </div>
             <div class="editor_block__image">
                 <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>
@@ -123,21 +123,22 @@
     <div class="preview" id="preview">
         <div class="car_block">
             <div class="car_block__brand">
+                <a href="#" class="preview__close">&times;</a>
                 <span>${car.brand} ${car.model}</span>
             </div>
             <div class="car_block__img">
                 <img src="${car.imagePath}"/>
             </div>
             <div class="car_block__characteristics">
-                ${color}: ${car.color}<br/>
-                ${mileage}: ${car.mileage} KM<br/>
-                ${gearbox}: ${car.gearbox.toString().toLowerCase()}<br/>
-                ${year}: ${car.manufacturedYear}<br/>
-                ${engine}: ${car.engineType.toString().toLowerCase()}<br/>
-                ${car_class}: ${car.carClass.toString().toLowerCase()}<br/>
+                ${color}: <span id="color">${car.color}</span><br/>
+                ${mileage}: <span id="mileage">${car.mileage}</span> KM<br/>
+                ${gearbox}: <span id="gearbox">${car.gearbox.toString().toLowerCase()}</span><br/>
+                ${year}: <span id="year">${car.manufacturedYear}</span><br/>
+                ${engine}: <span id="engine">${car.engineType.toString().toLowerCase()}</span><br/>
+                ${car_class}: <span id="class">${car.carClass.toString().toLowerCase()}</span><br/>
             </div>
             <div class="car_block__price">
-                ${price}: ${car.pricePerDay} BYN
+                ${price}: <span id="price">${car.pricePerDay}</span> BYN
             </div>
         </div>
     </div>

@@ -16,6 +16,14 @@
     opacity: .7;
 }
 
+.preview__close {
+    color: red;
+}
+
+.preview__close:hover {
+    opacity: 0.7;
+}
+
 .main_block {
     display: flex;
     flex-wrap: wrap;

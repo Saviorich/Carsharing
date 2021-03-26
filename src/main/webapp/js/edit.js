@@ -14,9 +14,15 @@ function readURL(input) {
 $(document).ready(function(){
     $("#view").click(function(){
 
-        alert($('#brand_editor').val() + " " + $('#model_editor').val())
         $('.car_block__brand span').text($('#brand_editor').val() + " " + $('#model_editor').val());
         $('.car_block__img img').attr('src', $('.editor_block__image img').attr('src'))
+        $('#color').text($('#ce option:selected').text());
+        $('#mileage').text($('#me').val());
+        $('#gearbox').text($('#ge option:selected').text());
+        $('#year').text($('#ye').val());
+        $('#engine').text($('#ee option:selected').text());
+        $('#class').text($('#cce option:selected').text());
+        $('#price').text($('#pre').val());
 
         var data = CKEDITOR.instances['content_editor'].getData();
         $('.news_block__header span').text($("#header_editor").val());

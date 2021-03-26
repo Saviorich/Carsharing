@@ -100,6 +100,7 @@ input[type=submit]:hover, .navigation a:hover {
 }
 
 .preview:target {
+    background: white;
     visibility: visible;
     opacity: 1;
 }

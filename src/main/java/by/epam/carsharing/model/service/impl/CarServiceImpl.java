@@ -2,11 +2,8 @@ package by.epam.carsharing.model.service.impl;
 
 import by.epam.carsharing.model.dao.CarDao;
 import by.epam.carsharing.model.dao.DaoFactory;
-import by.epam.carsharing.model.entity.car.Car;
-import by.epam.carsharing.model.entity.car.CarClass;
+import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.dao.exception.DaoException;
-import by.epam.carsharing.model.entity.car.EngineType;
-import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.CarService;
 
@@ -86,7 +83,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void update(int id, String brand, String model, String color, int mileage, GearboxType gearbox, String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws ServiceException {
+    public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox, String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws ServiceException {
         CarDao carDao = daoFactory.getCarDao();
 
         try {

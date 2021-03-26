@@ -2,6 +2,7 @@ package by.epam.carsharing.controller.command.impl;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.car.CarClass;
+import by.epam.carsharing.model.entity.car.CarColor;
 import by.epam.carsharing.model.entity.car.EngineType;
 import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.service.CarService;
@@ -30,7 +31,7 @@ public class EditCarCommand implements Command {
         int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
         String brand = request.getParameter(RequestParameter.BRAND_EDITOR);
         String model = request.getParameter(RequestParameter.MODEL_EDITOR);
-        String color = request.getParameter(RequestParameter.COLOR);
+        CarColor color = CarColor.valueOf(request.getParameter(RequestParameter.COLOR).toUpperCase());
         int mileage = Integer.parseInt(request.getParameter(RequestParameter.MILEAGE_EDITOR));
         GearboxType gearbox = GearboxType.valueOf(request.getParameter(RequestParameter.GEARBOX_EDITOR).toUpperCase());
         String year = request.getParameter(RequestParameter.YEAR_EDITOR);

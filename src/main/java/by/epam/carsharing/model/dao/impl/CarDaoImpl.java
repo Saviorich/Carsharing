@@ -2,10 +2,7 @@ package by.epam.carsharing.model.dao.impl;
 
 import by.epam.carsharing.model.connection.ConnectionPool;
 import by.epam.carsharing.model.dao.CarDao;
-import by.epam.carsharing.model.entity.car.Car;
-import by.epam.carsharing.model.entity.car.CarClass;
-import by.epam.carsharing.model.entity.car.EngineType;
-import by.epam.carsharing.model.entity.car.GearboxType;
+import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
 import by.epam.carsharing.model.dao.exception.DaoException;
 
@@ -47,7 +44,7 @@ public class CarDaoImpl implements CarDao {
             if (resultSet.next()) {
                 String brand = resultSet.getString(2);
                 String model = resultSet.getString(3);
-                String color = resultSet.getString(4);
+                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
                 int mileage = resultSet.getInt(5);
                 GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
                 String year = resultSet.getString(7);
@@ -82,7 +79,7 @@ public class CarDaoImpl implements CarDao {
                 int id = resultSet.getInt(1);
                 String brand = resultSet.getString(2);
                 String model = resultSet.getString(3);
-                String color = resultSet.getString(4);
+                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
                 int mileage = resultSet.getInt(5);
                 GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
                 String year = resultSet.getString(7);
@@ -112,7 +109,7 @@ public class CarDaoImpl implements CarDao {
         ){
             statement.setString(1, entity.getBrand());
             statement.setString(2, entity.getModel());
-            statement.setString(3, entity.getColor());
+            statement.setString(3, entity.getColor().toString());
             statement.setInt(4, entity.getMileage());
             statement.setString(5, entity.getGearbox().toString().toLowerCase());
             statement.setString(6, entity.getManufacturedYear());
@@ -157,7 +154,7 @@ public class CarDaoImpl implements CarDao {
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String model = resultSet.getString(3);
-                String color = resultSet.getString(4);
+                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
                 int mileage = resultSet.getInt(5);
                 GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
                 String year = resultSet.getString(7);
@@ -195,7 +192,7 @@ public class CarDaoImpl implements CarDao {
                 int id = resultSet.getInt(1);
                 String brand = resultSet.getString(2);
                 String model = resultSet.getString(3);
-                String color = resultSet.getString(4);
+                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
                 int mileage = resultSet.getInt(5);
                 GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
                 EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
@@ -232,7 +229,7 @@ public class CarDaoImpl implements CarDao {
                 int id = resultSet.getInt(1);
                 String brand = resultSet.getString(2);
                 String model = resultSet.getString(3);
-                String color = resultSet.getString(4);
+                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
                 int mileage = resultSet.getInt(5);
                 GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
                 String year = resultSet.getString(7);
@@ -255,7 +252,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void update(int id, String brand, String model, String color, int mileage, GearboxType gearbox,
+    public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
                        String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws DaoException {
         try (
                 Connection connection = pool.takeConnection();
@@ -263,7 +260,7 @@ public class CarDaoImpl implements CarDao {
         ) {
             statement.setString(1, brand);
             statement.setString(2, model);
-            statement.setString(3, color);
+            statement.setString(3, color.toString().toLowerCase());
             statement.setInt(4, mileage);
             statement.setString(5, gearbox.toString().toLowerCase());
             statement.setString(6, year);

@@ -8,7 +8,7 @@ public class Car implements Identifiable {
     private int id;
     private String brand;
     private String model;
-    private String color;
+    private CarColor color;
     private int mileage;
     private GearboxType gearbox;
     private String manufacturedYear;
@@ -21,7 +21,7 @@ public class Car implements Identifiable {
 
     public Car() {}
 
-    public Car(int id, String brand, String model, String color, int mileage, GearboxType gearbox,
+    public Car(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
                String manufacturedYear, EngineType engineType, BigDecimal pricePerDay,
                String vin, String plate,CarClass carClass, String imagePath) {
         this.id = id;
@@ -39,7 +39,7 @@ public class Car implements Identifiable {
         this.imagePath = imagePath;
     }
 
-    public Car(String brand, String model, String color, int mileage, GearboxType gearbox,
+    public Car(String brand, String model, CarColor color, int mileage, GearboxType gearbox,
                String manufacturedYear, EngineType engineType, BigDecimal pricePerDay, String vin,
                String plate,CarClass carClass, String imagePath) {
         this(-1, brand, model, color, mileage, gearbox,
@@ -59,7 +59,7 @@ public class Car implements Identifiable {
         return model;
     }
 
-    public String getColor() {
+    public CarColor getColor() {
         return color;
     }
 

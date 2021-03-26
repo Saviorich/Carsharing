@@ -21,8 +21,9 @@ public class UserDaoImpl implements UserDao {
             " INNER JOIN role on users.role = role.id;";
     private static final String LOGIN_QUERY = "SELECT users.id, users.email, users.user_password, role.role FROM users" +
             " INNER JOIN role on users.role = role.id WHERE email=? AND user_password=?;";
+    private static final String GET_BY_ID_QUERY = "SELECT users.id, email, user_password, role.role FROM users" +
+            " INNER JOIN role on users.role = role.id WHERE users.id=?;";
     private static final String REGISTER_QUERY = "INSERT INTO users (email, user_password, role) VALUE (?, ?, ?);";
-    private static final String GET_BY_ID_QUERY = "SELECT * FROM users WHERE id=?;";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM users WHERE id=?";
 
     private static final int DEFAULT_ROLE_ID = 1;

@@ -15,8 +15,8 @@ import java.util.Optional;
 public class UserDetailsDaoImpl implements UserDetailsDao {
 
     private static final String ADD_DETAILS_QUERY = "INSERT INTO user_details (" +
-            "user_id, phone_number, first_name, second_name, middle_name) " +
-            "VALUE (?, ?, ?, ?, ?);";
+            "user_id, passport_number, phone_number, first_name, second_name, middle_name) " +
+            "VALUE (?, ?, ?, ?, ?, ?);";
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
     @Override
@@ -35,11 +35,12 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(ADD_DETAILS_QUERY);
         ) {
-            statement.setInt(1, entity.getUserId());
-            statement.setString(2, entity.getPhoneNumber());
-            statement.setString(3, entity.getFirstName());
-            statement.setString(4, entity.getSecondName());
-            statement.setString(5, entity.getMiddleName());
+            statement.setInt(1, entity.getUser().getId());
+            statement.setString(2, entity.getPassportNumber());
+            statement.setString(3, entity.getPhoneNumber());
+            statement.setString(4, entity.getFirstName());
+            statement.setString(5, entity.getSecondName());
+            statement.setString(6, entity.getMiddleName());
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {
@@ -54,10 +55,6 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
 
     @Override
     public void update() throws DaoException {
-
-    }
-
-    public static void main(String[] args) {
 
     }
 }

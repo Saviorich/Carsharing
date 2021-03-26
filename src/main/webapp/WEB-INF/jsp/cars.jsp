@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sharing" uri="carsharing" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,6 +22,14 @@
         <fmt:message key="admin.add_car" var="add_car"/>
         <fmt:message key="header.cars" var="cars"/>
         <fmt:message key="delete_dialog.message" var="message"/>
+
+        <fmt:message key="car.class_hatchback" var="hatchback_class"/>
+        <fmt:message key="car.class_muscle" var="muscle_class"/>
+        <fmt:message key="car.class_pickup" var="pickup_class"/>
+        <fmt:message key="car.class_sedan" var="sedan_class"/>
+        <fmt:message key="car.class_sport" var="sport_class"/>
+        <fmt:message key="car.class_suv" var="suv_class"/>
+        <fmt:message key="car.class_wagon" var="wagon_class"/>
     </fmt:bundle>
     <title>${cars}</title>
 </head>
@@ -46,7 +55,7 @@
                     ${gearbox}: ${car.gearbox.toString().toLowerCase()}<br/>
                     ${year}: ${car.manufacturedYear}<br/>
                     ${engine}: ${car.engineType.toString().toLowerCase()}<br/>
-                    ${car_class}: ${car.carClass.toString().toLowerCase()}<br/>
+                    ${car_class}: <sharing:ConstantFormatTag constant="${car.carClass}" enumeration="CarClass"/><br/>
             </div>
             <div class="car_block__price">
                 ${price}: ${car.pricePerDay} BYN

@@ -55,16 +55,16 @@
         </label>
         <label>
             ${passport_number}
-            <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required/><br/>
+            <input name="passport_number" value="" pattern="([A-ZА-Я]{2})([0-9]{7})" placeholder="AA1234567" required/>
         </label>
         <label>
             ${identification_number}
             <input name="identification_number" value="" placeholder="1234567A123PB1"
-                       pattern="([0-9]{7})[A-ZА-Я]([0-9]{3})[A-ZА-Я][A-ZА-Я][0-9]" required/><br/>
+                       pattern="([0-9]{7})[A-ZА-Я]([0-9]{3})[A-ZА-Я][A-ZА-Я][0-9]" required/>
         </label>
         <label>
             ${issue_date}
-            <input name="issue_date" type="date" value="" placeholder="dd/mm/yyyy" min="01/01/1970" max="01/01/2100" required/><br/>
+            <input name="issue_date" type="date" value="" placeholder="dd/mm/yyyy" min="01/01/1970" max="01/01/2100" required/>
         </label>
         <input class="button" type="submit" value="${register}">
         <label>${have_account}</label>

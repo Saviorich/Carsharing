@@ -1,6 +1,7 @@
 package by.epam.carsharing.util;
 
 import by.epam.carsharing.model.entity.car.CarClass;
+import by.epam.carsharing.model.entity.car.CarColor;
 import by.epam.carsharing.model.entity.car.EngineType;
 import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.entity.status.OrderStatus;
@@ -22,6 +23,7 @@ public class ConstantFormatTag extends TagSupport {
     private static final String CAR_CLASS = "CarClass";
     private static final String ENGINE_TYPE = "EngineType";
     private static final String GEARBOX_TYPE = "GearboxType";
+    private static final String CAR_COLOR = "CarColor";
 
     private String constant;
     private String enumeration;
@@ -53,6 +55,9 @@ public class ConstantFormatTag extends TagSupport {
             case GEARBOX_TYPE:
                 value = formatGearboxType();
                 break;
+            case CAR_COLOR:
+                value = formatCarColor();
+                break;
         }
         try {
             pageContext.getOut().print(pageContext.findAttribute(value));
@@ -65,6 +70,39 @@ public class ConstantFormatTag extends TagSupport {
     @Override
     public int doEndTag() throws JspException {
         return EVAL_PAGE;
+    }
+
+    private String formatCarColor() {
+        final String blackColor = "black_color";
+        final String blueColor = "blue_color";
+        final String greyColor = "grey_color";
+        final String redColor = "red_color";
+        final String yellowColor = "yellow_color";
+        final String whiteColor = "white_color";
+
+        String color = null;
+        CarColor carColor = CarColor.valueOf(constant);
+        switch (carColor) {
+            case BLACK:
+                color = blackColor;
+                break;
+            case WHITE:
+                color = whiteColor;
+                break;
+            case YELLOW:
+                color = yellowColor;
+                break;
+            case BLUE:
+                color = blueColor;
+                break;
+            case RED:
+                color = redColor;
+                break;
+            case GREY:
+                color = greyColor;
+                break;
+        }
+        return color;
     }
 
     private String formatOrderStatus() {

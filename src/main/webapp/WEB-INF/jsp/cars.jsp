@@ -37,6 +37,13 @@
 
         <fmt:message key="car.gearbox_manual" var="manual_gearbox"/>
         <fmt:message key="car.gearbox_automatic" var="automatic_gearbox"/>
+
+        <fmt:message key="car.color_black" var="black_color"/>
+        <fmt:message key="car.color_blue" var="blue_color"/>
+        <fmt:message key="car.color_grey" var="grey_color"/>
+        <fmt:message key="car.color_red" var="red_color"/>
+        <fmt:message key="car.color_yellow" var="yellow_color"/>
+        <fmt:message key="car.color_white" var="white_color"/>
     </fmt:bundle>
     <title>${cars}</title>
 </head>
@@ -57,7 +64,7 @@
                 <img src="${car.imagePath}"/>
             </div>
             <div class="car_block__characteristics">
-                    ${color}: ${car.color}<br/>
+                    ${color}: <sharing:ConstantFormatTag constant="${car.color}" enumeration="CarColor"/><br/>
                     ${mileage}: ${car.mileage} KM<br/>
                     ${gearbox}: <sharing:ConstantFormatTag constant="${car.gearbox}" enumeration="GearboxType"/><br/>
                     ${year}: ${car.manufacturedYear}<br/>

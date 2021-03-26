@@ -24,7 +24,6 @@ public class AddCarCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String brand = request.getParameter(RequestParameter.BRAND_EDITOR);
         String model = request.getParameter(RequestParameter.MODEL_EDITOR);
         CarColor color = CarColor.valueOf(request.getParameter(RequestParameter.COLOR).toUpperCase());

@@ -47,7 +47,7 @@ public class FileUploadingServlet extends HttpServlet {
             String upload_path = UPLOAD_DIR + File.separator + filename;
 
             String imagePath = IMAGES_DIRECTORY_NAME + File.separator + filename;
-            ;
+
             if (Files.exists(Paths.get(upload_path + filename).toAbsolutePath())) {
                 imagePath = request.getParameter(RequestParameter.IMAGE_PATH);
             }

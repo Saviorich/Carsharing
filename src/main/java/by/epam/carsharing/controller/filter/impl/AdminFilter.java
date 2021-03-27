@@ -14,7 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminFilter", urlPatterns = { "/news_edit", "/Controller?command=gotonewseditpage" })
+@WebFilter(filterName = "AdminFilter", urlPatterns = { "/Controller?command=gotonewseditpage" })
 public class AdminFilter extends AbstractFilter {
 
     private static final Logger logger = LogManager.getLogger(AdminFilter.class);
@@ -28,7 +28,6 @@ public class AdminFilter extends AbstractFilter {
         if (!(user.getRole() == Role.ADMIN)) {
             throw new ServletException("User is not authorized");
         }
-        logger.log(Level.DEBUG, servletRequest.getAttribute("data_id"));
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

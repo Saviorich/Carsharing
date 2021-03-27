@@ -36,14 +36,30 @@ public class GoToEditPage implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
+
+        CarService carService = ServiceFactory.getInstance().getCarService();
+        NewsService newsService = ServiceFactory.getInstance().getNewsService();
+
+        String data_id = request.getParameter(RequestParameter.DATA_ID);
+
         try {
             CommandName commandName = CommandName.valueOf(request.getParameter(RequestParameter.COMMAND).toUpperCase());
             switch (commandName) {
-                case GOTONEWSEDITPAGE:
-                    processNews(request, response, user);
-                    break;
                 case GOTOCAREDITPAGE:
-                    processCar(request, response, user);
+                    if (data_id != null) {
+                        Optional<Car> car = carService.getById(
+                                Integer.parseInt(data_id));
+                        request.setAttribute(RequestParameter.DATA, car.get());
+                    }
+                    executeCommandResult(request, response, user, CAR_EDIT_PAGE);
+                    break;
+                case GOTONEWSEDITPAGE:
+                    if (data_id != null) {
+                        Optional<News> news = newsService.findNewsById(
+                                Integer.parseInt(data_id));
+                        request.setAttribute(RequestParameter.DATA, news.get());
+                    }
+                    executeCommandResult(request, response, user, NEWS_EDIT_PAGE);
                     break;
             }
         } catch (ServiceException e) {
@@ -51,42 +67,16 @@ public class GoToEditPage implements Command {
         }
     }
 
-    private void processCar(HttpServletRequest request, HttpServletResponse response, User user)
-            throws ServletException, IOException, ServiceException {
-        CarService carService = ServiceFactory.getInstance().getCarService();
 
-        String data_id = request.getParameter(RequestParameter.DATA_ID);
-        logger.log(Level.DEBUG, data_id);
-        if (data_id != null) {
-            Optional<Car> car = carService.getById(
-                    Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
-            request.setAttribute(RequestParameter.DATA, car.get());
-        }
+    private void executeCommandResult(HttpServletRequest request, HttpServletResponse response, User user, String page)
+            throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
         if (user != null && user.getRole() == Role.ADMIN) {
-            requestDispatcher = request.getRequestDispatcher(CAR_EDIT_PAGE);
-        } else {
+            requestDispatcher = request.getRequestDispatcher(page);
+        } else if (user == null) {
             requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
-        }
-        requestDispatcher.forward(request, response);
-    }
-
-    private void processNews(HttpServletRequest request, HttpServletResponse response, User user)
-            throws ServletException, IOException, ServiceException {
-        NewsService newsService = ServiceFactory.getInstance().getNewsService();
-
-        String data_id = request.getParameter(RequestParameter.DATA_ID);
-        logger.log(Level.DEBUG, data_id);
-        if (data_id != null) {
-            Optional<News> news = newsService.findNewsById(
-                    Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
-            request.setAttribute(RequestParameter.DATA, news.get());
-        }
-        RequestDispatcher requestDispatcher;
-        if (user != null && user.getRole() == Role.ADMIN) {
-            requestDispatcher = request.getRequestDispatcher(NEWS_EDIT_PAGE);
         } else {
-            requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
+            throw new ServletException("User is not authenticated");
         }
         requestDispatcher.forward(request, response);
     }

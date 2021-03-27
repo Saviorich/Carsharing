@@ -2,8 +2,6 @@ package by.epam.carsharing.controller;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.controller.command.CommandFactory;
-import by.epam.carsharing.model.service.NewsService;
-import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.Level;

@@ -4,8 +4,10 @@ import by.epam.carsharing.model.dao.CarDao;
 import by.epam.carsharing.model.dao.DaoFactory;
 import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.dao.exception.DaoException;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.CarService;
+import by.epam.carsharing.validation.impl.CarValidator;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 public class CarServiceImpl implements CarService {
 
+    private static final CarValidator VALIDATOR = new CarValidator();
     private static final DaoFactory daoFactory = DaoFactory.getInstance();
 
     @Override
@@ -35,7 +38,7 @@ public class CarServiceImpl implements CarService {
         try {
             cars = carDao.getAll();
         } catch (DaoException e) {
-            throw new ServiceException("DaoException in getAll", e);
+            throw new ServiceException(e);
         }
         return cars;
     }
@@ -48,7 +51,7 @@ public class CarServiceImpl implements CarService {
         try {
             cars = carDao.getCarsByBrand(brand);
         } catch (DaoException e) {
-            throw new ServiceException("DaoException in getCarsByBrand", e);
+            throw new ServiceException(e);
         }
 
         return cars;
@@ -62,7 +65,7 @@ public class CarServiceImpl implements CarService {
         try {
             cars = carDao.getCarsByYear(year);
         } catch (DaoException e) {
-            throw new ServiceException("DaoException in getCarsByBrand", e);
+            throw new ServiceException(e);
         }
 
         return cars;
@@ -76,15 +79,24 @@ public class CarServiceImpl implements CarService {
         try {
             cars = carDao.getCarsByClass(carClass);
         } catch (DaoException e) {
-            throw new ServiceException("DaoException in getCarsByBrand", e);
+            throw new ServiceException(e);
         }
 
         return cars;
     }
 
     @Override
-    public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox, String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws ServiceException {
+    public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
+                       String year, EngineType engineType, CarClass carClass, BigDecimal price, String vin, String plate, String imagePath) throws ServiceException, InvalidDataException {
         CarDao carDao = daoFactory.getCarDao();
+
+        if (!VALIDATOR.isMileageValid(mileage)
+                || !VALIDATOR.isPlateValid(plate)
+                || !VALIDATOR.isPriceValid(price)
+                || !VALIDATOR.isVinValid(vin)
+                || !VALIDATOR.isYearValid(year)) {
+            throw new InvalidDataException(VALIDATOR.getMessage());
+        }
 
         try {
             carDao.update(id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, imagePath);
@@ -94,9 +106,23 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void add(Car car) throws ServiceException {
+    public void add(Car car) throws ServiceException, InvalidDataException {
         CarDao carDao = daoFactory.getCarDao();
 
+        int mileage = car.getMileage();
+        String plate = car.getPlate();
+        BigDecimal price = car.getPricePerDay();
+        String vin = car.getVin();
+        String year = car.getManufacturedYear();
+
+        if (!VALIDATOR.isMileageValid(mileage)
+                || !VALIDATOR.isPlateValid(plate)
+                || !VALIDATOR.isPriceValid(price)
+                || !VALIDATOR.isVinValid(vin)
+                || !VALIDATOR.isYearValid(year)) {
+            throw new InvalidDataException(VALIDATOR.getMessage());
+        }
+        
         try {
             carDao.add(car);
         } catch (DaoException e){

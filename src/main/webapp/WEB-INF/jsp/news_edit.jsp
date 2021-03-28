@@ -18,12 +18,25 @@
         <fmt:message key="editor.header" var="editor_header"/>
         <fmt:message key="admin.preview" var="preview"/>
         <fmt:message key="admin.submit" var="submit"/>
+        <fmt:message key="register.validation_message" var="validation_message"/>
+        <fmt:message key="editor.error" var="error_message"/>
     </fmt:bundle>
 
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
 <c:set var="n" value="${requestScope.data}"/>
+<c:set var="is_register_failed" scope="request" value="${requestScope.error}"/>
+<c:set var="is_invalid_data" scope="request" value="${requestScope.validation}"/>
+
+<c:choose>
+    <c:when test="${is_register_failed}">
+        <p class="error">${error_message}</p>
+    </c:when>
+    <c:when test="${is_invalid_data}">
+        <p class="error">${validation_message}</p>
+    </c:when>
+</c:choose>
 <form action="Upload" method="post" enctype='multipart/form-data'>
     <div class="container">
         <div class="editor_block">

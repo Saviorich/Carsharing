@@ -12,6 +12,7 @@
         <fmt:message key="login.log_in" var="log_in"/>
         <fmt:message key="login.error_message" var="error_message"/>
         <fmt:message key="login.no_account" var="no_account"/>
+        <fmt:message key="register.validation_message" var="validation_message"/>
         <fmt:message key="header.sign_up" var="sign_up"/>
     </fmt:bundle>
 </head>
@@ -33,13 +34,17 @@
         <label>${no_account}</label>
         <a href="register">${sign_up}</a>
     </form>
-        <c:set var="is_login_failed" scope="session" value="${sessionScope.error}"/>
-            <c:if test="${is_login_failed}">
-                <div id="fail_message">
-                        ${error_message}
-                </div>
-            </c:if>
-        <c:set var="is_login_failed" scope="session" value=""/>
+    <c:set var="is_register_failed" scope="request" value="${requestScope.error}"/>
+    <c:set var="is_invalid_data" scope="request" value="${requestScope.validation}"/>
+
+    <c:choose>
+        <c:when test="${is_register_failed}">
+            ${error_message}
+        </c:when>
+        <c:when test="${is_invalid_data}">
+            ${validation_message}
+        </c:when>
+    </c:choose>
 
 </div>
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>

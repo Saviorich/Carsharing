@@ -18,6 +18,7 @@
         <fmt:message key="register.passport_number" var="passport_number"/>
         <fmt:message key="register.identification_number" var="identification_number"/>
         <fmt:message key="register.issue_date" var="issue_date"/>
+        <fmt:message key="register.validation_message" var="validation_message"/>
         <fmt:message key="header.log_in" var="log_in"/>
         <fmt:message key="header.sign_up" var="sign_up"/>
     </fmt:bundle>
@@ -39,7 +40,7 @@
         </label>
         <label>
             ${first_name}
-            <input name="first_name" required>
+            <input name="first_name" pattern="[A-ZА-Я][a-zа-я]*" required>
         </label>
         <label>
             ${second_name}
@@ -64,19 +65,24 @@
         </label>
         <label>
             ${issue_date}
-            <input name="issue_date" type="date" value="" placeholder="dd/mm/yyyy" min="01/01/1970" max="01/01/2100" required/>
+            <input name="issue_date" type="date" value="" placeholder="DD-MM-YYYY" min="01/01/1970" max="01/01/2100" required/>
         </label>
         <input class="button" type="submit" value="${register}">
         <label>${have_account}</label>
         <a href="login">${log_in}</a>
     </form>
-    <c:set var="is_register_failed" scope="session" value="${sessionScope.error}"/>
-    <c:if test="${is_register_failed}">
-        <div id="fail_message">
-                ${error_message}
-        </div>
-    </c:if>
-    <c:set var="is_login_failed" scope="session" value=""/>
+    <c:set var="is_register_failed" scope="request" value="${requestScope.error}"/>
+    <c:set var="is_invalid_data" scope="request" value="${requestScope.validation}"/>
+
+    <c:choose>
+        <c:when test="${is_register_failed}">
+            ${error_message}
+        </c:when>
+        <c:when test="${is_invalid_data}">
+            ${validation_message}
+        </c:when>
+    </c:choose>
+
 
 </div>
 <jsp:include page="/WEB-INF/jsp/footer.jsp"/>

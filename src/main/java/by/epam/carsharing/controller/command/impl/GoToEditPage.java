@@ -60,9 +60,9 @@ public class GoToEditPage implements Command {
                     if (data_id != null) {
                         Optional<News> news = newsService.findNewsById(
                                 Integer.parseInt(data_id));
-                        processRequest(request);
                         request.setAttribute(RequestParameter.DATA, news.get());
                     }
+                    processRequest(request);
                     executeCommandResult(request, response, user, NEWS_EDIT_PAGE);
                     break;
             }

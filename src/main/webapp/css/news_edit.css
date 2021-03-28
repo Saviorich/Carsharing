@@ -1,3 +1,9 @@
+.error {
+    text-align: center;
+    color: red;
+    font-size: 20px;
+}
+
 .container {
     overflow: hidden;
     display: flex;

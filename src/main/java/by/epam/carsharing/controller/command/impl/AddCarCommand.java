@@ -4,6 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.Level;
@@ -21,6 +22,8 @@ public class AddCarCommand implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static final Logger logger = LogManager.getLogger(AddCarCommand.class);
     private static final String GO_TO_CARS_PAGE = "Controller?command=gotocarspage";
+    private static final String GO_TO_CAR_EDIT_PAGE = "Controller?command=gotocareditpage&error=%s&validation=%s";
+    private static final String ERROR_MESSAGE = "Something went wrong";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +38,7 @@ public class AddCarCommand implements Command {
         String vin = request.getParameter(RequestParameter.VIN);
         String plate = request.getParameter(RequestParameter.PLATE);
         CarClass carClass = CarClass.valueOf(request.getParameter(RequestParameter.CLASS_EDITOR).toUpperCase());
-        String imagePath = request.getParameter(RequestParameter.IMAGE_PATH);
+        String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {
             CarService carService = serviceFactory.getCarService();
@@ -44,6 +47,10 @@ public class AddCarCommand implements Command {
             response.sendRedirect(GO_TO_CARS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, ERROR_MESSAGE, null));
+        } catch (InvalidDataException e) {
+            logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, null, e.getMessage()));
         }
     }
 }

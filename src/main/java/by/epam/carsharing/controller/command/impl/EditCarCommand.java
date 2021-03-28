@@ -7,6 +7,7 @@ import by.epam.carsharing.model.entity.car.EngineType;
 import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.Level;
@@ -24,6 +25,8 @@ public class EditCarCommand implements Command {
     private static final Logger logger = LogManager.getLogger(EditCarCommand.class);
     private static final ServiceFactory serviceFactor = ServiceFactory.getInstance();
     private static final String GO_TO_CARS_PAGE = "Controller?command=gotocarspage";
+    private static final String GO_TO_CAR_EDIT_PAGE = "Controller?command=gotocareditpage&data_id=%d&error=%s&validation=%s";
+    private static final String ERROR_MESSAGE = "Something went wrong";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,18 +41,23 @@ public class EditCarCommand implements Command {
         EngineType engineType = EngineType.valueOf(request.getParameter(RequestParameter.ENGINE_EDITOR).toUpperCase());
         CarClass carClass = CarClass.valueOf(request.getParameter(RequestParameter.CLASS_EDITOR).toUpperCase());
         BigDecimal price = new BigDecimal(request.getParameter(RequestParameter.PRICE_EDITOR));
-        // TODO: FIX BUG WITH IMAGES;
+        String vin = request.getParameter(RequestParameter.VIN);
+        String plate = request.getParameter(RequestParameter.PLATE);
         logger.log(Level.DEBUG, (String) request.getAttribute(RequestParameter.IMAGE_PATH));
         String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {
             CarService carService = serviceFactor.getCarService();
             carService.update(
-                    id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, imagePath
+                    id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, vin, plate, imagePath
             );
             response.sendRedirect(GO_TO_CARS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, id, ERROR_MESSAGE, null));
+        } catch (InvalidDataException e) {
+            logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, id, null, e.getMessage()));
         }
     }
 }

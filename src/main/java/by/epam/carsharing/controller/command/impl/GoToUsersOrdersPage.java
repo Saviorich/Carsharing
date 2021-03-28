@@ -37,7 +37,9 @@ public class GoToUsersOrdersPage implements Command {
         try {
             if (user != null) {
                 requestDispatcher = request.getRequestDispatcher(ORDERS_PAGE);
-                orders = user.getRole() == Role.ADMIN ? orderService.getAll() : orderService.getAllByUserId(user.getId());
+                orders = user.getRole() == Role.ADMIN
+                        ? orderService.getAll()
+                        : orderService.getAllByUserId(user.getId());
                 request.setAttribute(RequestParameter.ORDERS, orders);
             } else {
                 requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);

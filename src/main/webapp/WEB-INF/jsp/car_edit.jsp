@@ -54,6 +54,9 @@
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
+
+<%-- TODO: ADD LOCALIZATION --%>
+
 <c:set var="car" value="${requestScope.data}"/>
 <c:set var="error" value="${requestScope.error}"/>
 <c:set var="validation" value="${requestScope.validation}"/>

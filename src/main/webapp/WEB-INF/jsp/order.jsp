@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sharing" uri="carsharing" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
@@ -18,6 +19,29 @@
         <fmt:message key="admin.submit" var="submit"/>
         <fmt:message key="order.start_date" var="start_date"/>
         <fmt:message key="order.end_date" var="end_date"/>
+        <fmt:message key="order.not_available" var="not_available"/>
+
+        <fmt:message key="car.class_hatchback" var="hatchback_class"/>
+        <fmt:message key="car.class_muscle" var="muscle_class"/>
+        <fmt:message key="car.class_pickup" var="pickup_class"/>
+        <fmt:message key="car.class_sedan" var="sedan_class"/>
+        <fmt:message key="car.class_sport" var="sport_class"/>
+        <fmt:message key="car.class_suv" var="suv_class"/>
+        <fmt:message key="car.class_wagon" var="wagon_class"/>
+
+        <fmt:message key="car.engine_diesel" var="diesel_engine"/>
+        <fmt:message key="car.engine_gas" var="gas_engine"/>
+        <fmt:message key="car.engine_petrol" var="petrol_engine"/>
+
+        <fmt:message key="car.gearbox_manual" var="manual_gearbox"/>
+        <fmt:message key="car.gearbox_automatic" var="automatic_gearbox"/>
+
+        <fmt:message key="car.color_black" var="black_color"/>
+        <fmt:message key="car.color_blue" var="blue_color"/>
+        <fmt:message key="car.color_grey" var="grey_color"/>
+        <fmt:message key="car.color_red" var="red_color"/>
+        <fmt:message key="car.color_yellow" var="yellow_color"/>
+        <fmt:message key="car.color_white" var="white_color"/>
     </fmt:bundle>
 
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -27,7 +51,10 @@
 </head>
 <body>
 <jsp:include page="../jsp/header.jsp"/>
-<c:set var="car" value="${requestScope.car}"/>
+<c:set var="error" value="${requestScope.error}"/>
+<c:if test="${error ne null}">
+    <p class="error">${not_available} ${error}</p>
+</c:if>
 <div class="order_main_block">
     <div class="car_block" style="width: 440px;">
         <div class="car_block__brand">
@@ -37,12 +64,12 @@
             <img src="${car.imagePath}"/>
         </div>
         <div class="car_block__characteristics">
-            ${color}: ${car.color}<br/>
+            ${color}: <sharing:ConstantFormatTag constant="${car.color}" enumeration="CarColor"/><br/>
             ${mileage}: ${car.mileage} KM<br/>
-            ${gearbox}: ${car.gearbox.toString().toLowerCase()}<br/>
+            ${gearbox}: <sharing:ConstantFormatTag constant="${car.gearbox}" enumeration="GearboxType"/><br/>
             ${year}: ${car.manufacturedYear}<br/>
-            ${engine}: ${car.engineType.toString().toLowerCase()}<br/>
-            ${car_class}: ${car.carClass.toString().toLowerCase()}<br/>
+            ${engine}: <sharing:ConstantFormatTag constant="${car.engineType}" enumeration="EngineType"/><br/>
+            ${car_class}: <sharing:ConstantFormatTag constant="${car.carClass}" enumeration="CarClass"/><br/>
         </div>
         <div class="car_block__price">
             ${price}: <span>${car.pricePerDay}</span> BYN

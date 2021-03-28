@@ -1,6 +1,17 @@
 package by.epam.carsharing.controller.command;
 
 import by.epam.carsharing.controller.command.impl.*;
+import by.epam.carsharing.controller.command.impl.car.AddCarCommand;
+import by.epam.carsharing.controller.command.impl.car.DeleteCarCommand;
+import by.epam.carsharing.controller.command.impl.car.EditCarCommand;
+import by.epam.carsharing.controller.command.impl.car.GoToCarPage;
+import by.epam.carsharing.controller.command.impl.news.AddNewsCommand;
+import by.epam.carsharing.controller.command.impl.news.DeleteNewsCommand;
+import by.epam.carsharing.controller.command.impl.news.EditNewsCommand;
+import by.epam.carsharing.controller.command.impl.news.GoToNewsPage;
+import by.epam.carsharing.controller.command.impl.order.GoToOrderPage;
+import by.epam.carsharing.controller.command.impl.order.GoToUsersOrdersPage;
+import by.epam.carsharing.controller.command.impl.order.MakeOrderCommand;
 
 import java.util.HashMap;
 import java.util.Map;

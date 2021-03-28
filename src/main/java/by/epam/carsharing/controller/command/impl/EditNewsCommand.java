@@ -1,6 +1,7 @@
 package by.epam.carsharing.controller.command.impl;
 
 import by.epam.carsharing.controller.command.Command;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
 import by.epam.carsharing.model.service.ServiceFactory;
@@ -19,6 +20,7 @@ public class EditNewsCommand implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static final Logger logger = LogManager.getLogger(EditNewsCommand.class);
     private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
+    private static final String GO_TO_NEWS_EDIT_PAGE = "Controller?command=gotonewseditpage&data_id=%d&validation=%s&error=%s";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +35,10 @@ public class EditNewsCommand implements Command {
             response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, null, true));
+        } catch (InvalidDataException e) {
+            logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, true, null));
         }
     }
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static by.epam.carsharing.util.RequestUtils.processRequest;
+
 public class GoToLoginPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToLoginPage.class);
@@ -18,6 +20,8 @@ public class GoToLoginPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request);
+
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
         requestDispatcher.forward(request, response);
     }

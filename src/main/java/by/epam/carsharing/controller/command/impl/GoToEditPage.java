@@ -24,6 +24,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+import static by.epam.carsharing.util.RequestUtils.processRequest;
+
 public class GoToEditPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToEditPage.class);
@@ -51,12 +53,14 @@ public class GoToEditPage implements Command {
                                 Integer.parseInt(data_id));
                         request.setAttribute(RequestParameter.DATA, car.get());
                     }
+                    processRequest(request);
                     executeCommandResult(request, response, user, CAR_EDIT_PAGE);
                     break;
                 case GOTONEWSEDITPAGE:
                     if (data_id != null) {
                         Optional<News> news = newsService.findNewsById(
                                 Integer.parseInt(data_id));
+                        processRequest(request);
                         request.setAttribute(RequestParameter.DATA, news.get());
                     }
                     executeCommandResult(request, response, user, NEWS_EDIT_PAGE);

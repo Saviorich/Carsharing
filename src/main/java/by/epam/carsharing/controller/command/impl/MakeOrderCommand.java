@@ -8,6 +8,7 @@ import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.OrderService;
 import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
@@ -45,18 +46,16 @@ public class MakeOrderCommand implements Command {
         try {
             Date startDate = parseDate(request.getParameter(RequestParameter.START_DATE));
             Date endDate = parseDate(request.getParameter(RequestParameter.END_DATE));
-            if (!validator.isCarAvailableForDates(orderService.getAll(), carId, startDate, endDate)
-                    || !validator.isDatesValid(startDate, endDate)) {
-                response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, validator.getMessage()));
-            } else {
-                Car car = carService.getById(carId).get();
-                Order order = new Order(user, car, OrderStatus.NEW, startDate, endDate, "", "");
-                orderService.add(order);
-                response.sendRedirect(GO_TO_ORDERS_PAGE);
-            }
+            Car car = carService.getById(carId).get();
+            Order order = new Order(user, car, OrderStatus.NEW, startDate, endDate, "", "");
+            orderService.add(order);
+            response.sendRedirect(GO_TO_ORDERS_PAGE);
         } catch (ServiceException e){
             logger.log(Level.ERROR, e);
             response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, SERVICE_EXCEPTION_MESSAGE));
+        } catch (InvalidDataException e) {
+            logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, validator.getMessage()));
         }
     }
 

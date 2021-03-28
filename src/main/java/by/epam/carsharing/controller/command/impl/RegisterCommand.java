@@ -5,10 +5,11 @@ import by.epam.carsharing.model.entity.user.Passport;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.entity.user.UserDetails;
 import by.epam.carsharing.model.service.PassportService;
-import by.epam.carsharing.model.service.UserDetailsService;
-import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.UserDetailsService;
 import by.epam.carsharing.model.service.UserService;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
+import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
 import org.apache.logging.log4j.Level;
@@ -28,7 +29,7 @@ public class RegisterCommand implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static final Logger logger = LogManager.getLogger(RegisterCommand.class);
     private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
-    private static final String GO_TO_REGISTER_PAGE = "Controller?command=gotoregisterpage";
+    private static final String GO_TO_REGISTER_PAGE = "Controller?command=gotoregisterpage&error=%s&validation=%s";
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -51,7 +52,8 @@ public class RegisterCommand implements Command {
             issueDate = DATE_FORMAT.parse(issueDateParameter);
         } catch (ParseException e) {
             logger.log(Level.ERROR, e);
-            // TODO: show error message on page
+            response.sendRedirect(String.format(GO_TO_REGISTER_PAGE, true, null));
+            return;
         }
 
         HttpSession session = request.getSession();
@@ -72,9 +74,11 @@ public class RegisterCommand implements Command {
 
             response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
-            logger.log(Level.DEBUG, e);
-            session.setAttribute(SessionAttribute.ERROR, true);
-            response.sendRedirect(GO_TO_REGISTER_PAGE);
+            logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_REGISTER_PAGE, true, null));
+        } catch (InvalidDataException e) {
+            logger.log(Level.ERROR, e);
+            response.sendRedirect(String.format(GO_TO_REGISTER_PAGE, null, true));
         }
     }
 }

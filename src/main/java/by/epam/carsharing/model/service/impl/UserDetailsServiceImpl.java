@@ -5,11 +5,10 @@ import by.epam.carsharing.model.dao.UserDetailsDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.user.UserDetails;
 import by.epam.carsharing.model.service.UserDetailsService;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import by.epam.carsharing.validation.impl.UserDetailsValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +35,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public void add(UserDetails entity) throws ServiceException {
+    public void add(UserDetails entity) throws ServiceException, InvalidDataException {
+        UserDetailsValidator validator = new UserDetailsValidator();
+
+        String firstName = entity.getFirstName();
+        String secondName = entity.getSecondName();
+        String phoneNumber = entity.getPhoneNumber();
+
+        if (!validator.isValidName(firstName)
+                || !validator.isValidName(secondName)
+                || !validator.isValidPhoneNumber(phoneNumber)) {
+            throw new InvalidDataException(validator.getMessage());
+        }
+
         try {
             detailsDao.add(entity);
         } catch (DaoException e) {

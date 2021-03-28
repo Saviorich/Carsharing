@@ -4,6 +4,7 @@ import by.epam.carsharing.model.dao.DaoFactory;
 import by.epam.carsharing.model.dao.UserDao;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.dao.exception.DaoException;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.validation.impl.UserValidator;
@@ -28,9 +29,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByEmailAndPassword(String email, String password) throws ServiceException {
+    public Optional<User> findUserByEmailAndPassword(String email, String password) throws ServiceException, InvalidDataException {
         if (!validator.isValidEmail(email) || !validator.isValidPassword(password)) {
-            throw new ServiceException(validator.getMessage());
+            throw new InvalidDataException(validator.getMessage());
         }
 
         UserDao userDao = daoFactory.getUserDao();
@@ -47,9 +48,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(String email, String password) throws ServiceException {
+    public void registerUser(String email, String password) throws ServiceException, InvalidDataException {
         if (!validator.isValidEmail(email) || !validator.isValidPassword(password)) {
-            throw new ServiceException(validator.getMessage());
+            throw new InvalidDataException(validator.getMessage());
         }
 
         UserDao userDao = daoFactory.getUserDao();

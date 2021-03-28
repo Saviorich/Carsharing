@@ -10,6 +10,9 @@
     <fmt:setLocale value="${sessionScope.locale}" scope="session"/>
 
     <fmt:bundle basename="content">
+        <fmt:message key="order.start_date" var="start_date"/>
+        <fmt:message key="order.end_date" var="end_date"/>
+        <fmt:message key="header.cars" var="cars"/>
         <fmt:message key="orders.new_status" var="new_status"/>
     </fmt:bundle>
 </head>
@@ -25,13 +28,13 @@
                 ${order.user.email}
             </display:column>
         </c:if>
-        <display:column title="Car" sortable="true" sortProperty="car.brand">
+        <display:column title="${cars}" sortable="true" sortProperty="car.brand">
             ${order.car.brand} ${order.car.model}
         </display:column>
-        <display:column title="Start date" sortable="true" sortProperty="startDate">
+        <display:column title="${start_date}" sortable="true" sortProperty="startDate">
             ${order.startDate}
         </display:column>
-        <display:column title="End date" sortable="true" sortProperty="endDate">
+        <display:column title="${end_date}" sortable="true" sortProperty="endDate">
             ${order.endDate}
         </display:column>
         <display:column title="Status" sortable="true" sortProperty="status">
@@ -42,6 +45,13 @@
         </display:column>
         <display:column title="Return comment">
             ${order.returnComment}
+        </display:column>
+        <display:column title="Actions">
+            <div class="actions">
+                <a id="approve" href="#">Approve</a><br/>
+                <a id="reject" href="#">Reject</a><br/>
+                <a href="#">Change status</a><br/>
+            </div>
         </display:column>
     </display:table>
 </div>

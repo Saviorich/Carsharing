@@ -4,8 +4,10 @@ import by.epam.carsharing.model.dao.DaoFactory;
 import by.epam.carsharing.model.dao.NewsDao;
 import by.epam.carsharing.model.entity.News;
 import by.epam.carsharing.model.dao.exception.DaoException;
+import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
+import by.epam.carsharing.validation.impl.NewsValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +15,7 @@ import java.util.Optional;
 public class NewsServiceImpl implements NewsService {
 
     private static final DaoFactory daoFactory = DaoFactory.getInstance();
-
+    private static final NewsValidator VALIDATOR = new NewsValidator();
 
     @Override
     public Optional<News> findNewsById(int id) throws ServiceException {
@@ -55,7 +57,11 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void update(int id, String header, String content, String imagePath) throws ServiceException {
+    public void update(int id, String header, String content, String imagePath) throws ServiceException, InvalidDataException {
+        if (!VALIDATOR.isValidHeader(header)
+                || !VALIDATOR.isValidContent(content)) {
+            throw new InvalidDataException(VALIDATOR.getMessage());
+        }
         NewsDao newsDao = daoFactory.getNewsDao();
         try {
             newsDao.update(id, header, content, imagePath);
@@ -65,7 +71,17 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void add(News entity) throws ServiceException {
+    public void add(News entity) throws ServiceException, InvalidDataException {
+        NewsValidator newsValidator = new NewsValidator();
+
+        String header = entity.getHeader();
+        String content = entity.getContent();
+
+        if (!newsValidator.isValidHeader(header)
+                || !newsValidator.isValidContent(content)) {
+            throw new InvalidDataException(newsValidator.getMessage());
+        }
+
         NewsDao newsDao = daoFactory.getNewsDao();
         try {
             newsDao.add(entity);

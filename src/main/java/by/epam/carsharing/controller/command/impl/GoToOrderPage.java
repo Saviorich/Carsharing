@@ -4,7 +4,6 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.model.service.OrderService;
 import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
@@ -35,10 +34,15 @@ public class GoToOrderPage implements Command {
             CarService carService = serviceFactory.getCarService();
             Optional<Car> car = carService.getById(Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
 
+            String errorMessage = request.getParameter(RequestParameter.ERROR);
+
             car.ifPresent(value -> request.setAttribute(RequestParameter.CAR, value));
+            if (errorMessage != null) {
+                request.setAttribute(RequestParameter.ERROR, errorMessage);
+            }
 
             User user = (User) request.getSession().getAttribute(SessionAttribute.USER);
-            if (user!= null) {
+            if (user != null) {
                 requestDispatcher = request.getRequestDispatcher(ORDER_PAGE);
             } else {
                 requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);

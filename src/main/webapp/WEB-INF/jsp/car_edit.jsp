@@ -55,6 +55,31 @@
 <body>
 <jsp:include page="../jsp/header.jsp"/>
 <c:set var="car" value="${requestScope.data}"/>
+<c:set var="error" value="${requestScope.error}"/>
+<c:set var="validation" value="${requestScope.validation}"/>
+<c:choose>
+    <c:when test="${validation eq 'Invalid plate'}">
+        <p class="error">${validation}</p>
+    </c:when>
+    <c:when test="${validation eq 'Invalid vin'}">
+        <p class="error">${validation}</p>
+    </c:when>
+    <c:when test="${validation eq 'Invalid manufactured year'}">
+        <p class="error">${validation}</p>
+    </c:when>
+    <c:when test="${validation eq 'Invalid price'}">
+        <p class="error">${validation}</p>
+    </c:when>
+    <c:when test="${validation eq 'Invalid mileage'}">
+        <p class="error">${validation}</p>
+    </c:when>
+    <c:when test="${error ne null}">
+        <p class="error">${error}</p>
+    </c:when>
+    <c:when test="${validation ne null}">
+        <p class="error">${engine} ${validation}</p>
+    </c:when>
+</c:choose>
 <form action="Upload" method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="editor_block">

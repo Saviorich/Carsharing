@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
+import static by.epam.carsharing.util.RequestUtils.processRequest;
+
 public class GoToOrderPage implements Command {
 
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
@@ -34,12 +36,7 @@ public class GoToOrderPage implements Command {
             CarService carService = serviceFactory.getCarService();
             Optional<Car> car = carService.getById(Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
 
-            String errorMessage = request.getParameter(RequestParameter.ERROR);
-
             car.ifPresent(value -> request.setAttribute(RequestParameter.CAR, value));
-            if (errorMessage != null) {
-                request.setAttribute(RequestParameter.ERROR, errorMessage);
-            }
 
             User user = (User) request.getSession().getAttribute(SessionAttribute.USER);
             if (user != null) {
@@ -47,6 +44,7 @@ public class GoToOrderPage implements Command {
             } else {
                 requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
             }
+            processRequest(request);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

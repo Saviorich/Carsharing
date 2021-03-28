@@ -10,10 +10,14 @@ public class CarValidator extends Validator {
 
     private static final Pattern YEAR_PATTERN = Pattern.compile("19|(20)[\\d][\\d]");
     private static final Pattern VIN_PATTERN = Pattern.compile("([A-Z\\d]+){17}");
-    private static final Pattern PLATE_PATTERN = Pattern.compile("[A-ZА-Я]{2}\\d{4}");
+    private static final Pattern PLATE_PATTERN = Pattern.compile("\\d{4}[A-ZА-Я]{2}");
 
     public boolean isMileageValid(int mileage) {
-        return mileage >= 0;
+        if (mileage < 0) {
+            message = "Invalid mileage";
+            return false;
+        }
+        return true;
     }
 
     public boolean isYearValid(String year) {
@@ -44,7 +48,10 @@ public class CarValidator extends Validator {
     }
 
     public boolean isPriceValid(BigDecimal price) {
-        // TODO: add body
+        if (price.compareTo(BigDecimal.ZERO) < 0) {
+            message = "Invalid price";
+            return false;
+        }
         return true;
     }
 }

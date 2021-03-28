@@ -1,4 +1,4 @@
-package by.epam.carsharing.controller.command.impl;
+package by.epam.carsharing.controller.command.impl.order;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.Order;
@@ -12,7 +12,6 @@ import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
-import by.epam.carsharing.validation.impl.OrderValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

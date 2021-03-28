@@ -1,4 +1,4 @@
-package by.epam.carsharing.controller.command.impl;
+package by.epam.carsharing.controller.command.impl.news;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.service.exception.InvalidDataException;

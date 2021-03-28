@@ -1,6 +1,7 @@
-package by.epam.carsharing.controller.command.impl;
+package by.epam.carsharing.controller.command.impl.car;
 
 import by.epam.carsharing.controller.command.Command;
+import by.epam.carsharing.controller.command.impl.news.GoToNewsPage;
 import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.CarService;

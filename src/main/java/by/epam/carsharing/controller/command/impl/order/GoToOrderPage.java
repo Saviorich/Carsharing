@@ -1,10 +1,9 @@
-package by.epam.carsharing.controller.command.impl;
+package by.epam.carsharing.controller.command.impl.order;
 
 import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.model.entity.Order;
-import by.epam.carsharing.model.entity.Role;
+import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.entity.user.User;
-import by.epam.carsharing.model.service.OrderService;
+import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
@@ -18,32 +17,34 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
-public class GoToUsersOrdersPage implements Command {
+import static by.epam.carsharing.util.RequestUtils.processRequest;
+
+public class GoToOrderPage implements Command {
 
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-    private static final Logger logger = LogManager.getLogger(GoToUsersOrdersPage.class);
-    private static final String ORDERS_PAGE = "/WEB-INF/jsp/user_orders.jsp";
+    private static final Logger logger = LogManager.getLogger(GoToOrderPage.class);
+    private static final String ORDER_PAGE = "/WEB-INF/jsp/order.jsp";
     private static final String LOGIN_PAGE = "/login";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Order> orders;
         RequestDispatcher requestDispatcher;
-        OrderService orderService = serviceFactory.getOrderService();
-        User user = (User) request.getSession().getAttribute(SessionAttribute.USER);
 
         try {
+            CarService carService = serviceFactory.getCarService();
+            Optional<Car> car = carService.getById(Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
+
+            car.ifPresent(value -> request.setAttribute(RequestParameter.CAR, value));
+
+            User user = (User) request.getSession().getAttribute(SessionAttribute.USER);
             if (user != null) {
-                requestDispatcher = request.getRequestDispatcher(ORDERS_PAGE);
-                orders = user.getRole() == Role.ADMIN
-                        ? orderService.getAll()
-                        : orderService.getAllByUserId(user.getId());
-                request.setAttribute(RequestParameter.ORDERS, orders);
+                requestDispatcher = request.getRequestDispatcher(ORDER_PAGE);
             } else {
                 requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
             }
+            processRequest(request);
             requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

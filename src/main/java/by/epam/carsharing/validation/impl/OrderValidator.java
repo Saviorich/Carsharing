@@ -23,6 +23,17 @@ public class OrderValidator extends Validator {
         return isAvailable;
     }
 
+    public boolean isAlreadyMade(List<Order>orders, Order orderToCheck) {
+        boolean isMade = orders.stream()
+                .filter(order -> order.getUser().getId() == orderToCheck.getUser().getId())
+                .noneMatch(order -> order.getStartDate() == orderToCheck.getStartDate()
+                        && order.getEndDate() == orderToCheck.getEndDate());
+        if (isMade) {
+            message = "Order is already made";
+        }
+        return isMade;
+    }
+
     public boolean isDatesValid(Date startDate, Date endDate) {
         if (startDate.before(DATE_UTILS.getCurrentDateWithoutTime())) {
             message = "Start date is earlier than today's date";

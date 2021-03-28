@@ -31,13 +31,12 @@ public class MakeOrderCommand implements Command {
     private static final Logger logger = LogManager.getLogger(MakeOrderCommand.class);
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage";
-    private static final String GO_TO_ORDER_PAGE = "Controller?command=gotoorderpage&data_id=%d&error=%s";
+    private static final String GO_TO_ORDER_PAGE = "Controller?command=gotoorderpage&data_id=%d&error=%s&validation=%s";
     private static final String INVALID_DATE_MESSAGE =  "Invalid date";
     private static final String SERVICE_EXCEPTION_MESSAGE = "Something went wrong";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        OrderValidator validator = new OrderValidator();
         int carId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
         OrderService orderService = serviceFactory.getOrderService();
         CarService carService = serviceFactory.getCarService();
@@ -52,10 +51,10 @@ public class MakeOrderCommand implements Command {
             response.sendRedirect(GO_TO_ORDERS_PAGE);
         } catch (ServiceException e){
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, SERVICE_EXCEPTION_MESSAGE));
+            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, SERVICE_EXCEPTION_MESSAGE, null));
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, validator.getMessage()));
+            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, null, e.getMessage()));
         }
     }
 

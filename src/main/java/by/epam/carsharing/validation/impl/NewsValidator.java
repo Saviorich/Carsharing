@@ -6,8 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewsValidator extends Validator {
-    private static final Pattern HEADER_PATTERN = Pattern.compile(".{1,100}$");
-    private static final Pattern CONTENT_PATTERN = Pattern.compile("(^[A-Z].+){1,255}$");
+    private static final Pattern HEADER_PATTERN = Pattern.compile("(^[A-ZА-Я].+){1,100}$");
+    private static final Pattern CONTENT_PATTERN = Pattern.compile("(^[A-ZА-Я<].+){1,255}$");
 
     public boolean isValidHeader(String header) {
         Matcher matcher = HEADER_PATTERN.matcher(header);
@@ -25,11 +25,5 @@ public class NewsValidator extends Validator {
             return false;
         }
         return true;
-    }
-
-    public static void main(String[] args) {
-        NewsValidator newsValidator = new NewsValidator();
-        newsValidator.isValidHeader("Privet guys");
-        System.out.println(newsValidator.getMessage());
     }
 }

@@ -16,7 +16,7 @@
     <c:if test="${not empty user and user.role eq 'ADMIN'}">
         <span>${administrator}</span>
     </c:if>
-    <p>Epam, 2021</p>
+    <p>Epam &copy;, 2021</p>
 </div>
 </body>
 </html>

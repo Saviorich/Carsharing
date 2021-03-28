@@ -4,11 +4,18 @@ import by.epam.carsharing.model.entity.Order;
 import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.util.DateUtils;
 import by.epam.carsharing.validation.Validator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class OrderValidator extends Validator {
+
+    private static final Logger logger = LogManager.getLogger(OrderValidator.class);
 
     private static final DateUtils DATE_UTILS = new DateUtils();
 
@@ -25,9 +32,10 @@ public class OrderValidator extends Validator {
 
     public boolean isAlreadyMade(List<Order>orders, Order orderToCheck) {
         boolean isMade = orders.stream()
-                .filter(order -> order.getUser().getId() == orderToCheck.getUser().getId())
-                .noneMatch(order -> order.getStartDate() == orderToCheck.getStartDate()
-                        && order.getEndDate() == orderToCheck.getEndDate());
+                .filter(order -> order.getUser().getId() == orderToCheck.getUser().getId()
+                        && order.getCar().getId() == orderToCheck.getCar().getId())
+                .anyMatch(order -> order.getStartDate().equals(orderToCheck.getStartDate())
+                        && order.getEndDate().equals(orderToCheck.getEndDate()));
         if (isMade) {
             message = "Order is already made";
         }

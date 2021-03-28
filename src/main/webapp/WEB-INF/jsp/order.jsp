@@ -20,6 +20,7 @@
         <fmt:message key="order.start_date" var="start_date"/>
         <fmt:message key="order.end_date" var="end_date"/>
         <fmt:message key="order.not_available" var="not_available"/>
+        <fmt:message key="order.already_present" var="already_present"/>
 
         <fmt:message key="car.class_hatchback" var="hatchback_class"/>
         <fmt:message key="car.class_muscle" var="muscle_class"/>
@@ -55,8 +56,11 @@
 <c:set var="error" value="${requestScope.error}"/>
 <c:set var="validation" value="${requestScope.validation}"/>
 <c:choose>
+    <c:when test="${validation eq 'Order is already made'}">
+        <p class="error">${already_present}</p>
+    </c:when>
     <c:when test="${error ne null}">
-        <p>${error_message}</p>
+        <p class="error">${error_message}</p>
     </c:when>
     <c:when test="${validation ne null}">
         <p class="error">${not_available} ${validation}</p>

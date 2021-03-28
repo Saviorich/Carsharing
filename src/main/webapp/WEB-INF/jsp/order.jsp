@@ -42,6 +42,7 @@
         <fmt:message key="car.color_red" var="red_color"/>
         <fmt:message key="car.color_yellow" var="yellow_color"/>
         <fmt:message key="car.color_white" var="white_color"/>
+        <fmt:message key="editor.error" var="error_message"/>
     </fmt:bundle>
 
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
@@ -52,9 +53,15 @@
 <body>
 <jsp:include page="../jsp/header.jsp"/>
 <c:set var="error" value="${requestScope.error}"/>
-<c:if test="${error ne null}">
-    <p class="error">${not_available} ${error}</p>
-</c:if>
+<c:set var="validation" value="${requestScope.validation}"/>
+<c:choose>
+    <c:when test="${error ne null}">
+        <p>${error_message}</p>
+    </c:when>
+    <c:when test="${validation ne null}">
+        <p class="error">${not_available} ${validation}</p>
+    </c:when>
+</c:choose>
 <div class="order_main_block">
     <div class="car_block" style="width: 440px;">
         <div class="car_block__brand">

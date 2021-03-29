@@ -9,6 +9,7 @@ import by.epam.carsharing.controller.command.impl.news.AddNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.DeleteNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.EditNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.GoToNewsPage;
+import by.epam.carsharing.controller.command.impl.order.ChangeOrderStatusCommand;
 import by.epam.carsharing.controller.command.impl.order.GoToOrderPage;
 import by.epam.carsharing.controller.command.impl.order.GoToUsersOrdersPage;
 import by.epam.carsharing.controller.command.impl.order.MakeOrderCommand;
@@ -39,6 +40,7 @@ public class CommandFactory {
         commands.put(CommandName.GOTOORDERPAGE, new GoToOrderPage());
         commands.put(CommandName.GOTOORDERSPAGE, new GoToUsersOrdersPage());
         commands.put(CommandName.MAKEORDER, new MakeOrderCommand());
+        commands.put(CommandName.CHANGEORDERSTATUS, new ChangeOrderStatusCommand());
     }
 
     public Command takeCommand(String command) {

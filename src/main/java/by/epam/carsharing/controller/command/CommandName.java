@@ -20,4 +20,5 @@ public enum CommandName {
     DELETECAR,
     GOTOORDERSPAGE,
     MAKEORDER,
+    CHANGEORDERSTATUS,
 }

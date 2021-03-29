@@ -112,6 +112,7 @@ public class ConstantFormatTag extends TagSupport {
         final String receivedStatus = "received_status";
         final String cancelledStatus = "cancelled_status";
         final String returnedStatus = "returned_status";
+        final String rejectedStatus = "rejected_status";
 
         String status = null;
         OrderStatus orderStatus = OrderStatus.valueOf(constant);
@@ -133,6 +134,9 @@ public class ConstantFormatTag extends TagSupport {
                 break;
             case RETURNED:
                 status = returnedStatus;
+                break;
+            case REJECTED:
+                status = rejectedStatus;
                 break;
         }
         return status;

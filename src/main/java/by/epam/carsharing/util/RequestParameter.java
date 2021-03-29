@@ -38,6 +38,7 @@ public final class RequestParameter {
     public static final String START_DATE = "start_date";
     public static final String END_DATE = "end_date";
     public static final String VALIDATION = "validation";
+    public static final String STATUS = "status";
 
     private RequestParameter() {
     }

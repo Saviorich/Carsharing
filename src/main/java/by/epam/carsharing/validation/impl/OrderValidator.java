@@ -44,7 +44,7 @@ public class OrderValidator extends Validator {
 
     public boolean isDatesValid(Date startDate, Date endDate) {
         if (startDate.before(DATE_UTILS.getCurrentDateWithoutTime())) {
-            message = "Start date is earlier than today's date";
+            message = "Start date is earlier than todays date";
             return false;
         } else if (startDate.after(endDate)) {
             message = "Start date is earlier than end date";

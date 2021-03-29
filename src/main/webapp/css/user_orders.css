@@ -3,6 +3,10 @@
     font-size: 20px;
 }
 
+a:visited {
+    color: black;
+}
+
 .order_block {
     background: #ff9d26;
     width: 95%;
@@ -59,6 +63,10 @@ td {
     color: #ff9d26;
 }
 
+.actions a:visited {
+    color: #ff9d26;
+}
+
 .actions a:hover {
     opacity: .6;
     transition: .4s;
@@ -68,6 +76,15 @@ td {
     color: limegreen;
 }
 
+#approve:visited {
+    color: limegreen;
+}
+
+
 #reject {
+    color: red;
+}
+
+#reject:visited {
     color: red;
 }

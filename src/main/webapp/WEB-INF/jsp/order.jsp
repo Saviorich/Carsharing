@@ -59,6 +59,9 @@
     <c:when test="${validation eq 'Order is already made'}">
         <p class="error">${already_present}</p>
     </c:when>
+    <c:when test="${validation eq 'Start date is earlier than todays date'}">
+        <p class="error">Start date is earlier than today's date</p>
+    </c:when>
     <c:when test="${validation ne null}">
         <p class="error">${not_available} ${validation}</p>
     </c:when>

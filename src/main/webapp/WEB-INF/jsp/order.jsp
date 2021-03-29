@@ -59,11 +59,11 @@
     <c:when test="${validation eq 'Order is already made'}">
         <p class="error">${already_present}</p>
     </c:when>
-    <c:when test="${error ne null}">
-        <p class="error">${error_message}</p>
-    </c:when>
     <c:when test="${validation ne null}">
         <p class="error">${not_available} ${validation}</p>
+    </c:when>
+    <c:when test="${error ne null}">
+        <p class="error">${error_message}</p>
     </c:when>
 </c:choose>
 <div class="order_main_block">

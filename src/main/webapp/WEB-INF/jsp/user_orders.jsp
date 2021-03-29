@@ -14,6 +14,14 @@
         <fmt:message key="order.end_date" var="end_date"/>
         <fmt:message key="header.cars" var="cars"/>
         <fmt:message key="orders.new_status" var="new_status"/>
+        <fmt:message key="orders.approved_status" var="approved_status"/>
+        <fmt:message key="orders.cancelled_status" var="cancelled_status"/>
+        <fmt:message key="orders.paid_status" var="paid_status"/>
+        <fmt:message key="orders.received_status" var="received_status"/>
+        <fmt:message key="orders.returned_status" var="returned_status"/>
+        <fmt:message key="orders.rejected_status" var="rejected_status"/>
+        <fmt:message key="admin.edit" var="edit"/>
+        <fmt:message key="admin.delete" var="delete"/>
     </fmt:bundle>
 </head>
 <body>
@@ -47,11 +55,22 @@
             ${order.returnComment}
         </display:column>
         <display:column title="Actions">
-            <div class="actions">
-                <a id="approve" href="#">Approve</a><br/>
-                <a id="reject" href="#">Reject</a><br/>
-                <a href="#">Change status</a><br/>
-            </div>
+            <c:choose>
+                <c:when test="${is_admin}">
+                    <div class="actions">
+                        <a id="approve" href="Controller?command=changeorderstatus&status=approved&data_id=${order.id}">Approve</a><br/>
+                        <a id="reject" href="Controller?command=changeorderstatus&status=rejected&data_id=${order.id}">Reject</a><br/>
+                        <a href="#">Change status</a><br/>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <a href="#">${edit}</a>
+                    <c:if test="${order.status eq 'NEW'}">
+                        <a href="#">${delete}</a>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
+
         </display:column>
     </display:table>
 </div>

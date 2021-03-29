@@ -34,6 +34,10 @@ public class OrderDaoImpl implements OrderDao {
     private static final String ADD_ORDER_QUERY = "INSERT INTO orders " +
             "(user_id, car_id, status_id, start_date, end_date, rejection_comment, return_comment) " +
             "VALUE (?, ?, ?, ?, ?, ?, ?);";
+    private static final String CHANGE_STATUS_QUERY =
+            "UPDATE orders " +
+            "SET status_id = (SELECT id FROM status WHERE status_name=? AND status_group='orders') " +
+            "WHERE orders.id = ?;";
 
     private static final int DEFAULT_ORDER_STATUS_ID = 1;
 
@@ -134,5 +138,20 @@ public class OrderDaoImpl implements OrderDao {
         }
 
         return orders;
+    }
+
+    @Override
+    public void changeStatus(int orderId, OrderStatus status) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(CHANGE_STATUS_QUERY)
+        ) {
+            statement.setString(1, status.toString().toLowerCase());
+            statement.setInt(2, orderId);
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
     }
 }

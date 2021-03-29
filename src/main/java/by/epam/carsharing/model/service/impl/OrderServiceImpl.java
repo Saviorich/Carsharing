@@ -4,6 +4,7 @@ import by.epam.carsharing.model.dao.DaoFactory;
 import by.epam.carsharing.model.dao.OrderDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.Order;
+import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.service.OrderService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
@@ -59,6 +60,15 @@ public class OrderServiceImpl implements OrderService {
 
         try {
             orderDao.add(entity);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void changeStatus(int orderId, OrderStatus status) throws ServiceException {
+        try {
+            orderDao.changeStatus(orderId, status);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

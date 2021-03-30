@@ -23,15 +23,15 @@ public class ChangeOrderStatusCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        logger.log(Level.DEBUG, request.getParameter(RequestParameter.STATUS).toUpperCase());
-        logger.log(Level.DEBUG, request.getParameter(RequestParameter.DATA_ID));
-
         OrderStatus status = OrderStatus.valueOf(request.getParameter(RequestParameter.STATUS).toUpperCase());
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
+        String rejectionComment = request.getParameter("rejection_comment");
+        logger.log(Level.DEBUG, rejectionComment);
+
         OrderService orderService = serviceFactory.getOrderService();
         try {
-            orderService.changeStatus(orderId, status);
+            orderService.changeStatus(orderId, status, rejectionComment);
             response.sendRedirect(String.format(GO_TO_ORDERS_PAGE, null, null));
         } catch (ServiceException e) {
             logger.log(Level.FATAL, e);

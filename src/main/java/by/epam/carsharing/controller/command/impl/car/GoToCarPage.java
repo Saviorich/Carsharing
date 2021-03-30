@@ -24,18 +24,20 @@ public class GoToCarPage implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     private static final String CARS_PAGE = "/WEB-INF/jsp/cars.jsp";
-    private static final String LOGIN_PAGE = "/login";
+    private static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher;
         try {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(CARS_PAGE);
+            requestDispatcher = request.getRequestDispatcher(CARS_PAGE);
             CarService carService = serviceFactory.getCarService();
             List<Car> cars = carService.getAll();
             request.setAttribute(RequestParameter.CARS, cars);
-            requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
-            logger.error(e.getMessage(), e);
+            logger.error(e);
+            requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
         }
+        requestDispatcher.forward(request, response);
     }
 }

@@ -2,6 +2,7 @@ package by.epam.carsharing.model.dao.impl;
 
 import by.epam.carsharing.model.connection.ConnectionPool;
 import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
+import by.epam.carsharing.model.dao.DaoFactory;
 import by.epam.carsharing.model.dao.OrderDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.Order;
@@ -25,6 +26,7 @@ public class OrderDaoImpl implements OrderDao {
 
     private static final Logger logger = LogManager.getLogger(OrderDaoImpl.class);
     private static final ConnectionPool pool = ConnectionPool.getInstance();
+    private static final DaoFactory factory = DaoFactory.getInstance();
 
     private static final String GET_ALL_BY_USER_ID_QUERY = "SELECT orders.id, user_id, car_id, status_name, start_date, end_date, rejection_comment, return_comment FROM orders " +
             "INNER JOIN status on status.id = orders.status_id " +
@@ -36,15 +38,22 @@ public class OrderDaoImpl implements OrderDao {
             "VALUE (?, ?, ?, ?, ?, ?, ?);";
     private static final String CHANGE_STATUS_QUERY =
             "UPDATE orders " +
-            "SET status_id = (SELECT id FROM status WHERE status_name=? AND status_group='orders'), "+
-             "rejection_comment = ? " +
+            "SET status_id = (SELECT id FROM status WHERE status_name=? AND status_group='orders') "+
             "WHERE orders.id = ?;";
+    private static final String ADD_REJECTION_QUERY =
+            "UPDATE orders " +
+            "SET rejection_comment=? " +
+            "WHERE id=?";
+    private static final String ADD_RETURN_QUERY =
+            "UPDATE orders " +
+            "SET return_comment=? " +
+            "WHERE id=?";
 
     private static final int DEFAULT_ORDER_STATUS_ID = 1;
 
     @Override
     public Optional<Order> getById(int id) throws DaoException {
-        return Optional.empty();
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -69,7 +78,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void deleteById(int id) throws DaoException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -142,14 +151,43 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public void changeStatus(int orderId, OrderStatus status, String rejectionComment) throws DaoException {
+    public void changeStatus(int orderId, OrderStatus status) throws DaoException {
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(CHANGE_STATUS_QUERY)
         ) {
             statement.setString(1, status.toString().toLowerCase());
-            statement.setString(2, rejectionComment);
-            statement.setInt(3, orderId);
+            statement.setInt(2, orderId);
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void addRejectionComment(int orderId, String comment) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(ADD_REJECTION_QUERY)
+        ) {
+            statement.setString(1, comment);
+            statement.setInt(2, orderId);
+
+            statement.execute();
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
+    public void addReturnComment(int orderId, String comment) throws DaoException {
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(ADD_RETURN_QUERY)
+        ) {
+            statement.setString(1, comment);
+            statement.setInt(2, orderId);
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {

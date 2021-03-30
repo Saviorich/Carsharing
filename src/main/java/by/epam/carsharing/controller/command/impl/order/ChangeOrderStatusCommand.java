@@ -26,12 +26,15 @@ public class ChangeOrderStatusCommand implements Command {
         OrderStatus status = OrderStatus.valueOf(request.getParameter(RequestParameter.STATUS).toUpperCase());
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
-        String rejectionComment = request.getParameter("rejection_comment");
+        String rejectionComment = request.getParameter(RequestParameter.REJECTION_COMMENT);
         logger.log(Level.DEBUG, rejectionComment);
 
         OrderService orderService = serviceFactory.getOrderService();
         try {
-            orderService.changeStatus(orderId, status, rejectionComment);
+            orderService.changeStatus(orderId, status);
+            if (rejectionComment != null) {
+                orderService.addRejectionComment(orderId, rejectionComment);
+            }
             response.sendRedirect(String.format(GO_TO_ORDERS_PAGE, null, null));
         } catch (ServiceException e) {
             logger.log(Level.FATAL, e);

@@ -81,8 +81,6 @@
                             <c:if test="${order.status eq 'NEW'}">
                                 <a id="approve"
                                    href="Controller?command=changeorderstatus&status=approved&data_id=${order.id}">${approve}</a><br/>
-<%--                                <a id="reject"--%>
-<%--                                   href="Controller?command=changeorderstatus&status=rejected&data_id=${order.id}">${reject}</a><br/>--%>
                                 <button id="reject" type="submit">${reject}</button><br/>
                                 <input type="hidden" name="command" value="changeorderstatus">
                                 <input type="hidden" name="status" value="rejected">

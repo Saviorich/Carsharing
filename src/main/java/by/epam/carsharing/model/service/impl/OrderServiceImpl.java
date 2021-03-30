@@ -66,9 +66,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void changeStatus(int orderId, OrderStatus status, String rejectionComment) throws ServiceException {
+    public void changeStatus(int orderId, OrderStatus status) throws ServiceException {
         try {
-            orderDao.changeStatus(orderId, status, rejectionComment);
+            orderDao.changeStatus(orderId, status);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void addRejectionComment(int orderId, String rejectionComment) throws ServiceException {
+        try {
+            orderDao.addRejectionComment(orderId, rejectionComment);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public void addReturnComment(int orderId, String returnComment) throws ServiceException {
+        try {
+            orderDao.addReturnComment(orderId, returnComment);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

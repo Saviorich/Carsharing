@@ -18,6 +18,8 @@
         <fmt:message key="orders.rejection_comment" var="rejection_comment"/>
         <fmt:message key="orders.return_comment" var="return_comment"/>
         <fmt:message key="orders.action" var="actions"/>
+        <fmt:message key="orders.pay" var="pay"/>
+        <fmt:message key="orders.rejection_placeholder" var="rejection_placeholder"/>
         <fmt:message key="orders.new_status" var="new_status"/>
         <fmt:message key="orders.approve" var="approve"/>
         <fmt:message key="orders.reject" var="reject"/>
@@ -37,61 +39,73 @@
 <c:set var="is_admin" value="${sessionScope.user.role eq 'ADMIN'}"/>
 
 <div class="main_block">
-    <display:table name="requestScope.orders" uid="order" class="table" pagesize="8" requestURI=""
-                   sort="list" defaultorder="ascending">
-        <c:if test="${is_admin}">
-            <display:column title="${user}" sortable="true" sortProperty="user.email">
-                ${order.user.email}
+    <form id="main_form" action="Controller" method="post">
+        <display:table name="requestScope.orders" uid="order" class="table" pagesize="8" requestURI=""
+                       sort="list" defaultorder="ascending">
+            <c:if test="${is_admin}">
+                <display:column title="${user}" sortable="true" sortProperty="user.email">
+                    ${order.user.email}
+                </display:column>
+            </c:if>
+            <display:column title="${car}" sortable="true" sortProperty="car.brand">
+                ${order.car.brand} ${order.car.model}
             </display:column>
-        </c:if>
-        <display:column title="${car}" sortable="true" sortProperty="car.brand">
-            ${order.car.brand} ${order.car.model}
-        </display:column>
-        <display:column title="${start_date}" sortable="true" sortProperty="startDate">
-            ${order.startDate}
-        </display:column>
-        <display:column title="${end_date}" sortable="true" sortProperty="endDate">
-            ${order.endDate}
-        </display:column>
-        <display:column title="${status}" sortable="true" sortProperty="status">
-            <sharing:ConstantFormatTag constant="${order.status}" enumeration="OrderStatus"/>
-        </display:column>
-        <display:column title="${rejection_comment}">
-            ${order.rejectionComment}
-        </display:column>
-        <c:if test="${is_admin}">
-            <display:column title="${return_comment}">
-                ${order.returnComment}
+            <display:column title="${start_date}" sortable="true" sortProperty="startDate">
+                ${order.startDate}
             </display:column>
-        </c:if>
-        <display:column title="${actions}">
-            <div class="actions">
+            <display:column title="${end_date}" sortable="true" sortProperty="endDate">
+                ${order.endDate}
+            </display:column>
+            <display:column title="${status}" sortable="true" sortProperty="status">
+                <sharing:ConstantFormatTag constant="${order.status}" enumeration="OrderStatus"/>
+            </display:column>
+            <display:column title="${rejection_comment}">
                 <c:choose>
                     <c:when test="${is_admin}">
-
-                        <c:if test="${order.status eq 'NEW'}">
-                            <a id="approve"
-                               href="Controller?command=changeorderstatus&status=approved&data_id=${order.id}">${approve}</a><br/>
-                            <a id="reject"
-                               href="Controller?command=changeorderstatus&status=rejected&data_id=${order.id}">${reject}</a><br/>
-                        </c:if>
-                        <a href="#">${change_status}</a><br/>
+                        <textarea name="rejection_comment" placeholder="${rejection_placeholder}" form="main_form">${order.rejectionComment}</textarea>
                     </c:when>
                     <c:otherwise>
-                        <c:if test="${order.status eq 'NEW'}">
-                            <a href="#">${edit}</a><br/>
-                        </c:if>
-                        <c:if test="${order.status eq 'APPROVED'}">
-                            <a href="#">Pay</a><br/>
-                        </c:if>
-                        <c:if test="${order.status eq 'NEW' or order.status eq 'APPROVED'}">
-                            <a href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
-                        </c:if>
+                        ${order.rejectionComment}
                     </c:otherwise>
                 </c:choose>
-            </div>
-        </display:column>
-    </display:table>
+            </display:column>
+            <c:if test="${is_admin}">
+                <display:column title="${return_comment}">
+                    ${order.returnComment}
+                </display:column>
+            </c:if>
+            <display:column title="${actions}">
+                <div class="actions">
+                    <c:choose>
+                        <c:when test="${is_admin}">
+                            <c:if test="${order.status eq 'NEW'}">
+                                <a id="approve"
+                                   href="Controller?command=changeorderstatus&status=approved&data_id=${order.id}">${approve}</a><br/>
+<%--                                <a id="reject"--%>
+<%--                                   href="Controller?command=changeorderstatus&status=rejected&data_id=${order.id}">${reject}</a><br/>--%>
+                                <button id="reject" type="submit">${reject}</button><br/>
+                                <input type="hidden" name="command" value="changeorderstatus">
+                                <input type="hidden" name="status" value="rejected">
+                                <input type="hidden" name="data_id" value="${order.id}">
+                            </c:if>
+                            <a href="#">${change_status}</a><br/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${order.status eq 'NEW'}">
+                                <a href="#">${edit}</a><br/>
+                            </c:if>
+                            <c:if test="${order.status eq 'APPROVED'}">
+                                <a id="approve" href="#">${pay}</a><br/>
+                            </c:if>
+                            <c:if test="${order.status eq 'NEW' or order.status eq 'APPROVED'}">
+                                <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </display:column>
+        </display:table>
+    </form>
 </div>
 </body>
 </html>

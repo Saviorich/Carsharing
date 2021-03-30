@@ -23,19 +23,21 @@ public class GoToNewsPage implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     private static final String NEWS_PAGE = "/WEB-INF/jsp/news.jsp";
+    private static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(NEWS_PAGE);
+        RequestDispatcher requestDispatcher;
 
         try {
             NewsService newsService = serviceFactory.getNewsService();
             List<News> news = newsService.getAll();
             request.setAttribute(RequestParameter.NEWS, news);
-            requestDispatcher.forward(request, response);
+            requestDispatcher = request.getRequestDispatcher(NEWS_PAGE);
         } catch (ServiceException e) {
             logger.error(e);
-            // TODO: redirect to error page
+            requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
         }
+        requestDispatcher.forward(request, response);
     }
 }

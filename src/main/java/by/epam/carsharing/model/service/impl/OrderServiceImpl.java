@@ -66,9 +66,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void changeStatus(int orderId, OrderStatus status) throws ServiceException {
+    public void changeStatus(int orderId, OrderStatus status, String rejectionComment) throws ServiceException {
         try {
-            orderDao.changeStatus(orderId, status);
+            orderDao.changeStatus(orderId, status, rejectionComment);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

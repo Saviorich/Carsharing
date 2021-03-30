@@ -12,5 +12,5 @@ public interface OrderService {
     List<Order> getAllByUserId(int userId) throws ServiceException;
     void add(Order entity) throws ServiceException, InvalidDataException;
 
-    void changeStatus(int orderId, OrderStatus status) throws ServiceException;
+    void changeStatus(int orderId, OrderStatus status, String rejectionComment) throws ServiceException;
 }

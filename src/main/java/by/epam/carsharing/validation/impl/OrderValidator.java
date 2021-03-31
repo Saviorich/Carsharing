@@ -2,22 +2,19 @@ package by.epam.carsharing.validation.impl;
 
 import by.epam.carsharing.model.entity.Order;
 import by.epam.carsharing.model.entity.status.OrderStatus;
-import by.epam.carsharing.util.DateUtils;
+import by.epam.carsharing.util.DateUtil;
 import by.epam.carsharing.validation.Validator;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 public class OrderValidator extends Validator {
 
     private static final Logger logger = LogManager.getLogger(OrderValidator.class);
 
-    private static final DateUtils DATE_UTILS = new DateUtils();
+    private static final DateUtil DATE_UTILS = new DateUtil();
 
     public boolean isCarAvailableForDates(List<Order> orders, int carId, Date startDate, Date endDate) {
         boolean isAvailable =  orders.stream()

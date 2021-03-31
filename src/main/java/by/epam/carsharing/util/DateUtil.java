@@ -2,13 +2,12 @@ package by.epam.carsharing.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 
-public class DateUtils {
+public class DateUtil {
 
     public int calculateDaysBetweenDates(Date firstDate, Date secondDate) {
         long firstDateTime = firstDate.getTime();
@@ -40,6 +39,6 @@ public class DateUtils {
 
     public static void main(String[] args) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(new DateUtils().formatDate(sdf.parse("2007-03-22")));
+        System.out.println(new DateUtil().formatDate(sdf.parse("2007-03-22")));
     }
 }

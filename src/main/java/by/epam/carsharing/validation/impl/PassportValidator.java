@@ -1,6 +1,6 @@
 package by.epam.carsharing.validation.impl;
 
-import by.epam.carsharing.util.DateUtils;
+import by.epam.carsharing.util.DateUtil;
 import by.epam.carsharing.validation.Validator;
 
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class PassportValidator extends Validator {
 
-    private static final DateUtils DATE_UTILS = new DateUtils();
+    private static final DateUtil DATE_UTILS = new DateUtil();
 
     private static final Pattern PASSPORT_NUMBER_PATTERN = Pattern.compile("([A-ZА-Я]{2})([\\d]{7})");
     private static final Pattern IDENTIFICATION_NUMBER_PATTERN = Pattern.compile("([\\d]{7})[A-ZА-Я]([\\d]{3})[A-ZА-Я][A-ZА-Я][\\d]");

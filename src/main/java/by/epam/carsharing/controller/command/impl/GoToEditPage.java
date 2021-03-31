@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-import static by.epam.carsharing.util.RequestUtils.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequest;
 
 public class GoToEditPage implements Command {
 

@@ -2,9 +2,13 @@ package by.epam.carsharing.model.entity.car;
 
 import by.epam.carsharing.model.entity.Identifiable;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Car implements Identifiable {
+public class Car implements Identifiable, Serializable {
+
+    private static final long serialVersionUID = -1686129624753722221L;
+
     private int id;
     private String brand;
     private String model;

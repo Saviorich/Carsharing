@@ -3,10 +3,10 @@ package by.epam.carsharing.controller.command.impl;
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.user.Passport;
 import by.epam.carsharing.model.entity.user.User;
-import by.epam.carsharing.model.entity.user.UserDetails;
+import by.epam.carsharing.model.entity.user.UserDetail;
 import by.epam.carsharing.model.service.PassportService;
 import by.epam.carsharing.model.service.ServiceFactory;
-import by.epam.carsharing.model.service.UserDetailsService;
+import by.epam.carsharing.model.service.UserDetailService;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
@@ -58,7 +58,7 @@ public class RegisterCommand implements Command {
 
         HttpSession session = request.getSession();
         UserService userService = serviceFactory.getUserService();
-        UserDetailsService detailsService = serviceFactory.getUserDetailsService();
+        UserDetailService detailsService = serviceFactory.getUserDetailService();
         PassportService passportService = serviceFactory.getPassportService();
 
         try {
@@ -69,7 +69,7 @@ public class RegisterCommand implements Command {
             Passport passport = new Passport(passportNumber, identificationNumber, issueDate);
             passportService.add(passport);
 
-            UserDetails details = new UserDetails(user, passportNumber, phoneNumber, firstName, secondName, middleName);
+            UserDetail details = new UserDetail(user, passportNumber, phoneNumber, firstName, secondName, middleName);
             detailsService.add(details);
 
             response.sendRedirect(GO_TO_NEWS_PAGE);

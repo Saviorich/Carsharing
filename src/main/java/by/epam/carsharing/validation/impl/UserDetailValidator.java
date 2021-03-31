@@ -5,7 +5,7 @@ import by.epam.carsharing.validation.Validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserDetailsValidator extends Validator {
+public class UserDetailValidator extends Validator {
 
     private static final Pattern NAME_PATTERN = Pattern.compile("[A-ZА-Я][a-zа-я]*");
     private static final Pattern PHONE_PATTERN = Pattern.compile("[+](\\d{12})");

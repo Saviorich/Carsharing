@@ -1,24 +1,24 @@
 package by.epam.carsharing.model.service.impl;
 
 import by.epam.carsharing.model.dao.DaoHelper;
-import by.epam.carsharing.model.dao.UserDetailsDao;
+import by.epam.carsharing.model.dao.UserDetailDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
-import by.epam.carsharing.model.entity.user.UserDetails;
-import by.epam.carsharing.model.service.UserDetailsService;
+import by.epam.carsharing.model.entity.user.UserDetail;
+import by.epam.carsharing.model.service.UserDetailService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
-import by.epam.carsharing.validation.impl.UserDetailsValidator;
+import by.epam.carsharing.validation.impl.UserDetailValidator;
 
 import java.util.List;
 import java.util.Optional;
 
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class UserDetailServiceImpl implements UserDetailService {
 
-    UserDetailsDao detailsDao = DaoHelper.getInstance().getUserDetailsDao();
+    UserDetailDao detailsDao = DaoHelper.getInstance().getUserDetailsDao();
 
     @Override
-    public List<UserDetails> getAll() throws ServiceException {
-        List<UserDetails> details;
+    public List<UserDetail> getAll() throws ServiceException {
+        List<UserDetail> details;
 
         try {
             details = detailsDao.getAll();
@@ -30,13 +30,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public Optional<UserDetails> getById() throws ServiceException {
+    public Optional<UserDetail> getById() throws ServiceException {
         return Optional.empty();
     }
 
     @Override
-    public void add(UserDetails entity) throws ServiceException, InvalidDataException {
-        UserDetailsValidator validator = new UserDetailsValidator();
+    public void add(UserDetail entity) throws ServiceException, InvalidDataException {
+        UserDetailValidator validator = new UserDetailValidator();
 
         String firstName = entity.getFirstName();
         String secondName = entity.getSecondName();

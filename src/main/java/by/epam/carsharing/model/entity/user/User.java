@@ -3,7 +3,12 @@ package by.epam.carsharing.model.entity.user;
 import by.epam.carsharing.model.entity.Identifiable;
 import by.epam.carsharing.model.entity.Role;
 
-public class User implements Identifiable {
+import java.io.Serializable;
+
+public class User implements Identifiable, Serializable {
+
+    private static final long serialVersionUID = -7344903344424645993L;
+
     private Integer id;
     private String email;
     private String password;

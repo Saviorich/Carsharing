@@ -11,7 +11,7 @@ import by.epam.carsharing.controller.command.impl.news.EditNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.GoToNewsPage;
 import by.epam.carsharing.controller.command.impl.order.ChangeOrderStatusCommand;
 import by.epam.carsharing.controller.command.impl.order.GoToOrderPage;
-import by.epam.carsharing.controller.command.impl.order.GoToUsersOrdersPage;
+import by.epam.carsharing.controller.command.impl.order.GoToUserOrderPage;
 import by.epam.carsharing.controller.command.impl.order.MakeOrderCommand;
 
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class CommandFactory {
         commands.put(CommandName.DELETENEWS, new DeleteNewsCommand());
         commands.put(CommandName.EDITNEWS, new EditNewsCommand());
         commands.put(CommandName.GOTOORDERPAGE, new GoToOrderPage());
-        commands.put(CommandName.GOTOORDERSPAGE, new GoToUsersOrdersPage());
+        commands.put(CommandName.GOTOORDERSPAGE, new GoToUserOrderPage());
         commands.put(CommandName.MAKEORDER, new MakeOrderCommand());
         commands.put(CommandName.CHANGEORDERSTATUS, new ChangeOrderStatusCommand());
     }

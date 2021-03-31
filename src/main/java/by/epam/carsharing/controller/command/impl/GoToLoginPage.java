@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static by.epam.carsharing.util.RequestUtils.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequest;
 
 public class GoToLoginPage implements Command {
 

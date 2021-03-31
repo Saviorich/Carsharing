@@ -4,9 +4,13 @@ import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.entity.user.User;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order implements Identifiable {
+public class Order implements Identifiable, Serializable {
+
+    private static final long serialVersionUID = -4286293207754417211L;
+
     private int id;
     private User user;
     private Car car;

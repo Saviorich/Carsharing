@@ -1,10 +1,14 @@
 package by.epam.carsharing.model.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Payment {
-    private Integer id;
+public class Payment implements Identifiable, Serializable {
+
+    private static final long serialVersionUID = 5139007526727524142L;
+
+    private int id;
     private Integer orderId;
     private Integer statusId;
     private BigDecimal totalPrice;
@@ -12,7 +16,7 @@ public class Payment {
 
     public Payment() {}
 
-    public Payment(Integer id, Integer orderId, Integer statusId, BigDecimal totalPrice, Date paymentDate) {
+    public Payment(int id, Integer orderId, Integer statusId, BigDecimal totalPrice, Date paymentDate) {
         this.id = id;
         this.orderId = orderId;
         this.statusId = statusId;
@@ -20,7 +24,7 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -47,7 +51,7 @@ public class Payment {
 
         Payment payment = (Payment) o;
 
-        if (!id.equals(payment.id)) return false;
+        if (id != payment.id) return false;
         if (!orderId.equals(payment.orderId)) return false;
         if (!statusId.equals(payment.statusId)) return false;
         if (!totalPrice.equals(payment.totalPrice)) return false;
@@ -56,7 +60,7 @@ public class Payment {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id;
         result = 31 * result + orderId.hashCode();
         result = 31 * result + statusId.hashCode();
         result = 31 * result + totalPrice.hashCode();

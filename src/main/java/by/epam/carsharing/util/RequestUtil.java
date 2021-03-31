@@ -2,7 +2,7 @@ package by.epam.carsharing.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class RequestUtils {
+public class RequestUtil {
 
     /**
      * Takes parameters from the request, checks if its error or validation message

@@ -1,8 +1,12 @@
 package by.epam.carsharing.model.entity.user;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Passport {
+public class Passport implements Serializable {
+
+    private static final long serialVersionUID = -6077599575954635719L;
+
     private String passportNumber;
     private String identificationNumber;
     private Date issueDate;

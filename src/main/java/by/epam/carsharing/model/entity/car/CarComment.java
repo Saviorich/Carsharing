@@ -1,6 +1,11 @@
 package by.epam.carsharing.model.entity.car;
 
-public class CarComment {
+import java.io.Serializable;
+
+public class CarComment implements Serializable {
+
+    private static final long serialVersionUID = 1113293598558703521L;
+
     private Integer id;
     private Integer userId;
     private Integer carId;

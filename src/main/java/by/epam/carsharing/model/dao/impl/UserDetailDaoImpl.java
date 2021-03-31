@@ -2,9 +2,9 @@ package by.epam.carsharing.model.dao.impl;
 
 import by.epam.carsharing.model.connection.ConnectionPool;
 import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
-import by.epam.carsharing.model.dao.UserDetailsDao;
+import by.epam.carsharing.model.dao.UserDetailDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
-import by.epam.carsharing.model.entity.user.UserDetails;
+import by.epam.carsharing.model.entity.user.UserDetail;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDetailsDaoImpl implements UserDetailsDao {
+public class UserDetailDaoImpl implements UserDetailDao {
 
     private static final String ADD_DETAILS_QUERY = "INSERT INTO user_details (" +
             "user_id, passport_number, phone_number, first_name, second_name, middle_name) " +
@@ -20,17 +20,17 @@ public class UserDetailsDaoImpl implements UserDetailsDao {
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
     @Override
-    public Optional<UserDetails> getById(int id) throws DaoException {
+    public Optional<UserDetail> getById(int id) throws DaoException {
         return Optional.empty();
     }
 
     @Override
-    public List<UserDetails> getAll() throws DaoException {
+    public List<UserDetail> getAll() throws DaoException {
         return null;
     }
 
     @Override
-    public void add(UserDetails entity) throws DaoException {
+    public void add(UserDetail entity) throws DaoException {
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(ADD_DETAILS_QUERY);

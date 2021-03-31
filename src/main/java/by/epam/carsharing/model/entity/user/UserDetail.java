@@ -2,7 +2,12 @@ package by.epam.carsharing.model.entity.user;
 
 import by.epam.carsharing.model.entity.Identifiable;
 
-public class UserDetails implements Identifiable {
+import java.io.Serializable;
+
+public class UserDetail implements Identifiable, Serializable {
+
+    private static final long serialVersionUID = -7430151545667547284L;
+
     private int id;
     private User user;
     private String passportNumber;
@@ -11,10 +16,10 @@ public class UserDetails implements Identifiable {
     private String secondName;
     private String middleName;
 
-    public UserDetails() {}
+    public UserDetail() {}
 
-    public UserDetails(int id, User user, String passportNumber, String phoneNumber,
-                       String firstName, String secondName, String middleName) {
+    public UserDetail(int id, User user, String passportNumber, String phoneNumber,
+                      String firstName, String secondName, String middleName) {
         this.id = id;
         this.user = user;
         this.passportNumber = passportNumber;
@@ -24,8 +29,8 @@ public class UserDetails implements Identifiable {
         this.middleName = middleName;
     }
 
-    public UserDetails(User user, String passportNumber, String phoneNumber,
-                       String firstName, String secondName, String middleName) {
+    public UserDetail(User user, String passportNumber, String phoneNumber,
+                      String firstName, String secondName, String middleName) {
         this(-1, user, passportNumber, phoneNumber, firstName, secondName, middleName);
     }
 
@@ -62,7 +67,7 @@ public class UserDetails implements Identifiable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserDetails details = (UserDetails) o;
+        UserDetail details = (UserDetail) o;
 
         if (id != details.id) return false;
         if (!user.equals(details.user)) return false;

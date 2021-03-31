@@ -1,8 +1,12 @@
 package by.epam.carsharing.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class News implements Identifiable {
+public class News implements Identifiable, Serializable {
+
+    private static final long serialVersionUID = -4657136872925977530L;
+
     private Integer id;
     private Integer userId;
     private String header;

@@ -20,10 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class GoToUsersOrdersPage implements Command {
+public class GoToUserOrderPage implements Command {
 
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-    private static final Logger logger = LogManager.getLogger(GoToUsersOrdersPage.class);
+    private static final Logger logger = LogManager.getLogger(GoToUserOrderPage.class);
     private static final String ORDERS_PAGE = "/WEB-INF/jsp/user_orders.jsp";
     private static final String LOGIN_PAGE = "/login";
 

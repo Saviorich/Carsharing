@@ -1,12 +1,10 @@
-package by.epam.carsharing.util;
+package by.epam.carsharing.controller.tag;
 
 import by.epam.carsharing.model.entity.car.CarClass;
 import by.epam.carsharing.model.entity.car.CarColor;
 import by.epam.carsharing.model.entity.car.EngineType;
 import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.entity.status.OrderStatus;
-import by.epam.carsharing.model.service.ServiceFactory;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

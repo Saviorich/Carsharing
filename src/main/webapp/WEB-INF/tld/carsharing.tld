@@ -9,7 +9,7 @@
 
     <tag>
         <name>ConstantFormatTag</name>
-        <tag-class>by.epam.carsharing.util.ConstantFormatTag</tag-class>
+        <tag-class>by.epam.carsharing.controller.tag.ConstantFormatTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>constant</name>

@@ -42,24 +42,24 @@ public class GoToEditPage implements Command {
         CarService carService = ServiceFactory.getInstance().getCarService();
         NewsService newsService = ServiceFactory.getInstance().getNewsService();
 
-        String data_id = request.getParameter(RequestParameter.DATA_ID);
+        String dataId = request.getParameter(RequestParameter.DATA_ID);
 
         try {
             CommandName commandName = CommandName.valueOf(request.getParameter(RequestParameter.COMMAND).toUpperCase());
             switch (commandName) {
                 case GOTOCAREDITPAGE:
-                    if (data_id != null) {
+                    if (dataId != null) {
                         Optional<Car> car = carService.getById(
-                                Integer.parseInt(data_id));
+                                Integer.parseInt(dataId));
                         request.setAttribute(RequestParameter.DATA, car.get());
                     }
                     processRequest(request);
                     executeCommandResult(request, response, user, CAR_EDIT_PAGE);
                     break;
                 case GOTONEWSEDITPAGE:
-                    if (data_id != null) {
+                    if (dataId != null) {
                         Optional<News> news = newsService.findNewsById(
-                                Integer.parseInt(data_id));
+                                Integer.parseInt(dataId));
                         request.setAttribute(RequestParameter.DATA, news.get());
                     }
                     processRequest(request);

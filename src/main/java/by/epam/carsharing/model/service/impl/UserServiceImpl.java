@@ -1,6 +1,6 @@
 package by.epam.carsharing.model.service.impl;
 
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.dao.UserDao;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.dao.exception.DaoException;
@@ -14,14 +14,14 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
-    private static final DaoFactory daoFactory = DaoFactory.getInstance();
+    private static final DaoHelper daoHelper = DaoHelper.getInstance();
     private static final UserValidator validator = new UserValidator();
 
     @Override
     public Optional<User> getById(Integer id) throws ServiceException {
         Optional<User> user;
         try {
-            user = daoFactory.getUserDao().getById(id);
+            user = daoHelper.getUserDao().getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
             throw new InvalidDataException(validator.getMessage());
         }
 
-        UserDao userDao = daoFactory.getUserDao();
+        UserDao userDao = daoHelper.getUserDao();
 
         Optional<User> user = Optional.empty();
         try {
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
             throw new InvalidDataException(validator.getMessage());
         }
 
-        UserDao userDao = daoFactory.getUserDao();
+        UserDao userDao = daoHelper.getUserDao();
         try {
             password = DigestUtils.md5Hex(password);
             userDao.registerUser(email, password);

@@ -1,7 +1,7 @@
 package by.epam.carsharing.model.service.impl;
 
 import by.epam.carsharing.model.dao.CarDao;
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
@@ -16,11 +16,11 @@ import java.util.Optional;
 public class CarServiceImpl implements CarService {
 
     private static final CarValidator VALIDATOR = new CarValidator();
-    private static final DaoFactory daoFactory = DaoFactory.getInstance();
+    private static final DaoHelper daoHelper = DaoHelper.getInstance();
 
     @Override
     public Optional<Car> getById(int id) throws ServiceException {
-        CarDao dao = daoFactory.getCarDao();
+        CarDao dao = daoHelper.getCarDao();
         Optional<Car> car;
         try {
             car = dao.getById(id);
@@ -33,7 +33,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAll() throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getAll();
@@ -46,7 +46,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByBrand(String brand) throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getCarsByBrand(brand);
@@ -60,7 +60,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByYear(String year) throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getCarsByYear(year);
@@ -74,7 +74,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByClass(CarClass carClass) throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getCarsByClass(carClass);
@@ -88,7 +88,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
                        String year, EngineType engineType, CarClass carClass, BigDecimal price, String vin, String plate, String imagePath) throws ServiceException, InvalidDataException {
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         if (!VALIDATOR.isMileageValid(mileage)
                 || !VALIDATOR.isPlateValid(plate)
@@ -107,7 +107,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void add(Car car) throws ServiceException, InvalidDataException {
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         int mileage = car.getMileage();
         String plate = car.getPlate();
@@ -132,7 +132,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteById(int id) throws ServiceException {
-        CarDao carDao = daoFactory.getCarDao();
+        CarDao carDao = daoHelper.getCarDao();
 
         try {
             carDao.deleteById(id);

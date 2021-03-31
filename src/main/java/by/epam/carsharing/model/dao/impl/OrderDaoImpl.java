@@ -2,14 +2,13 @@ package by.epam.carsharing.model.dao.impl;
 
 import by.epam.carsharing.model.connection.ConnectionPool;
 import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.dao.OrderDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.Order;
 import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.entity.user.User;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,13 +20,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicIntegerArray;
 
 public class OrderDaoImpl implements OrderDao {
 
     private static final Logger logger = LogManager.getLogger(OrderDaoImpl.class);
     private static final ConnectionPool pool = ConnectionPool.getInstance();
-    private static final DaoFactory factory = DaoFactory.getInstance();
+    private static final DaoHelper factory = DaoHelper.getInstance();
 
     private static final String GET_ALL_BY_USER_ID_QUERY = "SELECT orders.id, user_id, car_id, status_name, start_date, end_date, rejection_comment, return_comment FROM orders " +
             "INNER JOIN status on status.id = orders.status_id " +

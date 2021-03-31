@@ -1,6 +1,6 @@
 package by.epam.carsharing.model.service.impl;
 
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.dao.PassportDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.user.Passport;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class PassportServiceImpl implements PassportService {
 
-    private static final PassportDao passportDao = DaoFactory.getInstance().getPassportDao();
+    private static final PassportDao passportDao = DaoHelper.getInstance().getPassportDao();
 
     @Override
     public void add(Passport entity) throws ServiceException, InvalidDataException {

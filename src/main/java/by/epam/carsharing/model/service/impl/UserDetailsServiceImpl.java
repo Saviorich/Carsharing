@@ -1,6 +1,6 @@
 package by.epam.carsharing.model.service.impl;
 
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.dao.UserDetailsDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.user.UserDetails;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    UserDetailsDao detailsDao = DaoFactory.getInstance().getUserDetailsDao();
+    UserDetailsDao detailsDao = DaoHelper.getInstance().getUserDetailsDao();
 
     @Override
     public List<UserDetails> getAll() throws ServiceException {

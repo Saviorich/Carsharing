@@ -1,6 +1,6 @@
 package by.epam.carsharing.model.service.impl;
 
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.dao.OrderDao;
 import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.entity.Order;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
-    OrderDao orderDao = DaoFactory.getInstance().getOrderDao();
+    OrderDao orderDao = DaoHelper.getInstance().getOrderDao();
 
     @Override
     public List<Order> getAll() throws ServiceException {

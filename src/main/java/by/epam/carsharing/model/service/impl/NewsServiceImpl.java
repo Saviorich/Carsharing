@@ -1,6 +1,6 @@
 package by.epam.carsharing.model.service.impl;
 
-import by.epam.carsharing.model.dao.DaoFactory;
+import by.epam.carsharing.model.dao.DaoHelper;
 import by.epam.carsharing.model.dao.NewsDao;
 import by.epam.carsharing.model.entity.News;
 import by.epam.carsharing.model.dao.exception.DaoException;
@@ -14,12 +14,12 @@ import java.util.Optional;
 
 public class NewsServiceImpl implements NewsService {
 
-    private static final DaoFactory daoFactory = DaoFactory.getInstance();
+    private static final DaoHelper daoHelper = DaoHelper.getInstance();
     private static final NewsValidator VALIDATOR = new NewsValidator();
 
     @Override
     public Optional<News> findNewsById(int id) throws ServiceException {
-        NewsDao dao = daoFactory.getNewsDao();
+        NewsDao dao = daoHelper.getNewsDao();
         Optional<News> news;
         try {
             news = dao.getById(id);
@@ -36,7 +36,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public List<News> getAll() throws ServiceException {
-        NewsDao newsDao = daoFactory.getNewsDao();
+        NewsDao newsDao = daoHelper.getNewsDao();
         List<News> news;
         try {
             news = newsDao.getAll();
@@ -48,7 +48,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void deleteById(int id) throws ServiceException {
-        NewsDao newsDao = daoFactory.getNewsDao();
+        NewsDao newsDao = daoHelper.getNewsDao();
         try {
             newsDao.deleteById(id);
         } catch (DaoException e) {
@@ -62,7 +62,7 @@ public class NewsServiceImpl implements NewsService {
                 || !VALIDATOR.isValidContent(content)) {
             throw new InvalidDataException(VALIDATOR.getMessage());
         }
-        NewsDao newsDao = daoFactory.getNewsDao();
+        NewsDao newsDao = daoHelper.getNewsDao();
         try {
             newsDao.update(id, header, content, imagePath);
         } catch (DaoException e){
@@ -82,7 +82,7 @@ public class NewsServiceImpl implements NewsService {
             throw new InvalidDataException(newsValidator.getMessage());
         }
 
-        NewsDao newsDao = daoFactory.getNewsDao();
+        NewsDao newsDao = daoHelper.getNewsDao();
         try {
             newsDao.add(entity);
         } catch (DaoException e){

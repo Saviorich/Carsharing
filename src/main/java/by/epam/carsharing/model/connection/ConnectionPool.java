@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -51,8 +50,6 @@ public class ConnectionPool {
     }
 
     public void initPoolData() throws ConnectionPoolException {
-        Locale.setDefault(Locale.ENGLISH);
-
         try {
             Class.forName(driverName);
 
@@ -85,7 +82,7 @@ public class ConnectionPool {
         }
     }
 
-    public Connection takeConnection() throws ConnectionPoolException{
+    public Connection takeConnection() throws ConnectionPoolException {
         Connection connection;
 
         try {
@@ -95,40 +92,6 @@ public class ConnectionPool {
             throw new ConnectionPoolException("Error connecting to the data source.", e);
         }
         return connection;
-    }
-
-    public void closeConnection(Connection connection, Statement statement, ResultSet resultSet) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            logger.error("Connection isn't return to the pool", e);
-        }
-
-        try {
-            resultSet.close();
-        } catch (SQLException e) {
-           logger.error("ResultSet isn't close");
-        }
-
-        try {
-            statement.close();
-        } catch (SQLException e) {
-            logger.error("Statement isn't close");
-        }
-    }
-
-    public void closeConnection(Connection connection, Statement statement) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            logger.error("Connection isn't return to the pool");
-        }
-
-        try {
-            statement.close();
-        } catch (SQLException e) {
-            logger.error("Statement isn't close");
-        }
     }
 
     private void closeConnectionsQueue(BlockingQueue<Connection> queue) throws SQLException {
@@ -143,7 +106,7 @@ public class ConnectionPool {
 
     /**
      * Proxy connection
-     * */
+     */
     private class PooledConnection implements Connection {
         private Connection connection;
 

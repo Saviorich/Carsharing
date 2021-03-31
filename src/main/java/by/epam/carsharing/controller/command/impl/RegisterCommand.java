@@ -62,16 +62,11 @@ public class RegisterCommand implements Command {
         PassportService passportService = serviceFactory.getPassportService();
 
         try {
-            userService.registerUser(email, password);
+            Passport passport = new Passport(passportNumber, identificationNumber, issueDate);
+            UserDetail details = new UserDetail(null, passportNumber, phoneNumber, firstName, secondName, middleName);
+            userService.registerUser(email, password, details, passport);
             User user = userService.findUserByEmailAndPassword(email, password).get();
             session.setAttribute(SessionAttribute.USER, user);
-
-            Passport passport = new Passport(passportNumber, identificationNumber, issueDate);
-            passportService.add(passport);
-
-            UserDetail details = new UserDetail(user, passportNumber, phoneNumber, firstName, secondName, middleName);
-            detailsService.add(details);
-
             response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

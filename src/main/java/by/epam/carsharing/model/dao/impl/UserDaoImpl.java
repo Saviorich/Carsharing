@@ -3,19 +3,23 @@ package by.epam.carsharing.model.dao.impl;
 import by.epam.carsharing.model.connection.ConnectionPool;
 import by.epam.carsharing.model.dao.UserDao;
 import by.epam.carsharing.model.entity.Role;
+import by.epam.carsharing.model.entity.user.Passport;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
 import by.epam.carsharing.model.dao.exception.DaoException;
+import by.epam.carsharing.model.entity.user.UserDetail;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserDaoImpl implements UserDao {
+
+    private static final Logger logger = LogManager.getLogger(UserDaoImpl.class);
 
     private static final String GET_ALL_QUERY = "SELECT users.id, email, user_password, role.role FROM users" +
             " INNER JOIN role on users.role = role.id;";
@@ -25,30 +29,77 @@ public class UserDaoImpl implements UserDao {
             " INNER JOIN role on users.role = role.id WHERE users.id=?;";
     private static final String REGISTER_QUERY = "INSERT INTO users (email, user_password, role) VALUE (?, ?, ?);";
     private static final String DELETE_BY_ID_QUERY = "DELETE FROM users WHERE id=?";
+    private static final String ADD_PASSPORT_QUERY = "INSERT INTO passport " +
+            "(passport_number, identification_number, issue_date) " +
+            "VALUE (?, ?, ?);";
+    private static final String ADD_DETAILS_QUERY = "INSERT INTO user_details (" +
+            "user_id, passport_number, phone_number, first_name, second_name, middle_name) " +
+            "VALUE (?, ?, ?, ?, ?, ?);";
 
     private static final int DEFAULT_ROLE_ID = 1;
 
     private static final ConnectionPool pool = ConnectionPool.getInstance();
 
     @Override
-    public void registerUser(String email, String password, int role) throws DaoException {
-        try (
-                Connection connection = pool.takeConnection();
-                PreparedStatement statement = connection.prepareStatement(REGISTER_QUERY);
-        ){
-            statement.setString(1, email);
-            statement.setString(2, password);
-            statement.setInt(3, role);
+    public void registerUser(String email, String password, UserDetail details, Passport passport, int role) throws DaoException {
+        Connection connection = null;
+        try {
+            connection = pool.takeConnection();
 
-            statement.execute();
+            PreparedStatement userStatement = connection.prepareStatement(REGISTER_QUERY, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement passportStatement = connection.prepareStatement(ADD_PASSPORT_QUERY);
+            PreparedStatement detailsStatement = connection.prepareStatement(ADD_DETAILS_QUERY);
+
+            connection.setAutoCommit(false);
+
+            userStatement.setString(1, email);
+            userStatement.setString(2, password);
+            userStatement.setInt(3, role);
+            userStatement.executeUpdate();
+
+            logger.log(Level.DEBUG, "User added successfully");
+
+            ResultSet generatedKeys = userStatement.getGeneratedKeys();
+
+            passportStatement.setString(1, passport.getPassportNumber());
+            passportStatement.setString(2, passport.getIdentificationNumber());
+            passportStatement.setDate(3, new Date(passport.getIssueDate().getTime()));
+            passportStatement.execute();
+
+            logger.log(Level.DEBUG, "Passport added successfully");
+
+            if (generatedKeys.next()) {
+                detailsStatement.setInt(1, generatedKeys.getInt(1));
+                detailsStatement.setString(2, details.getPassportNumber());
+                detailsStatement.setString(3, details.getPhoneNumber());
+                detailsStatement.setString(4, details.getFirstName());
+                detailsStatement.setString(5, details.getSecondName());
+                detailsStatement.setString(6, details.getMiddleName());
+                detailsStatement.execute();
+            }
+            logger.log(Level.DEBUG, "Details added successfully");
+
+            connection.commit();
         } catch (SQLException | ConnectionPoolException e){
+            try {
+                connection.rollback();
+            } catch (SQLException throwable) {
+                throw new DaoException(throwable);
+            }
             throw new DaoException(e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+                connection.close();
+            } catch (SQLException sqlException) {
+                throw new DaoException(sqlException);
+            }
         }
     }
 
     @Override
-    public void registerUser(String email, String password) throws DaoException {
-        registerUser(email, password, DEFAULT_ROLE_ID);
+    public void registerUser(String email, String password, UserDetail details, Passport passport) throws DaoException {
+        registerUser(email, password, details, passport, DEFAULT_ROLE_ID);
     }
 
     @Override

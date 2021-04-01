@@ -10,6 +10,7 @@ import by.epam.carsharing.model.service.UserDetailService;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
+import by.epam.carsharing.util.DateUtil;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
 import org.apache.logging.log4j.Level;
@@ -27,6 +28,8 @@ import java.util.Date;
 
 public class RegisterCommand implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+
+    private static final DateUtil DATE_UTILS = new DateUtil();
     private static final Logger logger = LogManager.getLogger(RegisterCommand.class);
     private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
     private static final String GO_TO_REGISTER_PAGE = "Controller?command=gotoregisterpage&error=%s&validation=%s";
@@ -47,21 +50,11 @@ public class RegisterCommand implements Command {
         String identificationNumber = request.getParameter(RequestParameter.IDENTIFICATION_NUMBER);
         String issueDateParameter = request.getParameter(RequestParameter.ISSUE_DATE);
 
-        Date issueDate = null;
-        try {
-            issueDate = DATE_FORMAT.parse(issueDateParameter);
-        } catch (ParseException e) {
-            logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_REGISTER_PAGE, true, null));
-            return;
-        }
-
         HttpSession session = request.getSession();
         UserService userService = serviceFactory.getUserService();
-        UserDetailService detailsService = serviceFactory.getUserDetailService();
-        PassportService passportService = serviceFactory.getPassportService();
 
         try {
+            Date issueDate = DATE_UTILS.parseDate(issueDateParameter);
             Passport passport = new Passport(passportNumber, identificationNumber, issueDate);
             UserDetail details = new UserDetail(null, passportNumber, phoneNumber, firstName, secondName, middleName);
             userService.registerUser(email, password, details, passport);

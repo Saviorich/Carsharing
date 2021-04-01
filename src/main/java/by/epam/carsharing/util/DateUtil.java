@@ -1,5 +1,7 @@
 package by.epam.carsharing.util;
 
+import by.epam.carsharing.model.service.exception.InvalidDataException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class DateUtil {
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public int calculateDaysBetweenDates(Date firstDate, Date secondDate) {
         long firstDateTime = firstDate.getTime();
@@ -37,8 +41,11 @@ public class DateUtil {
         calendar.set(Calendar.MILLISECOND, 0);
     }
 
-    public static void main(String[] args) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(new DateUtil().formatDate(sdf.parse("2007-03-22")));
+    public Date parseDate(String date) throws InvalidDataException {
+        try {
+            return DATE_FORMAT.parse(date);
+        } catch (ParseException e) {
+            throw new InvalidDataException(e);
+        }
     }
 }

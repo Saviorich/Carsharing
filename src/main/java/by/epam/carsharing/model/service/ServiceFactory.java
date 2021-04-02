@@ -14,6 +14,7 @@ public final class ServiceFactory {
     private final OrderService orderService = new OrderServiceImpl();
     private final UserDetailService detailService = new UserDetailServiceImpl();
     private final PassportService passportService = new PassportServiceImpl();
+    private final PaymentService paymentService = new PaymentServiceImpl();
 
     public static ServiceFactory getInstance() {
         return instance;
@@ -39,5 +40,9 @@ public final class ServiceFactory {
 
     public PassportService getPassportService() {
         return passportService;
+    }
+
+    public PaymentService getPaymentService() {
+        return paymentService;
     }
 }

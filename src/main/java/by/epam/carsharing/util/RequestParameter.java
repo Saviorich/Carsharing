@@ -41,6 +41,11 @@ public final class RequestParameter {
     public static final String STATUS = "status";
     public static final String REJECTION_COMMENT = "rejection_comment";
     public static final String RETURN_COMMENT = "return_comment";
+    public static final String TOTAL_PRICE = "total_price";
+    public static final String CARD_NUMBER = "card_number";
+    public static final String EXPIRY_DATE = "expiry_date";
+    public static final String HOLDER = "holder";
+    public static final String CVV = "cvv";
 
     private RequestParameter() {
     }

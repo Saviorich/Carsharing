@@ -6,6 +6,7 @@ import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderService {
     List<Order> getAll() throws ServiceException;
@@ -16,4 +17,6 @@ public interface OrderService {
 
     void addRejectionComment(int orderId, String rejectionComment) throws ServiceException;
     void addReturnComment(int orderId, String returnComment) throws ServiceException;
+
+    Optional<Order> getById(int id) throws ServiceException;
 }

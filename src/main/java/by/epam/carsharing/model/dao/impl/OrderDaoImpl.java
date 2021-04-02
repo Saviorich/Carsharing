@@ -27,6 +27,7 @@ public class OrderDaoImpl implements OrderDao {
     private static final ConnectionPool pool = ConnectionPool.getInstance();
     private static final DaoHelper factory = DaoHelper.getInstance();
 
+    private static final String GET_BY_ID_QUERY = "SELECT user_id, car_id, status_name, start_date, end_date, rejection_comment, return_comment FROM orders INNER JOIN status ON orders.status_id = status.id WHERE orders.id=?;";
     private static final String GET_ALL_BY_USER_ID_QUERY = "SELECT orders.id, user_id, car_id, status_name, start_date, end_date, rejection_comment, return_comment FROM orders " +
             "INNER JOIN status on status.id = orders.status_id " +
             "WHERE user_id=?;";
@@ -52,7 +53,29 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Optional<Order> getById(int id) throws DaoException {
-        throw new UnsupportedOperationException();
+        Optional<Order> order = Optional.empty();
+        try (
+                Connection connection = pool.takeConnection();
+                PreparedStatement statement = connection.prepareStatement(GET_BY_ID_QUERY);
+        ) {
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                User user = new UserDaoImpl().getById(rs.getInt(1)).get();
+                Car car = new CarDaoImpl().getById(rs.getInt(2)).get();
+                OrderStatus status = OrderStatus.valueOf(rs.getString(3).toUpperCase());
+                Date startDate = rs.getDate(4);
+                Date endDate = rs.getDate(5);
+                String rejectionComment = rs.getString(6);
+                String returnComment = rs.getString(7);
+                order = Optional.of(new Order(id, user, car, status, startDate, endDate, rejectionComment, returnComment));
+            }
+        } catch (SQLException | ConnectionPoolException e) {
+            throw new DaoException(e);
+        }
+        return order;
     }
 
     @Override

@@ -18,7 +18,10 @@ public class OrderValidator extends Validator {
 
     public boolean isCarAvailableForDates(List<Order> orders, int carId, Date startDate, Date endDate) {
         boolean isAvailable =  orders.stream()
-                .filter(order -> order.getCar().getId() == carId && order.getStatus() == OrderStatus.APPROVED)
+                .filter(order -> order.getCar().getId() == carId
+                        && (order.getStatus() == OrderStatus.APPROVED
+                        || order.getStatus() == OrderStatus.PAID
+                        || order.getStatus() == OrderStatus.RECEIVED))
                 .noneMatch(order -> DATE_UTILS.isBetweenDates(startDate, order.getStartDate(), order.getEndDate())
                             && DATE_UTILS.isBetweenDates(endDate, order.getStartDate(), order.getEndDate()));
         if (!isAvailable) {
@@ -30,7 +33,7 @@ public class OrderValidator extends Validator {
     public boolean isAlreadyMade(List<Order>orders, Order orderToCheck) {
         boolean isMade = orders.stream()
                 .filter(order -> order.getUser().getId() == orderToCheck.getUser().getId()
-                        && order.getCar().getId() == orderToCheck.getCar().getId())
+                        && order.getCar().getId() == orderToCheck.getCar().getId() && order.getStatus() == OrderStatus.NEW)
                 .anyMatch(order -> order.getStartDate().equals(orderToCheck.getStartDate())
                         && order.getEndDate().equals(orderToCheck.getEndDate()));
         if (isMade) {

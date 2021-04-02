@@ -13,10 +13,22 @@ import by.epam.carsharing.validation.impl.OrderValidator;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
 
     OrderDao orderDao = DaoHelper.getInstance().getOrderDao();
+
+    @Override
+    public Optional<Order> getById(int id) throws ServiceException {
+        Optional<Order> order;
+        try {
+            order = orderDao.getById(id);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+        return order;
+    }
 
     @Override
     public List<Order> getAll() throws ServiceException {

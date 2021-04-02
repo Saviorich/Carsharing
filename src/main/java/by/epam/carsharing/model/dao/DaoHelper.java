@@ -15,6 +15,7 @@ public final class DaoHelper {
     private final OrderDao orderDao = new OrderDaoImpl();
     private final UserDetailDao detailDao = new UserDetailDaoImpl();
     private final PassportDao passportDao = new PassportDaoImpl();
+    private final PaymentDao paymentDao = new PaymentDaoImpl();
 
 
     public NewsDao getNewsDao() {
@@ -41,4 +42,7 @@ public final class DaoHelper {
         return passportDao;
     }
 
+    public PaymentDao getPaymentDao() {
+        return paymentDao;
+    }
 }

@@ -21,4 +21,6 @@ public enum CommandName {
     GOTOORDERSPAGE,
     MAKEORDER,
     CHANGEORDERSTATUS,
+    GOTOPAYMENTPAGE,
+    MAKEPAYMENT,
 }

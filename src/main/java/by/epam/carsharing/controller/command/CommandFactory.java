@@ -13,6 +13,8 @@ import by.epam.carsharing.controller.command.impl.order.ChangeOrderStatusCommand
 import by.epam.carsharing.controller.command.impl.order.GoToOrderPage;
 import by.epam.carsharing.controller.command.impl.order.GoToUserOrderPage;
 import by.epam.carsharing.controller.command.impl.order.MakeOrderCommand;
+import by.epam.carsharing.controller.command.impl.payment.GoToPaymentPage;
+import by.epam.carsharing.controller.command.impl.payment.MakePayment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +43,8 @@ public class CommandFactory {
         commands.put(CommandName.GOTOORDERSPAGE, new GoToUserOrderPage());
         commands.put(CommandName.MAKEORDER, new MakeOrderCommand());
         commands.put(CommandName.CHANGEORDERSTATUS, new ChangeOrderStatusCommand());
+        commands.put(CommandName.GOTOPAYMENTPAGE, new GoToPaymentPage());
+        commands.put(CommandName.MAKEPAYMENT, new MakePayment());
     }
 
     public Command takeCommand(String command) {

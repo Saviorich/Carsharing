@@ -94,7 +94,7 @@
                                 <a href="#">${edit}</a><br/>
                             </c:if>
                             <c:if test="${order.status eq 'APPROVED'}">
-                                <a href="Controller?command=gotopaymentpage&data_id=${order.id}" onclick="window.open(this.href, '', 'resizable=no,status=no,location=no,toolbar=no,menubar=no,fullscreen=no,scrollbars=no,dependent=no'); return false;">${pay}</a><br/>
+                                <a href="Controller?command=gotopaymentpage&data_id=${order.id}">${pay}</a><br/>
                                 <c:set var="order_id" value="${order.id}"/>
                             </c:if>
                             <c:if test="${order.status eq 'NEW' or order.status eq 'APPROVED'}">

@@ -21,6 +21,7 @@
         <fmt:message key="order.end_date" var="end_date"/>
         <fmt:message key="order.not_available" var="not_available"/>
         <fmt:message key="order.already_present" var="already_present"/>
+        <fmt:message key="orders.total_price" var="total_price"/>
 
         <fmt:message key="car.class_hatchback" var="hatchback_class"/>
         <fmt:message key="car.class_muscle" var="muscle_class"/>
@@ -100,7 +101,7 @@
                 <div class="total_price">
                     <input id="total_price" type="hidden" name="total_price" value="" readonly="readonly" required/>
                     <input type="hidden" name="data_id" value="${car.id}">
-                    <p>Total price: <span>0</span> BYN</p>
+                    <p>${total_price}: <span>0</span> BYN</p>
                 </div>
             </div>
         </div>

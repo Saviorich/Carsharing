@@ -1,5 +1,7 @@
 package by.epam.carsharing.model.entity;
 
+import by.epam.carsharing.model.entity.status.PaymentStatus;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,18 +12,22 @@ public class Payment implements Identifiable, Serializable {
 
     private int id;
     private Integer orderId;
-    private Integer statusId;
+    private PaymentStatus status;
     private BigDecimal totalPrice;
     private Date paymentDate;
 
     public Payment() {}
 
-    public Payment(int id, Integer orderId, Integer statusId, BigDecimal totalPrice, Date paymentDate) {
+    public Payment(int id, Integer orderId, PaymentStatus status, BigDecimal totalPrice, Date paymentDate) {
         this.id = id;
         this.orderId = orderId;
-        this.statusId = statusId;
+        this.status = status;
         this.totalPrice = totalPrice;
         this.paymentDate = paymentDate;
+    }
+
+    public Payment(Integer orderId, PaymentStatus status, BigDecimal totalPrice, Date paymentDate) {
+        this(-1, orderId, status, totalPrice, paymentDate);
     }
 
     public int getId() {
@@ -32,8 +38,8 @@ public class Payment implements Identifiable, Serializable {
         return orderId;
     }
 
-    public Integer getStatusId() {
-        return statusId;
+    public PaymentStatus getStatus() {
+        return status;
     }
 
     public BigDecimal getTotalPrice() {
@@ -53,7 +59,7 @@ public class Payment implements Identifiable, Serializable {
 
         if (id != payment.id) return false;
         if (!orderId.equals(payment.orderId)) return false;
-        if (!statusId.equals(payment.statusId)) return false;
+        if (status != payment.status) return false;
         if (!totalPrice.equals(payment.totalPrice)) return false;
         return paymentDate.equals(payment.paymentDate);
     }
@@ -62,7 +68,7 @@ public class Payment implements Identifiable, Serializable {
     public int hashCode() {
         int result = id;
         result = 31 * result + orderId.hashCode();
-        result = 31 * result + statusId.hashCode();
+        result = 31 * result + status.hashCode();
         result = 31 * result + totalPrice.hashCode();
         result = 31 * result + paymentDate.hashCode();
         return result;
@@ -73,7 +79,7 @@ public class Payment implements Identifiable, Serializable {
         final StringBuilder sb = new StringBuilder("Payment{");
         sb.append("id=").append(id);
         sb.append(", orderId=").append(orderId);
-        sb.append(", statusId=").append(statusId);
+        sb.append(", status=").append(status);
         sb.append(", totalPrice=").append(totalPrice);
         sb.append(", paymentDate=").append(paymentDate);
         sb.append('}');

@@ -43,10 +43,6 @@ public class MakePayment implements Command {
             String cvv = request.getParameter(RequestParameter.CVV);
             Date expiryDate = DATE_UTILS.parseDate(request.getParameter(RequestParameter.EXPIRY_DATE));
 
-            logger.log(Level.DEBUG, cardNumber);
-            logger.log(Level.DEBUG, cvv);
-            logger.log(Level.DEBUG, expiryDate);
-
             PaymentValidator validator = new PaymentValidator();
             if (!validator.isCardNumberValid(cardNumber)
                     || !validator.isCvvNumberValid(cvv)

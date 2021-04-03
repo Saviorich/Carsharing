@@ -21,6 +21,8 @@
         <fmt:message key="order.end_date" var="end_date"/>
         <fmt:message key="order.not_available" var="not_available"/>
         <fmt:message key="order.already_present" var="already_present"/>
+        <fmt:message key="order.earlier_than_today" var="earlier_than_today"/>
+        <fmt:message key="order.earlier_than_end" var="earlier_than_end"/>
         <fmt:message key="orders.total_price" var="total_price"/>
 
         <fmt:message key="car.class_hatchback" var="hatchback_class"/>
@@ -61,7 +63,10 @@
         <p class="error">${already_present}</p>
     </c:when>
     <c:when test="${validation eq 'Start date is earlier than todays date'}">
-        <p class="error">Start date is earlier than today's date</p>
+        <p class="error">${earlier_than_today}</p>
+    </c:when>
+    <c:when test="${validation eq 'Start date is earlier than end date'}">
+        <p class="error">${earlier_than_end}</p>
     </c:when>
     <c:when test="${validation ne null}">
         <p class="error">${not_available} ${validation}</p>

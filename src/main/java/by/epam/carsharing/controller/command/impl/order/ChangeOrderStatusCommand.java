@@ -27,13 +27,16 @@ public class ChangeOrderStatusCommand implements Command {
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
         String rejectionComment = request.getParameter(RequestParameter.REJECTION_COMMENT);
-        logger.log(Level.DEBUG, rejectionComment);
+        String returnComment = request.getParameter(RequestParameter.RETURN_COMMENT);
 
         OrderService orderService = serviceFactory.getOrderService();
         try {
             orderService.changeStatus(orderId, status);
             if (rejectionComment != null) {
                 orderService.addRejectionComment(orderId, rejectionComment);
+            }
+            if (returnComment != null) {
+                orderService.addReturnComment(orderId, returnComment);
             }
             response.sendRedirect(String.format(GO_TO_ORDERS_PAGE, null, null));
         } catch (ServiceException e) {

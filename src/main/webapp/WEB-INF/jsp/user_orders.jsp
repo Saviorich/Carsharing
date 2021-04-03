@@ -20,6 +20,9 @@
         <fmt:message key="orders.return_comment" var="return_comment"/>
         <fmt:message key="orders.action" var="actions"/>
         <fmt:message key="orders.pay" var="pay"/>
+        <fmt:message key="orders.received" var="received"/>
+        <fmt:message key="orders.return" var="retrn"/>
+        <fmt:message key="orders.return_placeholder" var="return_placeholder"/>
         <fmt:message key="orders.rejection_placeholder" var="rejection_placeholder"/>
         <fmt:message key="orders.new_status" var="new_status"/>
         <fmt:message key="orders.approve" var="approve"/>
@@ -63,7 +66,7 @@
             <display:column title="${rejection_comment}">
                 <c:choose>
                     <c:when test="${is_admin and order.status eq 'NEW'}">
-                        <textarea name="rejection_comment" placeholder="${rejection_placeholder}" form="main_form">${order.rejectionComment}</textarea>
+                        <textarea name="rejection_comment" placeholder="${rejection_placeholder}" form="main_form"></textarea>
                     </c:when>
                     <c:otherwise>
                         ${order.rejectionComment}
@@ -72,22 +75,35 @@
             </display:column>
             <c:if test="${is_admin}">
                 <display:column title="${return_comment}">
+                    <c:if test="${is_admin and order.status eq 'RECEIVED'}">
+                        <textarea name="return_comment" placeholder="${return_placeholder}" form="main_form"></textarea>
+                    </c:if>
                     ${order.returnComment}
                 </display:column>
             </c:if>
             <display:column title="${actions}">
                 <div class="actions">
+                    <input type="hidden" name="command" value="changeorderstatus">
                     <c:choose>
                         <c:when test="${is_admin}">
                             <c:if test="${order.status eq 'NEW'}">
                                 <a id="approve"
                                    href="Controller?command=changeorderstatus&status=approved&data_id=${order.id}">${approve}</a><br/>
                                 <button id="reject" type="submit">${reject}</button><br/>
-                                <input type="hidden" name="command" value="changeorderstatus">
                                 <input type="hidden" name="status" value="rejected">
                                 <input type="hidden" name="data_id" value="${order.id}">
                             </c:if>
-                            <a href="#">${change_status}</a><br/>
+                            <c:if test="${order.status eq 'PAID'}">
+                                <a href="Controller?command=changeorderstatus&status=received&data_id=${order.id}">${received}</a><br/>
+                            </c:if>
+                            <c:if test="${order.status eq 'RECEIVED'}">
+                                <button id="reject" type="submit">${retrn}</button><br/>
+                                <input type="hidden" name="status" value="returned">
+                                <input type="hidden" name="data_id" value="${order.id}">
+                            </c:if>
+                            <c:if test="${(order.status ne 'RECEIVED') and (order.status ne 'RETURNED')}">
+                                <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
+                            </c:if>
                         </c:when>
                         <c:otherwise>
                             <c:if test="${order.status eq 'NEW'}">

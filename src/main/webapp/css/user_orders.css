@@ -3,6 +3,16 @@
     font-size: 20px;
 }
 
+.admin_panel {
+    text-align: center;
+    height: 30px;
+    text-decoration: none;
+}
+
+.admin_panel a {
+    color: red;
+}
+
 .order_block {
     background: #ff9d26;
     width: 95%;

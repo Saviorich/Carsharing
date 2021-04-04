@@ -76,10 +76,10 @@
 
     <c:choose>
         <c:when test="${is_register_failed}">
-            ${error_message}
+            <p>${error_message}</p>
         </c:when>
         <c:when test="${is_invalid_data}">
-            ${validation_message}
+            <p>${validation_message}</p>
         </c:when>
     </c:choose>
 

@@ -14,7 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminFilter", urlPatterns = { "/Controller?command=gotonewseditpage" })
+@WebFilter(filterName = "AdminFilter", urlPatterns = { "/Controller?command=gotonewseditpage", "/Controller?command=gotocareditpage" })
 public class AdminFilter extends AbstractFilter {
 
     private static final Logger logger = LogManager.getLogger(AdminFilter.class);

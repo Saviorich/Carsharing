@@ -50,20 +50,11 @@ body {
     margin: 0 auto;
 }
 
-.register p {
-    margin-bottom: -20px;
-}
-
 .register .button {
     background: #ff9d26;
     border: none;
     margin-top: 20px;
     margin-bottom: 20px;
-}
-
-#fail_message {
-    line-height: normal;
-    margin-bottom: 10px;
 }
 
 label {
@@ -74,6 +65,16 @@ label {
     text-decoration: none;
     font-size: inherit;
     color: #ff9d26;
+}
+
+.register p {
+    margin: -5px;
+    color: white;
+}
+
+p:hover {
+    transition: .4s;
+    color: navajowhite;
 }
 
 .register a:hover {

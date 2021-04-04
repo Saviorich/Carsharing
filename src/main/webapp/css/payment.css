@@ -66,3 +66,13 @@ label {
 .payment a:hover {
     opacity: .8;
 }
+
+.register p {
+    margin: -5px;
+    color: white;
+}
+
+p:hover {
+    transition: .4s;
+    color: navajowhite;
+}

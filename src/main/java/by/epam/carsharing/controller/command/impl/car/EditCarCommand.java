@@ -43,7 +43,6 @@ public class EditCarCommand implements Command {
         BigDecimal price = new BigDecimal(request.getParameter(RequestParameter.PRICE_EDITOR));
         String vin = request.getParameter(RequestParameter.VIN);
         String plate = request.getParameter(RequestParameter.PLATE);
-        logger.log(Level.DEBUG, (String) request.getAttribute(RequestParameter.IMAGE_PATH));
         String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {

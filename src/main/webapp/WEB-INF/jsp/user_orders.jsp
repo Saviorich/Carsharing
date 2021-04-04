@@ -101,14 +101,11 @@
                                 <input type="hidden" name="status" value="returned">
                                 <input type="hidden" name="data_id" value="${order.id}">
                             </c:if>
-                            <c:if test="${(order.status ne 'RECEIVED') and (order.status ne 'RETURNED')}">
+                            <c:if test="${(order.status ne 'RECEIVED') and (order.status ne 'RETURNED') and (order.status ne 'NEW')}">
                                 <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
                             </c:if>
                         </c:when>
                         <c:otherwise>
-                            <c:if test="${order.status eq 'NEW'}">
-                                <a href="#">${edit}</a><br/>
-                            </c:if>
                             <c:if test="${order.status eq 'APPROVED'}">
                                 <a href="Controller?command=gotopaymentpage&data_id=${order.id}">${pay}</a><br/>
                                 <c:set var="order_id" value="${order.id}"/>

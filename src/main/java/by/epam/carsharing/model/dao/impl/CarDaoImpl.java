@@ -19,7 +19,7 @@ public class CarDaoImpl implements CarDao {
 
     private static final String GET_BY_ID_QUERY = "SELECT * FROM cars WHERE id=?;";
     private static final String GET_ALL_QUERY = "SELECT * FROM cars;";
-    private static final String GET_BY_BRAND = "SELECT * FROM cars WHERE LOWER(brand)=?;";
+    private static final String GET_BY_NAME = "SELECT * FROM cars WHERE brand LIKE CONCAT('%', ?, '%') OR model LIKE CONCAT('%', ?, '%')";
     private static final String GET_BY_YEAR = "SELECT * FROM cars WHERE manufactured_year=?;";
     private static final String GET_BY_CLASS = "SELECT * FROM cars WHERE class=?;";
     private static final String UPDATE_CAR_QUERY = "UPDATE cars SET brand=?, model=?, color=?, mileage=?, gearbox=?, manufactured_year=?, engine_type=?, class=?, price_per_day=?, image_path=? WHERE id=?;";
@@ -141,18 +141,20 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public List<Car> getCarsByBrand(String brand) throws DaoException {
+    public List<Car> getCarsByName(String criteria) throws DaoException {
         List<Car> cars = new ArrayList<>();
 
         try (
                 Connection connection = pool.takeConnection();
-                PreparedStatement statement = connection.prepareStatement(GET_BY_BRAND)
+                PreparedStatement statement = connection.prepareStatement(GET_BY_NAME)
         ) {
-            statement.setString(1, brand.toLowerCase());
+            statement.setString(1, criteria);
+            statement.setString(2, criteria);
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
+                String brand = resultSet.getString(2);
                 String model = resultSet.getString(3);
                 CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
                 int mileage = resultSet.getInt(5);

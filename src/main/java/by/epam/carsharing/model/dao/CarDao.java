@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface CarDao extends Dao<Car> {
-    List<Car> getCarsByBrand(String brand) throws DaoException;
+    List<Car> getCarsByName(String criteria) throws DaoException;
     List<Car> getCarsByYear(String year) throws DaoException;
     List<Car> getCarsByClass(CarClass carClass) throws DaoException;
 

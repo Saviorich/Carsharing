@@ -46,6 +46,7 @@ public final class RequestParameter {
     public static final String EXPIRY_DATE = "expiry_date";
     public static final String HOLDER = "holder";
     public static final String CVV = "cvv";
+    public static final String SEARCH = "search";
 
     private RequestParameter() {
     }

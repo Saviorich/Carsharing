@@ -3,9 +3,9 @@ package by.epam.carsharing.controller.command.impl.car;
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.controller.command.impl.news.GoToNewsPage;
 import by.epam.carsharing.model.entity.car.Car;
-import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,16 +24,23 @@ public class GoToCarPage implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
 
     private static final String CARS_PAGE = "/WEB-INF/jsp/cars.jsp";
-    private static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
+    private static final String ERROR_PAGE = "error.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher requestDispatcher;
         try {
-            requestDispatcher = request.getRequestDispatcher(CARS_PAGE);
             CarService carService = serviceFactory.getCarService();
-            List<Car> cars = carService.getAll();
+
+            String criteria = request.getParameter(RequestParameter.SEARCH);
+            List<Car> cars;
+            if (criteria != null && !criteria.isEmpty()) {
+                cars = serviceFactory.getCarService().getCarsByName(criteria);
+            } else {
+                cars = carService.getAll();
+            }
             request.setAttribute(RequestParameter.CARS, cars);
+            requestDispatcher = request.getRequestDispatcher(CARS_PAGE);
         } catch (ServiceException e) {
             logger.error(e);
             requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);

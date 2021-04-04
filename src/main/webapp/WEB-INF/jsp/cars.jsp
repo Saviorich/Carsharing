@@ -54,6 +54,16 @@
         <a id="admin_but_add" href="Controller?command=gotocareditpage">${add_car}</a>
     </c:if>
 </div>
+<div class="user_panel">
+    <c:if test="${sessionScope.user.role ne 'ADMIN'}">
+        <form action="Controller?command=gotocarspage" method="post">
+            Search by brand: <input name="search" type="text" placeholder="Search..">
+            <button type="submit">&hookleftarrow;</button>
+<%--            Sort by: <select name="sort"><option value="priceup">Price &uparrow;</option><option value="pricedown">Price &downarrow;</option></select>--%>
+<%--            <button type="submit">&hookleftarrow;</button>--%>
+        </form>
+    </c:if>
+</div>
 <div class="main_block">
     <c:forEach var="car" items="${requestScope.cars}">
         <div class="car_block">

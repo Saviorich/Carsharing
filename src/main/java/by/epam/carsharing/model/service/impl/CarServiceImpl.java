@@ -16,14 +16,13 @@ import java.util.Optional;
 public class CarServiceImpl implements CarService {
 
     private static final CarValidator VALIDATOR = new CarValidator();
-    private static final DaoHelper daoHelper = DaoHelper.getInstance();
+    private static final CarDao carDao = DaoHelper.getInstance().getCarDao();
 
     @Override
     public Optional<Car> getById(int id) throws ServiceException {
-        CarDao dao = daoHelper.getCarDao();
         Optional<Car> car;
         try {
-            car = dao.getById(id);
+            car = carDao.getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
@@ -33,7 +32,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getAll() throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getAll();
@@ -46,7 +44,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByName(String criteria) throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getCarsByName(criteria);
@@ -60,7 +57,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByYear(String year) throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getCarsByYear(year);
@@ -74,7 +70,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByClass(CarClass carClass) throws ServiceException {
         List<Car> cars;
-        CarDao carDao = daoHelper.getCarDao();
 
         try {
             cars = carDao.getCarsByClass(carClass);
@@ -88,7 +83,6 @@ public class CarServiceImpl implements CarService {
     @Override
     public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
                        String year, EngineType engineType, CarClass carClass, BigDecimal price, String vin, String plate, String imagePath) throws ServiceException, InvalidDataException {
-        CarDao carDao = daoHelper.getCarDao();
 
         if (!VALIDATOR.isMileageValid(mileage)
                 || !VALIDATOR.isPlateValid(plate)
@@ -107,7 +101,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void add(Car car) throws ServiceException, InvalidDataException {
-        CarDao carDao = daoHelper.getCarDao();
 
         int mileage = car.getMileage();
         String plate = car.getPlate();
@@ -132,7 +125,6 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteById(int id) throws ServiceException {
-        CarDao carDao = daoHelper.getCarDao();
 
         try {
             carDao.deleteById(id);

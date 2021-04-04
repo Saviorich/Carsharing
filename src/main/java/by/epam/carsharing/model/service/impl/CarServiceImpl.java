@@ -44,12 +44,12 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getCarsByBrand(String brand) throws ServiceException {
+    public List<Car> getCarsByName(String criteria) throws ServiceException {
         List<Car> cars;
         CarDao carDao = daoHelper.getCarDao();
 
         try {
-            cars = carDao.getCarsByBrand(brand);
+            cars = carDao.getCarsByName(criteria);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

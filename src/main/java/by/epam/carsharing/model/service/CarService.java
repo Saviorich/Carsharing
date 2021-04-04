@@ -12,7 +12,7 @@ public interface CarService {
     Optional<Car> getById(int id) throws ServiceException;
     List<Car> getAll() throws ServiceException;
 
-    List<Car> getCarsByBrand(String brand) throws ServiceException;
+    List<Car> getCarsByName(String criteria) throws ServiceException;
     List<Car> getCarsByYear(String year) throws ServiceException;
     List<Car> getCarsByClass(CarClass carClass) throws ServiceException;
 

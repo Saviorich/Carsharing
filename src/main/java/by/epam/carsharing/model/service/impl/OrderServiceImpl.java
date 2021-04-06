@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
 
-    OrderDao orderDao = DaoHelper.getInstance().getOrderDao();
+    private static final OrderDao orderDao = DaoHelper.getInstance().getOrderDao();
 
     @Override
     public Optional<Order> getById(int id) throws ServiceException {

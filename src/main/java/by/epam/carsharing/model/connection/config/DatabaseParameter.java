@@ -1,6 +1,6 @@
 package by.epam.carsharing.model.connection.config;
 
-public class DatabaseParameter {
+public final class DatabaseParameter {
     private DatabaseParameter() {}
 
     public static final String DRIVER = "driver";

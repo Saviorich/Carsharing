@@ -29,9 +29,11 @@ public class DatabaseResourceManager {
                 this.properties = properties;
             } else {
                 logger.fatal("database.properties not found");
+                throw new IOException("database.properties not found");
             }
         } catch (IOException e) {
             logger.fatal("IOException in DatabaseResourceManager class");
+            throw new RuntimeException(e);
         }
     }
 

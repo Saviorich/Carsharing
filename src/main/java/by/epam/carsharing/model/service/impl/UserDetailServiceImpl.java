@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class UserDetailServiceImpl implements UserDetailService {
 
-    UserDetailDao detailsDao = DaoHelper.getInstance().getUserDetailsDao();
+    private static final UserDetailDao detailsDao = DaoHelper.getInstance().getUserDetailsDao();
 
     @Override
     public List<UserDetail> getAll() throws ServiceException {

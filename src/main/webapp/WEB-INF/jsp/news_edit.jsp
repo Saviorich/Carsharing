@@ -51,7 +51,7 @@
                 </textarea>
             </div>
             <div class="editor_block__image">
-                <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>
+                <input id="image_input" name="image_editor" type='file' onchange="readURL(this);" accept="image/*"/>
                 <img id="loaded_image" src="${n.imagePath}" alt="your image"/>
             </div>
             <div class="navigation">

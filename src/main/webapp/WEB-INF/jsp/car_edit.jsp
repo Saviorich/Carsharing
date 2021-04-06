@@ -101,12 +101,12 @@
                 <option value="red">${red_color}</option>
                 <option value="white">${white_color}</option>
             </select><br/>
-                    ${mileage}: <input class="content_editor" name="mileage_editor" type="number" value="${car.mileage}"/>KM<br/>
+                    ${mileage}: <input class="content_editor" name="mileage_editor" type="number" value="${car.mileage}" pattern="[0-9]{7}" required/>KM<br/>
                     ${gearbox}: <select id="ge" class="content_editor" name="gearbox_editor">
                 <option value="manual">${manual_gearbox}</option>
                 <option value="automatic">${automatic_gearbox}</option>
             </select><br/>
-                    ${year}: <input id="ye" class="content_editor" name="year_editor" type="number" value="${car.manufacturedYear}"/><br/>
+                    ${year}: <input id="ye" class="content_editor" name="year_editor" type="number" value="${car.manufacturedYear}" required/><br/>
                     ${engine}: <select id="ee" class="content_editor" name="engine_editor">
                 <option value="petrol">${petrol_engine}</option>
                 <option value="diesel">${diesel_engine}</option>
@@ -121,12 +121,12 @@
                 <option value="hatchback">${hatchback_class}</option>
                 <option value="pickup">${pickup_class}</option>
             </select><br/>
-                    VIN: <input id="ve" id="vin_editor" class="content_editor" name="vin_editor" value="${car.vin}"><br/>
+                    VIN: <input id="ve" id="vin_editor" class="content_editor" name="vin_editor" value="${car.vin}" required><br/>
                     ${plate}: <input id="pe" class="content_editor" name="plate_editor" value="${car.plate}"><br/>
-                ${price}: <input id="pre" class="content_editor" name="price_editor" type="number" min="0" step="0.1" value="${car.pricePerDay}">
+                ${price}: <input id="pre" class="content_editor" name="price_editor" type="number" min="0" step="0.1" value="${car.pricePerDay}" required>
             </div>
             <div class="editor_block__image">
-                <input id="image_input" name="image_editor" type='file' onchange="readURL(this);"/>
+                <input id="image_input" name="image_editor" type='file' onchange="readURL(this);" accept="image/*"/>
                 <img id="uploaded image" src="${car.imagePath}" alt="your image"/>
             </div>
             <div class="navigation">

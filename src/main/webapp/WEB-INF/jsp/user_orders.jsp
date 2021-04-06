@@ -43,7 +43,7 @@
 <c:set var="is_admin" value="${sessionScope.user.role eq 'ADMIN'}"/>
 
 <div class="main_block">
-    <form id="main_form" action="Controller" method="post">
+    <form id="main_form" action="Controller?command=changeorderstatus" method="post">
         <display:table name="requestScope.orders" uid="order" class="table" pagesize="8" requestURI=""
                        sort="list" defaultorder="ascending">
             <c:if test="${is_admin}">
@@ -65,7 +65,7 @@
             </display:column>
             <display:column title="${rejection_comment}">
                 <c:choose>
-                    <c:when test="${is_admin and order.status eq 'NEW'}">
+                    <c:when test="${is_admin and (order.status eq 'NEW' or order.status eq 'APPROVED')}">
                         <textarea name="rejection_comment" placeholder="${rejection_placeholder}" form="main_form"></textarea>
                     </c:when>
                     <c:otherwise>
@@ -83,15 +83,14 @@
             </c:if>
             <display:column title="${actions}">
                 <div class="actions">
-                    <input type="hidden" name="command" value="changeorderstatus">
                     <c:choose>
                         <c:when test="${is_admin}">
                             <c:if test="${order.status eq 'NEW'}">
                                 <a id="approve"
                                    href="Controller?command=changeorderstatus&status=approved&data_id=${order.id}">${approve}</a><br/>
-                                <button id="reject" type="submit">${reject}</button><br/>
                                 <input type="hidden" name="status" value="rejected">
                                 <input type="hidden" name="data_id" value="${order.id}">
+                                <button id="reject" type="submit">${reject}</button><br/>
                             </c:if>
                             <c:if test="${order.status eq 'PAID'}">
                                 <a href="Controller?command=changeorderstatus&status=received&data_id=${order.id}">${received}</a><br/>
@@ -101,8 +100,10 @@
                                 <input type="hidden" name="status" value="returned">
                                 <input type="hidden" name="data_id" value="${order.id}">
                             </c:if>
-                            <c:if test="${(order.status ne 'RECEIVED') and (order.status ne 'RETURNED') and (order.status ne 'NEW')}">
-                                <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
+                            <c:if test="${order.status eq 'APPROVED'}">
+                                <input type="hidden" name="status" value="rejected">
+                                <input type="hidden" name="data_id" value="${order.id}">
+                                <button id="reject" type="submit">${reject}</button><br/>
                             </c:if>
                         </c:when>
                         <c:otherwise>

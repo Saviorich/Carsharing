@@ -1,10 +1,7 @@
 package by.epam.carsharing.controller.command;
 
 import by.epam.carsharing.controller.command.impl.*;
-import by.epam.carsharing.controller.command.impl.car.AddCarCommand;
-import by.epam.carsharing.controller.command.impl.car.DeleteCarCommand;
-import by.epam.carsharing.controller.command.impl.car.EditCarCommand;
-import by.epam.carsharing.controller.command.impl.car.GoToCarPage;
+import by.epam.carsharing.controller.command.impl.car.*;
 import by.epam.carsharing.controller.command.impl.news.AddNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.DeleteNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.EditNewsCommand;
@@ -30,6 +27,7 @@ public class CommandFactory {
         commands.put(CommandName.REGISTER, new RegisterCommand());
         commands.put(CommandName.SIGNOUT, new SignOutCommand());
         commands.put(CommandName.GOTOCARSPAGE, new GoToCarPage());
+        commands.put(CommandName.GOTOCARCOMMENTSPAGE, new GoToCarComment());
         commands.put(CommandName.CHANGELANG, new ChangeLanguageCommand());
         commands.put(CommandName.GOTONEWSEDITPAGE, new GoToEditPage());
         commands.put(CommandName.GOTOCAREDITPAGE, new GoToEditPage());

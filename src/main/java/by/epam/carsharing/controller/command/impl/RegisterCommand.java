@@ -4,9 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.user.Passport;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.entity.user.UserDetail;
-import by.epam.carsharing.model.service.PassportService;
 import by.epam.carsharing.model.service.ServiceFactory;
-import by.epam.carsharing.model.service.UserDetailService;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
@@ -22,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

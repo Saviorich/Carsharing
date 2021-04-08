@@ -35,10 +35,10 @@ public class EditNewsCommand implements Command {
             response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, null, true));
+            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, null, e.getMessage()));
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, true, null));
+            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, e.getMessage(), null));
         }
     }
 }

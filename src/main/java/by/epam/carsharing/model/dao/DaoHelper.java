@@ -1,6 +1,7 @@
 package by.epam.carsharing.model.dao;
 
 import by.epam.carsharing.model.dao.impl.*;
+import by.epam.carsharing.model.entity.car.CarComment;
 
 public final class DaoHelper {
     private final static DaoHelper instance = new DaoHelper();
@@ -13,9 +14,9 @@ public final class DaoHelper {
     private final NewsDao newsDao = new NewsDaoImpl();
     private final CarDao carDao = new CarDaoImpl();
     private final OrderDao orderDao = new OrderDaoImpl();
-    private final UserDetailDao detailDao = new UserDetailDaoImpl();
     private final PassportDao passportDao = new PassportDaoImpl();
     private final PaymentDao paymentDao = new PaymentDaoImpl();
+    private final CarCommentDao carCommentDao = new CarCommentDaoImpl();
 
 
     public NewsDao getNewsDao() {
@@ -34,15 +35,15 @@ public final class DaoHelper {
         return orderDao;
     }
 
-    public UserDetailDao getUserDetailsDao() {
-        return detailDao;
-    }
-
     public PassportDao getPassportDao() {
         return passportDao;
     }
 
     public PaymentDao getPaymentDao() {
         return paymentDao;
+    }
+
+    public CarCommentDao getCarCommentDao() {
+        return carCommentDao;
     }
 }

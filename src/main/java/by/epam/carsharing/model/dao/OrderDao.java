@@ -7,7 +7,6 @@ import by.epam.carsharing.model.entity.status.OrderStatus;
 import java.util.List;
 
 public interface OrderDao extends Dao<Order>{
-    List<Order> getAll() throws DaoException;
     List<Order> getAllByUserId(int userId) throws DaoException;
 
     void changeStatus(int orderId, OrderStatus status) throws DaoException;

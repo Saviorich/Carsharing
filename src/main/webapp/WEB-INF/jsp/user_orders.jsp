@@ -93,7 +93,7 @@
                                 <button id="reject" type="submit">${reject}</button><br/>
                             </c:if>
                             <c:if test="${order.status eq 'PAID'}">
-                                <a href="Controller?command=changeorderstatus&status=received&data_id=${order.id}">${received}</a><br/>
+                                <a id="approve" href="Controller?command=changeorderstatus&status=received&data_id=${order.id}">${received}</a><br/>
                             </c:if>
                             <c:if test="${order.status eq 'RECEIVED'}">
                                 <button id="reject" type="submit">${retrn}</button><br/>
@@ -108,11 +108,14 @@
                         </c:when>
                         <c:otherwise>
                             <c:if test="${order.status eq 'APPROVED'}">
-                                <a href="Controller?command=gotopaymentpage&data_id=${order.id}">${pay}</a><br/>
+                                <a id="approve" href="Controller?command=gotopaymentpage&data_id=${order.id}">${pay}</a><br/>
                                 <c:set var="order_id" value="${order.id}"/>
                             </c:if>
                             <c:if test="${order.status eq 'NEW' or order.status eq 'APPROVED'}">
                                 <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
+                            </c:if>
+                            <c:if test="${order.status eq 'RETURNED'}">
+                                <a id="approve" href="Controller?command=gotocarcommentspage&data_id=${order.car.id}">Leave comment</a>
                             </c:if>
                         </c:otherwise>
                     </c:choose>

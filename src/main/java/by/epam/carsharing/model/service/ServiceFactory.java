@@ -12,9 +12,8 @@ public final class ServiceFactory {
     private final UserService userService = new UserServiceImpl();
     private final CarService carService = new CarServiceImpl();
     private final OrderService orderService = new OrderServiceImpl();
-    private final UserDetailService detailService = new UserDetailServiceImpl();
-    private final PassportService passportService = new PassportServiceImpl();
     private final PaymentService paymentService = new PaymentServiceImpl();
+    private final CarCommentService commentService = new CarCommentServiceImpl();
 
     public static ServiceFactory getInstance() {
         return instance;
@@ -34,15 +33,11 @@ public final class ServiceFactory {
 
     public OrderService getOrderService() {return orderService; }
 
-    public UserDetailService getUserDetailService() {
-        return detailService;
-    }
-
-    public PassportService getPassportService() {
-        return passportService;
-    }
-
     public PaymentService getPaymentService() {
         return paymentService;
+    }
+
+    public CarCommentService getCommentService() {
+        return commentService;
     }
 }

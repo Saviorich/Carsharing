@@ -1,41 +1,44 @@
 package by.epam.carsharing.model.entity.car;
 
+import by.epam.carsharing.model.entity.Identifiable;
+import by.epam.carsharing.model.entity.Order;
+import by.epam.carsharing.model.entity.user.User;
+
 import java.io.Serializable;
 
-public class CarComment implements Serializable {
+public class CarComment implements Identifiable, Serializable {
 
     private static final long serialVersionUID = 1113293598558703521L;
 
-    private Integer id;
-    private Integer userId;
-    private Integer carId;
-    private Integer orderId;
+    private int id;
+    private User user;
+    private Car car;
     private String content;
 
     public CarComment() {}
 
-    public CarComment(Integer id, Integer userId, Integer carId, Integer orderId, String content) {
+    public CarComment(int id, User user, Car car, String content) {
         this.id = id;
-        this.userId = userId;
-        this.carId = carId;
-        this.orderId = orderId;
+        this.user = user;
+        this.car = car;
         this.content = content;
     }
 
-    public Integer getId() {
+    public CarComment(User user, Car car, String content) {
+        this(-1, user, car, content);
+    }
+
+    @Override
+    public int getId() {
         return id;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public Integer getCarId() {
-        return carId;
-    }
-
-    public Integer getOrderId() {
-        return orderId;
+    public Car getCar() {
+        return car;
     }
 
     public String getContent() {
@@ -47,22 +50,20 @@ public class CarComment implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CarComment that = (CarComment) o;
+        CarComment comment = (CarComment) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
-        if (carId != null ? !carId.equals(that.carId) : that.carId != null) return false;
-        if (orderId != null ? !orderId.equals(that.orderId) : that.orderId != null) return false;
-        return content != null ? content.equals(that.content) : that.content == null;
+        if (id != comment.id) return false;
+        if (!user.equals(comment.user)) return false;
+        if (!car.equals(comment.car)) return false;
+        return content.equals(comment.content);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        result = 31 * result + (carId != null ? carId.hashCode() : 0);
-        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
+        int result = id;
+        result = 31 * result + user.hashCode();
+        result = 31 * result + car.hashCode();
+        result = 31 * result + content.hashCode();
         return result;
     }
 
@@ -70,9 +71,8 @@ public class CarComment implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder("CarComment{");
         sb.append("id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", carId=").append(carId);
-        sb.append(", orderId=").append(orderId);
+        sb.append(", user=").append(user);
+        sb.append(", car=").append(car);
         sb.append(", content='").append(content).append('\'');
         sb.append('}');
         return sb.toString();

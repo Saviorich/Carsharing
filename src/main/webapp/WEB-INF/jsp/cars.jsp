@@ -9,6 +9,9 @@
 
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content">
+        <fmt:message key="car.find" var="find"/>
+        <fmt:message key="car.comments" var="comments"/>
+
         <fmt:message key="car.order" var="order"/>
         <fmt:message key="car.color" var="color"/>
         <fmt:message key="car.class" var="car_class"/>
@@ -51,7 +54,7 @@
 <jsp:include page="../jsp/header.jsp"/>
 <div class="user_panel">
     <form action="Controller?command=gotocarspage" method="post">
-        Search by brand: <input name="search" type="text" placeholder="Search..">
+        ${find}: <input name="search" type="text" placeholder="C5">
         <button type="submit">&hookleftarrow;</button>
         <%--            Sort by: <select name="sort"><option value="priceup">Price &uparrow;</option><option value="pricedown">Price &downarrow;</option></select>--%>
         <%--            <button type="submit">&hookleftarrow;</button>--%>
@@ -90,6 +93,7 @@
                            onclick="return confirm('${message}')">${delete}</a>
                     </c:when>
                     <c:otherwise>
+                        <a href="Controller?command=gotocarcommentspage&data_id=${car.id}">${comments}</a>
                         <a href="Controller?command=gotoorderpage&data_id=${car.id}">${order}</a>
                     </c:otherwise>
                 </c:choose>

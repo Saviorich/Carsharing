@@ -47,6 +47,7 @@ public final class RequestParameter {
     public static final String HOLDER = "holder";
     public static final String CVV = "cvv";
     public static final String SEARCH = "search";
+    public static final String ABLE_TO_COMMENT = "able_to_comment";
 
     private RequestParameter() {
     }

@@ -46,40 +46,41 @@ public class UserDaoImpl implements UserDao {
         try {
             connection = pool.takeConnection();
 
-            PreparedStatement userStatement = connection.prepareStatement(REGISTER_QUERY, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement passportStatement = connection.prepareStatement(ADD_PASSPORT_QUERY);
-            PreparedStatement detailsStatement = connection.prepareStatement(ADD_DETAILS_QUERY);
+            PreparedStatement statement = connection.prepareStatement(REGISTER_QUERY, Statement.RETURN_GENERATED_KEYS);
 
             connection.setAutoCommit(false);
 
-            userStatement.setString(1, email);
-            userStatement.setString(2, password);
-            userStatement.setInt(3, role);
-            userStatement.executeUpdate();
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.setInt(3, role);
+            statement.executeUpdate();
 
             logger.log(Level.DEBUG, "User added successfully");
 
-            ResultSet generatedKeys = userStatement.getGeneratedKeys();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
 
-            passportStatement.setString(1, passport.getPassportNumber());
-            passportStatement.setString(2, passport.getIdentificationNumber());
-            passportStatement.setDate(3, new Date(passport.getIssueDate().getTime()));
-            passportStatement.execute();
+            statement = connection.prepareStatement(ADD_PASSPORT_QUERY);
+            statement.setString(1, passport.getPassportNumber());
+            statement.setString(2, passport.getIdentificationNumber());
+            statement.setDate(3, new Date(passport.getIssueDate().getTime()));
+            statement.execute();
 
             logger.log(Level.DEBUG, "Passport added successfully");
 
+            statement = connection.prepareStatement(ADD_DETAILS_QUERY);
             if (generatedKeys.next()) {
-                detailsStatement.setInt(1, generatedKeys.getInt(1));
-                detailsStatement.setString(2, details.getPassportNumber());
-                detailsStatement.setString(3, details.getPhoneNumber());
-                detailsStatement.setString(4, details.getFirstName());
-                detailsStatement.setString(5, details.getSecondName());
-                detailsStatement.setString(6, details.getMiddleName());
-                detailsStatement.execute();
+                statement.setInt(1, generatedKeys.getInt(1));
+                statement.setString(2, details.getPassportNumber());
+                statement.setString(3, details.getPhoneNumber());
+                statement.setString(4, details.getFirstName());
+                statement.setString(5, details.getSecondName());
+                statement.setString(6, details.getMiddleName());
+                statement.execute();
             }
             logger.log(Level.DEBUG, "Details added successfully");
 
             connection.commit();
+            statement.close();
         } catch (SQLException | ConnectionPoolException e){
             try {
                 connection.rollback();

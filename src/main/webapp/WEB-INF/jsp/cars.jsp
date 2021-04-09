@@ -86,6 +86,7 @@
                     ${price}: ${car.pricePerDay} BYN
             </div>
             <div class="car_block__button">
+                <a href="Controller?command=gotocarcommentspage&data_id=${car.id}">${comments}</a>
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'ADMIN'}">
                         <a href="Controller?command=gotocareditpage&data_id=${car.id}">${edit}</a>
@@ -93,7 +94,6 @@
                            onclick="return confirm('${message}')">${delete}</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="Controller?command=gotocarcommentspage&data_id=${car.id}">${comments}</a>
                         <a href="Controller?command=gotoorderpage&data_id=${car.id}">${order}</a>
                     </c:otherwise>
                 </c:choose>

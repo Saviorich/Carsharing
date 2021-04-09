@@ -1,4 +1,4 @@
-package by.epam.carsharing.controller.command.impl.car;
+package by.epam.carsharing.controller.command.impl.comment;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.car.Car;
@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+
+import static by.epam.carsharing.util.RequestUtil.processRequest;
 
 public class GoToCarComment implements Command {
 
@@ -49,6 +51,7 @@ public class GoToCarComment implements Command {
                 request.setAttribute(RequestParameter.ABLE_TO_COMMENT, true);
             }
 
+            processRequest(request);
             request.setAttribute(RequestParameter.CAR, car);
             request.setAttribute(RequestParameter.DATA, comments);
             dispatcher = request.getRequestDispatcher(COMMENTS_PAGE);

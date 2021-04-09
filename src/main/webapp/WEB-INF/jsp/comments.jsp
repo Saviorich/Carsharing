@@ -5,7 +5,9 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="css/cars.css" type="text/css"/>
+    <link rel="stylesheet" href="<c:url value="/css/cars.css"/>" type="text/css"/>
+    <link rel="stylesheet" href="<c:url value="/css/comments.css"/>" type="text/css">
+    <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:bundle basename="content">
@@ -42,6 +44,10 @@
         <fmt:message key="car.color_yellow" var="yellow_color"/>
         <fmt:message key="car.color_white" var="white_color"/>
         <fmt:message key="editor.error" var="error_message"/>
+
+        <fmt:message key="comments.no_comments" var="no_comments"/>
+        <fmt:message key="comments.invalid_content" var="invalid_content"/>
+        <fmt:message key="comments.write_comment" var="write_comment"/>
     </fmt:bundle>
 </head>
 <body>
@@ -70,24 +76,44 @@
         </div>
     </div>
 
+    <c:if test="${requestScope.validation eq 'Invalid content'}">
+        <h2 id="no_comments">${invalid_content}<h2/>
+    </c:if>
+
     <c:if test="${requestScope.able_to_comment}">
-        <form name="main_form" action="Controller?command=leavecomment" method="post">
-            <textarea name="return_comment" placeholder="..." form="main_form"></textarea>
-        </form>
+        <div class="comment_editor">
+            <h4>${write_comment}:</h4>
+            <form name="main_form" action="Controller?command=leavecomment" method="post">
+                <textarea name="content_editor" id="content_editor"></textarea>
+                <input type="hidden" name="data_id" value="${car.id}">
+                <button class="submit_but" type="submit">${submit}</button>
+            </form>
+        </div>
+    </c:if>
+
+    <c:if test="${empty comments}">
+        <h2 id="no_comments">${no_comments}</h2>
     </c:if>
 
     <div class="comments">
         <c:forEach var="c" items="${comments}">
             <div class="comment">
                 <div class="comment__header">
-                    <c:out value="${c.user.email}"/>
+                    <h4>${c.user.email}</h4>
+                    <div class="comment__header__admin_panel">
+                        <c:if test="${sessionScope.user.role eq 'ADMIN' or sessionScope.user eq c.user}">
+                            <a href="Controller?command=deletecomment&data_id=${c.id}" title="${delete}">&times;</a>
+                        </c:if>
+                    </div>
                 </div>
                 <div class="comment__content">
-                    <c:out value="${c.content}"/>
+                    ${c.content}
                 </div>
             </div>
         </c:forEach>
     </div>
 </div>
+
+<script src="js/ckeditor_config.js"></script>
 </body>
 </html>

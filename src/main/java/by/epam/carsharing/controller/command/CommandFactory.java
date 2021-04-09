@@ -2,6 +2,9 @@ package by.epam.carsharing.controller.command;
 
 import by.epam.carsharing.controller.command.impl.*;
 import by.epam.carsharing.controller.command.impl.car.*;
+import by.epam.carsharing.controller.command.impl.comment.DeleteComment;
+import by.epam.carsharing.controller.command.impl.comment.GoToCarComment;
+import by.epam.carsharing.controller.command.impl.comment.LeaveComment;
 import by.epam.carsharing.controller.command.impl.news.AddNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.DeleteNewsCommand;
 import by.epam.carsharing.controller.command.impl.news.EditNewsCommand;
@@ -43,6 +46,8 @@ public class CommandFactory {
         commands.put(CommandName.CHANGEORDERSTATUS, new ChangeOrderStatusCommand());
         commands.put(CommandName.GOTOPAYMENTPAGE, new GoToPaymentPage());
         commands.put(CommandName.MAKEPAYMENT, new MakePayment());
+        commands.put(CommandName.LEAVECOMMENT, new LeaveComment());
+        commands.put(CommandName.DELETECOMMENT, new DeleteComment());
     }
 
     public Command takeCommand(String command) {

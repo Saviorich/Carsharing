@@ -48,11 +48,13 @@
         <fmt:message key="comments.no_comments" var="no_comments"/>
         <fmt:message key="comments.invalid_content" var="invalid_content"/>
         <fmt:message key="comments.write_comment" var="write_comment"/>
+        <fmt:message key="comments.next" var="next"/>
+        <fmt:message key="comments.previous" var="previous"/>
     </fmt:bundle>
 </head>
 <body>
-<c:set var="car" value="${requestScope.car}"/>
 <c:set var="comments" value="${requestScope.data}"/>
+<c:set var="car" value="${requestScope.car}"/>
 
 <jsp:include page="../jsp/header.jsp"/>
 <div class="order_main_block">
@@ -77,10 +79,10 @@
     </div>
 
     <c:if test="${requestScope.validation eq 'Invalid content'}">
-        <h2 id="no_comments">${invalid_content}<h2/>
-    </c:if>
+    <h2 id="no_comments">${invalid_content}<h2/>
+        </c:if>
 
-    <c:if test="${requestScope.able_to_comment}">
+        <c:if test="${requestScope.able_to_comment}">
         <div class="comment_editor">
             <h4>${write_comment}:</h4>
             <form name="main_form" action="Controller?command=leavecomment" method="post">
@@ -89,29 +91,63 @@
                 <button class="submit_but" type="submit">${submit}</button>
             </form>
         </div>
-    </c:if>
+        </c:if>
 
-    <c:if test="${empty comments}">
+        <c:if test="${empty comments}">
         <h2 id="no_comments">${no_comments}</h2>
-    </c:if>
+        </c:if>
 
-    <div class="comments">
-        <c:forEach var="c" items="${comments}">
-            <div class="comment">
-                <div class="comment__header">
-                    <h4>${c.user.email}</h4>
-                    <div class="comment__header__admin_panel">
-                        <c:if test="${sessionScope.user.role eq 'ADMIN' or sessionScope.user eq c.user}">
-                            <a href="Controller?command=deletecomment&data_id=${c.id}" title="${delete}">&times;</a>
-                        </c:if>
+        <div class="comments">
+            <c:forEach var="c" items="${comments}">
+                <div class="comment">
+                    <div class="comment__header">
+                        <h4>${c.user.email}</h4>
+                        <div class="comment__header__admin_panel">
+                            <c:if test="${sessionScope.user.role eq 'ADMIN' or sessionScope.user eq c.user}">
+                                <a href="Controller?command=deletecomment&data_id=${c.id}" title="${delete}">&times;</a>
+                            </c:if>
+                        </div>
+                    </div>
+                    <div class="comment__content">
+                            ${c.content}
                     </div>
                 </div>
-                <div class="comment__content">
-                    ${c.content}
-                </div>
-            </div>
-        </c:forEach>
-    </div>
+            </c:forEach>
+        </div>
+
+        <c:set var="currentPage" value="${requestScope.current_page}"/>
+
+
+        <div class="content">
+            <ul class="pagination">
+                <c:if test="${currentPage != 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="Controller?command=gotocarcommentspage&data_id=${car.id}&current_page=${currentPage-1}">${previous}</a>
+                    </li>
+                </c:if>
+
+                <c:forEach begin="1" end="${requestScope.pages_amount}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <li class="page-item_active">
+                                <a class="page-link">${i} <span class="sr-only">(current)</span></a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a class="page-link" href="Controller?command=gotocarcommentspage&data_id=${car.id}&current_page=${i}">${i}</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <c:if test="${currentPage lt requestScope.pages_amount}">
+                    <li class="page-item">
+                        <a class="page-link" href="Controller?command=gotocarcommentspage&data_id=${car.id}&current_page=${currentPage+1}">${next}</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
 </div>
 
 <script src="js/ckeditor_config.js"></script>

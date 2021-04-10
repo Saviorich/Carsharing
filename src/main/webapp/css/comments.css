@@ -59,3 +59,40 @@
     padding: 5px;
     margin: 10px 0 10px 5px;
 }
+
+.content {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+    *display: inline;
+}
+
+.pagination li {
+    display: inline;
+    text-decoration: none;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.page-item a {
+    background: rgba(71, 71, 71, 0.1);
+}
+
+.page-item a:hover {
+    background: rgba(71, 71, 71, 0.4);
+    transition: .2s;
+}
+
+.page-item_active a {
+    background: #ff9d26;
+}

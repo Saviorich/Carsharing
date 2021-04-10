@@ -24,10 +24,10 @@ public class ConnectionPool {
     private BlockingQueue<Connection> connectionQueue;
     private BlockingQueue<Connection> givenAwayConnectionQueue;
 
-    private String driverName;
-    private String url;
-    private String user;
-    private String password;
+    private final String driverName;
+    private final String url;
+    private final String user;
+    private final String password;
     private int poolSize;
 
     private ConnectionPool() {

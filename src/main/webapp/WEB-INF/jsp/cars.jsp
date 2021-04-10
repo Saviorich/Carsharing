@@ -86,7 +86,7 @@
                     ${price}: ${car.pricePerDay} BYN
             </div>
             <div class="car_block__button">
-                <a href="Controller?command=gotocarcommentspage&data_id=${car.id}">${comments}</a>
+                <a href="Controller?command=gotocarcommentspage&data_id=${car.id}&current_page=1">${comments}</a>
                 <c:choose>
                     <c:when test="${sessionScope.user.role eq 'ADMIN'}">
                         <a href="Controller?command=gotocareditpage&data_id=${car.id}">${edit}</a>

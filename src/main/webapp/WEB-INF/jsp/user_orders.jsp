@@ -115,7 +115,7 @@
                                 <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
                             </c:if>
                             <c:if test="${order.status eq 'RETURNED'}">
-                                <a id="approve" href="Controller?command=gotocarcommentspage&data_id=${order.car.id}">Leave comment</a>
+                                <a id="approve" href="Controller?command=gotocarcommentspage&data_id=${order.car.id}&current_page=1">Leave comment</a>
                             </c:if>
                         </c:otherwise>
                     </c:choose>

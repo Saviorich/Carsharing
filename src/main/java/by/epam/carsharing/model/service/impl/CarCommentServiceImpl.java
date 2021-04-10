@@ -60,4 +60,23 @@ public class CarCommentServiceImpl implements CarCommentService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public int getDataAmount(int carId) throws ServiceException {
+        try {
+            return COMMENT_DAO.getDataAmount(carId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    @Override
+    public List<CarComment> getCommentsForPage(int carId, int recordsPerPage, int currentPage) throws ServiceException {
+        try {
+            int offset = currentPage * recordsPerPage - recordsPerPage;
+            return COMMENT_DAO.getCommentsForPage(carId, recordsPerPage, offset);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
 }

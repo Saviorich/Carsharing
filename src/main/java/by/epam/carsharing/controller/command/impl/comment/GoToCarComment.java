@@ -30,35 +30,50 @@ public class GoToCarComment implements Command {
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
     private static final String REFERER = "referer";
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage";
+    private static final CarCommentService COMMENT_SERVICE = serviceFactory.getCommentService();
+
+    private static final int RECORDS_PER_PAGE = 5;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
         int carId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
-        CarCommentService commentService = serviceFactory.getCommentService();
         CarService carService = serviceFactory.getCarService();
         try {
-            Car car = carService.getById(carId).get();
-            List<CarComment> comments = commentService.getAllByCarId(carId);
-
-            /**
-             * If the request came from the orders page,
-             * then this ensures that the user can leave a comment.
-             * @see HttpServletRequest
-             * */
+            /*
+              If the request came from the orders page,
+              then this ensures that the user can leave a comment.
+             */
             if (request.getHeader(REFERER).contains(GO_TO_ORDERS_PAGE)) {
                 request.setAttribute(RequestParameter.ABLE_TO_COMMENT, true);
             }
 
-            processRequest(request);
+            Car car = carService.getById(carId).get();
             request.setAttribute(RequestParameter.CAR, car);
-            request.setAttribute(RequestParameter.DATA, comments);
+
+            processRequest(request);
+            processPage(carId, request);
             dispatcher = request.getRequestDispatcher(COMMENTS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.FATAL, e);
             dispatcher = request.getRequestDispatcher(ERROR_PAGE);
         }
         dispatcher.forward(request, response);
+    }
+
+    private void processPage(int carId, HttpServletRequest request) throws ServiceException {
+        int currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE));
+
+        List<CarComment> comments = COMMENT_SERVICE.getCommentsForPage(carId, RECORDS_PER_PAGE, currentPage);
+        request.setAttribute(RequestParameter.DATA, comments);
+
+        int records = COMMENT_SERVICE.getDataAmount(carId);
+
+        // Calculates actual pages amount
+        int pagesAmount = (int) Math.ceil(records / (float) RECORDS_PER_PAGE);
+
+        request.setAttribute(RequestParameter.PAGES_AMOUNT, pagesAmount);
+        request.setAttribute(RequestParameter.CURRENT_PAGE, currentPage);
     }
 }

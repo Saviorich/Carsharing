@@ -15,4 +15,7 @@ public interface CarCommentService {
     void add(CarComment entity) throws ServiceException, InvalidDataException;
 
     void deleteById(int id) throws ServiceException;
+
+    int getDataAmount(int carId) throws ServiceException;
+    List<CarComment> getCommentsForPage(int carId, int recordsPerPage, int currentPage) throws ServiceException;
 }

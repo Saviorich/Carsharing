@@ -48,6 +48,8 @@ public final class RequestParameter {
     public static final String CVV = "cvv";
     public static final String SEARCH = "search";
     public static final String ABLE_TO_COMMENT = "able_to_comment";
+    public static final String CURRENT_PAGE = "current_page";
+    public static final String PAGES_AMOUNT = "pages_amount";
 
     private RequestParameter() {
     }

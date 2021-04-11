@@ -1,9 +1,8 @@
-package by.epam.carsharing.validation.impl;
+package by.epam.carsharing.validation;
 
 import by.epam.carsharing.model.entity.Order;
 import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.util.DateUtil;
-import by.epam.carsharing.validation.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

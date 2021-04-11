@@ -1,4 +1,4 @@
-package by.epam.carsharing.validation.impl;
+package by.epam.carsharing.validation;
 
 import by.epam.carsharing.util.DateUtil;
 import by.epam.carsharing.validation.Validator;

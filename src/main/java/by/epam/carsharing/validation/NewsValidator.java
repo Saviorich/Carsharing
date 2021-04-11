@@ -11,19 +11,19 @@ public class NewsValidator extends Validator {
 
     public boolean isValidHeader(String header) {
         Matcher matcher = HEADER_PATTERN.matcher(header);
-        if (!matcher.matches()){
+        boolean isValid = matcher.matches();
+        if (!isValid){
             message = "Invalid header data: " + header;
-            return false;
         }
-        return true;
+        return isValid;
     }
 
     public boolean isValidContent(String content) {
         Matcher matcher = CONTENT_PATTERN.matcher(content);
-        if (!matcher.matches()) {
+        boolean isValid = matcher.matches();
+        if (!isValid) {
             message = "Invalid content data: " + content;
-            return false;
         }
-        return true;
+        return isValid;
     }
 }

@@ -25,11 +25,11 @@ public class PaymentValidator extends Validator {
     }
 
     public boolean isExpirationDateValid(Date expirationDate) {
-        if (expirationDate.before(DATE_UTILS.getCurrentDateWithoutTime())) {
+        boolean isValid = expirationDate.after(DATE_UTILS.getCurrentDateWithoutTime());
+        if (!isValid) {
             message = "Invalid expiry date";
-            return false;
         }
-        return true;
+        return isValid;
     }
 
     public boolean isCvvNumberValid(String cvvNumber) {

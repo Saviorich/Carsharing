@@ -17,28 +17,29 @@ public class PassportValidator extends Validator {
 
     public boolean isValidPassportNumber(String passportNumber) {
         Matcher matcher = PASSPORT_NUMBER_PATTERN.matcher(passportNumber);
-        if (!matcher.matches()) {
+        boolean isValid = matcher.matches();
+        if (!isValid) {
             message = "Invalid passport number";
-            return false;
         }
-        return true;
+        return isValid;
     }
 
     public boolean isValidIdentificationNumber(String identificationNumber) {
         Matcher matcher = IDENTIFICATION_NUMBER_PATTERN.matcher(identificationNumber);
-        if (!matcher.matches()) {
+        boolean isValid = matcher.matches();
+        if (!isValid) {
             message = "Invalid identification number";
-            return false;
         }
-        return true;
+        return isValid;
     }
 
     public boolean isValidIssueDate(Date issueDate) {
         Matcher matcher = ISSUE_DATE_PATTERN.matcher(DATE_UTILS.formatDate(issueDate));
-        if (!matcher.matches()) {
+        boolean isValid = matcher.matches();
+        if (!isValid || issueDate.before(DATE_UTILS.getCurrentDateWithoutTime())) {
             message = "Invalid issue date";
-            return false;
+            isValid = false;
         }
-        return true;
+        return isValid;
     }
 }

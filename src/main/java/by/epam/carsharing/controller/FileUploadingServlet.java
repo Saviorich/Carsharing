@@ -1,7 +1,7 @@
 package by.epam.carsharing.controller;
 
 import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.controller.command.CommandFactory;
+import by.epam.carsharing.controller.command.CommandProvider;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.Level;
@@ -30,7 +30,7 @@ public class FileUploadingServlet extends HttpServlet {
 
 
     private static final Logger logger = LogManager.getLogger(FileUploadingServlet.class);
-    private static final CommandFactory factory = new CommandFactory();
+    private static final CommandProvider provider = CommandProvider.getInstance();
     private static final String IMAGE_EDITOR_PART = "image_editor";
     private static final String IMAGES_DIRECTORY_NAME = "images";
     private static final String UPLOAD_DIR = "D:\\java_projects\\jwd_final_project\\Carsharing\\src\\main\\webapp\\"
@@ -82,7 +82,7 @@ public class FileUploadingServlet extends HttpServlet {
         Command command;
 
         name = request.getParameter(RequestParameter.COMMAND);
-        command = factory.takeCommand(name);
+        command = provider.takeCommand(name);
 
         command.execute(request, response);
     }

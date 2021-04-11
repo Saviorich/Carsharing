@@ -16,13 +16,16 @@ import by.epam.carsharing.controller.command.impl.order.MakeOrderCommand;
 import by.epam.carsharing.controller.command.impl.payment.GoToPaymentPage;
 import by.epam.carsharing.controller.command.impl.payment.MakePayment;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
-public class CommandFactory {
-    private Map<CommandName, Command> commands = new HashMap<>();
+public final class CommandProvider {
 
-    public CommandFactory() {
+    private static final CommandProvider INSTANCE = new CommandProvider();
+
+    private final Map<CommandName, Command> commands = new EnumMap<>(CommandName.class);
+
+    private CommandProvider() {
         commands.put(CommandName.LOGIN, new LoginCommand());
         commands.put(CommandName.GOTOLOGINPAGE, new GoToLoginPage());
         commands.put(CommandName.GOTONEWSPAGE, new GoToNewsPage());
@@ -48,6 +51,10 @@ public class CommandFactory {
         commands.put(CommandName.MAKEPAYMENT, new MakePayment());
         commands.put(CommandName.LEAVECOMMENT, new LeaveComment());
         commands.put(CommandName.DELETECOMMENT, new DeleteComment());
+    }
+
+    public static CommandProvider getInstance() {
+        return INSTANCE;
     }
 
     public Command takeCommand(String command) {

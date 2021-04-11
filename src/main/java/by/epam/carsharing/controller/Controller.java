@@ -1,7 +1,7 @@
 package by.epam.carsharing.controller;
 
 import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.controller.command.CommandFactory;
+import by.epam.carsharing.controller.command.CommandProvider;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +16,7 @@ public class Controller extends HttpServlet {
 
     private static final Logger logger = LogManager.getLogger(Controller.class);
 
-    private final CommandFactory factory = new CommandFactory();
+    private final CommandProvider provider = CommandProvider.getInstance();
 
     public Controller() {super();}
 
@@ -36,7 +36,7 @@ public class Controller extends HttpServlet {
         Command command;
 
         name = request.getParameter(RequestParameter.COMMAND);
-        command = factory.takeCommand(name);
+        command = provider.takeCommand(name);
 
         command.execute(request, response);
     }

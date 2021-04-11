@@ -7,7 +7,7 @@ import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.validation.impl.CarValidator;
+import by.epam.carsharing.validation.CarValidator;
 
 import java.math.BigDecimal;
 import java.util.List;

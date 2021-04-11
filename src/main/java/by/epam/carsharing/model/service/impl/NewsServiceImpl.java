@@ -7,7 +7,7 @@ import by.epam.carsharing.model.dao.exception.DaoException;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
-import by.epam.carsharing.validation.impl.NewsValidator;
+import by.epam.carsharing.validation.NewsValidator;
 
 import java.util.List;
 import java.util.Optional;

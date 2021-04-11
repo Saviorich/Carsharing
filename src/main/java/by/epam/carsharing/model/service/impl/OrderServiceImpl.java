@@ -8,7 +8,7 @@ import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.service.OrderService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
-import by.epam.carsharing.validation.impl.OrderValidator;
+import by.epam.carsharing.validation.OrderValidator;
 
 import java.util.ArrayList;
 import java.util.Date;

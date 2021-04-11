@@ -8,7 +8,6 @@ import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
-import by.epam.carsharing.validation.impl.UserValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

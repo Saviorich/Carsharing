@@ -9,7 +9,7 @@ import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.DateUtil;
 import by.epam.carsharing.util.RequestParameter;
-import by.epam.carsharing.validation.impl.PaymentValidator;
+import by.epam.carsharing.validation.PaymentValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

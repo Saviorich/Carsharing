@@ -39,6 +39,10 @@ public class Order implements Identifiable, Serializable {
         this(-1, user, car, status, startDate, endDate, rejectionComment, returnComment);
     }
 
+    public Order(int id, User user, Car car, OrderStatus status, Date startDate, Date endDate) {
+        this(id, user, car, status, startDate, endDate, null, null);
+    }
+
     public int getId() {
         return id;
     }

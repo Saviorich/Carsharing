@@ -2,7 +2,6 @@ package by.epam.carsharing.controller.command.impl.payment;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.Order;
-import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.OrderService;
 import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.model.service.exception.ServiceException;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-import static by.epam.carsharing.util.RequestUtil.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToPaymentPage implements Command {
 
@@ -36,7 +35,7 @@ public class GoToPaymentPage implements Command {
         OrderService orderService = serviceFactory.getOrderService();
         PriceCalculator priceCalculator = new PriceCalculator();
 
-        processRequest(request);
+        processRequestErrors(request);
         try {
             Order order = orderService.getById(orderId).get();
             BigDecimal totalPrice = priceCalculator.calculatePrice(order);

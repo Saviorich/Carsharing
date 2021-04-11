@@ -24,6 +24,8 @@ public class EditNewsCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = GO_TO_NEWS_PAGE;
+
         int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
         String header = request.getParameter(RequestParameter.HEADER_EDITOR);
         String content = request.getParameter(RequestParameter.CONTENT_EDITOR);
@@ -32,13 +34,13 @@ public class EditNewsCommand implements Command {
         try {
             NewsService newsService = serviceFactory.getNewsService();
             newsService.update(id, header, content, imagePath);
-            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, null, e.getMessage()));
+            commandResult = String.format(GO_TO_NEWS_EDIT_PAGE, id, null, e.getMessage());
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, id, e.getMessage(), null));
+            commandResult = String.format(GO_TO_NEWS_EDIT_PAGE, id, e.getMessage(), null);
         }
+        response.sendRedirect(commandResult);
     }
 }

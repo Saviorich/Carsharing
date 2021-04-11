@@ -28,6 +28,8 @@ public class AddNewsCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = GO_TO_NEWS_PAGE;
+
         HttpSession session = request.getSession();
         int userId = ((User)session.getAttribute(SessionAttribute.USER)).getId();
         String header = request.getParameter(RequestParameter.HEADER_EDITOR);
@@ -38,13 +40,13 @@ public class AddNewsCommand implements Command {
             NewsService newsService = serviceFactory.getNewsService();
             News news = new News(userId, header, content, imagePath);
             newsService.add(news);
-            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, null, true));
+            commandResult = String.format(GO_TO_NEWS_EDIT_PAGE, null, true);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_NEWS_EDIT_PAGE, true, null));
+            commandResult = String.format(GO_TO_NEWS_EDIT_PAGE, true, null);
         }
+        response.sendRedirect(commandResult);
     }
 }

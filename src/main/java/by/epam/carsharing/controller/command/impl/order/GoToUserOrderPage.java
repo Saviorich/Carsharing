@@ -26,6 +26,7 @@ public class GoToUserOrderPage implements Command {
     private static final Logger logger = LogManager.getLogger(GoToUserOrderPage.class);
     private static final String ORDERS_PAGE = "/WEB-INF/jsp/user_orders.jsp";
     private static final String LOGIN_PAGE = "/login";
+    private static final String ERROR_PAGE = "error.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,9 +45,10 @@ public class GoToUserOrderPage implements Command {
             } else {
                 requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
             }
-            requestDispatcher.forward(request, response);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
         }
+        requestDispatcher.forward(request, response);
     }
 }

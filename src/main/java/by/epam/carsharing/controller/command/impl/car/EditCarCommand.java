@@ -30,6 +30,7 @@ public class EditCarCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = GO_TO_CARS_PAGE;
 
         int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
         String brand = request.getParameter(RequestParameter.BRAND_EDITOR);
@@ -50,13 +51,13 @@ public class EditCarCommand implements Command {
             carService.update(
                     id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, vin, plate, imagePath
             );
-            response.sendRedirect(GO_TO_CARS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, id, ERROR_MESSAGE, null));
+            commandResult =  String.format(GO_TO_CAR_EDIT_PAGE, id, ERROR_MESSAGE, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, id, null, e.getMessage()));
+            commandResult = String.format(GO_TO_CAR_EDIT_PAGE, id, null, e.getMessage());
         }
+        response.sendRedirect(commandResult);
     }
 }

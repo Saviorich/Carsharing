@@ -1,18 +1,14 @@
 package by.epam.carsharing.controller.command.impl.payment;
 
 import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.controller.command.CommandFactory;
-import by.epam.carsharing.controller.command.impl.order.ChangeOrderStatusCommand;
 import by.epam.carsharing.model.entity.Payment;
 import by.epam.carsharing.model.entity.status.PaymentStatus;
-import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.PaymentService;
 import by.epam.carsharing.model.service.ServiceFactory;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.DateUtil;
 import by.epam.carsharing.util.RequestParameter;
-import by.epam.carsharing.util.SessionAttribute;
 import by.epam.carsharing.validation.impl.PaymentValidator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -36,6 +32,8 @@ public class MakePayment implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult;
+
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
         try {
@@ -57,13 +55,14 @@ public class MakePayment implements Command {
             PaymentService paymentService = ServiceFactory.getInstance().getPaymentService();
             Payment payment = new Payment(orderId, PaymentStatus.APPROVED, totalPrice, null);
             paymentService.add(payment);
-            response.sendRedirect(String.format(CHANGE_STATUS, orderId));
+            commandResult = String.format(CHANGE_STATUS, orderId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_PAYMENT_PAGE, orderId, true, null));
+            commandResult = String.format(GO_TO_PAYMENT_PAGE, orderId, true, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_PAYMENT_PAGE, orderId, null, e.getMessage()));
+            commandResult = String.format(GO_TO_PAYMENT_PAGE, orderId, null, e.getMessage());
         }
+        response.sendRedirect(commandResult);
     }
 }

@@ -27,6 +27,8 @@ public class AddCarCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = GO_TO_CARS_PAGE;
+
         String brand = request.getParameter(RequestParameter.BRAND_EDITOR);
         String model = request.getParameter(RequestParameter.MODEL_EDITOR);
         CarColor color = CarColor.valueOf(request.getParameter(RequestParameter.COLOR).toUpperCase());
@@ -44,13 +46,13 @@ public class AddCarCommand implements Command {
             CarService carService = serviceFactory.getCarService();
             Car car = new Car(brand, model, color, mileage, gearbox, year, engine, price, vin, plate, carClass, imagePath);
             carService.add(car);
-            response.sendRedirect(GO_TO_CARS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, ERROR_MESSAGE, null));
+            commandResult = String.format(GO_TO_CAR_EDIT_PAGE, ERROR_MESSAGE, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_CAR_EDIT_PAGE, null, e.getMessage()));
+            commandResult = String.format(GO_TO_CAR_EDIT_PAGE, null, e.getMessage());
         }
+        response.sendRedirect(commandResult);
     }
 }

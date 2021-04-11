@@ -10,7 +10,7 @@ public class RequestUtil {
      * @see HttpServletRequest
      * @param request
      */
-    public static void processRequest(HttpServletRequest request) {
+    public static void processRequestErrors(HttpServletRequest request) {
         String error = request.getParameter(RequestParameter.ERROR);
         String validation = request.getParameter(RequestParameter.VALIDATION);
 

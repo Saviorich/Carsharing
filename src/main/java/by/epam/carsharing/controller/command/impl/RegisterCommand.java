@@ -35,6 +35,8 @@ public class RegisterCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = GO_TO_NEWS_PAGE;
+
         String email = request.getParameter(RequestParameter.EMAIL);
         String password = request.getParameter(RequestParameter.PASSWORD);
 
@@ -57,13 +59,13 @@ public class RegisterCommand implements Command {
             userService.registerUser(email, password, details, passport);
             User user = userService.findUserByEmailAndPassword(email, password).get();
             session.setAttribute(SessionAttribute.USER, user);
-            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_REGISTER_PAGE, true, null));
+            commandResult = String.format(GO_TO_REGISTER_PAGE, true, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_REGISTER_PAGE, null, true));
+            commandResult = String.format(GO_TO_REGISTER_PAGE, null, true);
         }
+        response.sendRedirect(commandResult);
     }
 }

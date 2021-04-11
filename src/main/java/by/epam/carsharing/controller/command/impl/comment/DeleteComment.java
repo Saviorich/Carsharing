@@ -18,7 +18,7 @@ public class DeleteComment implements Command {
 
     private static final Logger logger = LogManager.getLogger(DeleteComment.class);
     private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
-
+    private static final String ERROR_PARAMETER = "&error=true";
     private static final String REFERER = "referer";
 
     @Override
@@ -32,7 +32,7 @@ public class DeleteComment implements Command {
             commentService.deleteById(commentId);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
-            commandResult += "&error=true";
+            commandResult += ERROR_PARAMETER;
         }
         response.sendRedirect(commandResult);
     }

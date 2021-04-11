@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static by.epam.carsharing.util.RequestUtil.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToCarComment implements Command {
 
@@ -32,7 +32,7 @@ public class GoToCarComment implements Command {
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage";
     private static final CarCommentService COMMENT_SERVICE = serviceFactory.getCommentService();
 
-    private static final int RECORDS_PER_PAGE = 5;
+    private static final int RECORDS_PER_PAGE = 3;
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class GoToCarComment implements Command {
             Car car = carService.getById(carId).get();
             request.setAttribute(RequestParameter.CAR, car);
 
-            processRequest(request);
+            processRequestErrors(request);
             processPage(carId, request);
             dispatcher = request.getRequestDispatcher(COMMENTS_PAGE);
         } catch (ServiceException e) {

@@ -27,6 +27,8 @@ public class LoginCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String commandResult = GO_TO_NEWS_PAGE;
+
         String email;
         String password;
 
@@ -43,14 +45,14 @@ public class LoginCommand implements Command {
         try {
             user = userService.findUserByEmailAndPassword(email, password);
             session.setAttribute(SessionAttribute.USER, user.get());
-            response.sendRedirect(GO_TO_NEWS_PAGE);
         } catch (ServiceException e) {
             logger.error(Level.FATAL, e);
-            response.sendRedirect(String.format(GO_TO_LOGIN_PAGE, true, null));
+            commandResult = String.format(GO_TO_LOGIN_PAGE, true, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_LOGIN_PAGE, null, true));
+            commandResult = String.format(GO_TO_LOGIN_PAGE, null, true);
         }
+        response.sendRedirect(commandResult);
     }
 }
 

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-import static by.epam.carsharing.util.RequestUtil.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToEditPage implements Command {
 
@@ -53,7 +53,7 @@ public class GoToEditPage implements Command {
                                 Integer.parseInt(dataId));
                         request.setAttribute(RequestParameter.DATA, car.get());
                     }
-                    processRequest(request);
+                    processRequestErrors(request);
                     executeCommandResult(request, response, user, CAR_EDIT_PAGE);
                     break;
                 case GOTONEWSEDITPAGE:
@@ -62,7 +62,7 @@ public class GoToEditPage implements Command {
                                 Integer.parseInt(dataId));
                         request.setAttribute(RequestParameter.DATA, news.get());
                     }
-                    processRequest(request);
+                    processRequestErrors(request);
                     executeCommandResult(request, response, user, NEWS_EDIT_PAGE);
                     break;
             }

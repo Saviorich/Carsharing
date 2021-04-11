@@ -23,6 +23,8 @@ public class ChangeOrderStatusCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = String.format(GO_TO_ORDERS_PAGE, null, null);
+
         OrderStatus status = OrderStatus.valueOf(request.getParameter(RequestParameter.STATUS).toUpperCase());
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
@@ -38,10 +40,10 @@ public class ChangeOrderStatusCommand implements Command {
             if (returnComment != null) {
                 orderService.addReturnComment(orderId, returnComment);
             }
-            response.sendRedirect(String.format(GO_TO_ORDERS_PAGE, null, null));
         } catch (ServiceException e) {
             logger.log(Level.FATAL, e);
-            response.sendRedirect(String.format(GO_TO_ORDERS_PAGE, true, null));
+            commandResult = String.format(GO_TO_ORDERS_PAGE, true, null);
         }
+        response.sendRedirect(commandResult);
     }
 }

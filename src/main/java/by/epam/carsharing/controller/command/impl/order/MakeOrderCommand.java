@@ -21,8 +21,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MakeOrderCommand implements Command {
@@ -32,11 +30,12 @@ public class MakeOrderCommand implements Command {
     private static final DateUtil DATE_UTILS = new DateUtil();
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage";
     private static final String GO_TO_ORDER_PAGE = "Controller?command=gotoorderpage&data_id=%d&error=%s&validation=%s";
-    private static final String INVALID_DATE_MESSAGE =  "Invalid date";
-    private static final String SERVICE_EXCEPTION_MESSAGE = "Something went wrong";
+    private static final String ERROR_MESSAGE = "Something went wrong";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String commandResult = GO_TO_ORDERS_PAGE;
+
         int carId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
         OrderService orderService = serviceFactory.getOrderService();
         CarService carService = serviceFactory.getCarService();
@@ -48,13 +47,13 @@ public class MakeOrderCommand implements Command {
             Car car = carService.getById(carId).get();
             Order order = new Order(user, car, OrderStatus.NEW, startDate, endDate, "", "");
             orderService.add(order);
-            response.sendRedirect(GO_TO_ORDERS_PAGE);
         } catch (ServiceException e){
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, SERVICE_EXCEPTION_MESSAGE, null));
+            commandResult = String.format(GO_TO_ORDER_PAGE, carId, ERROR_MESSAGE, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            response.sendRedirect(String.format(GO_TO_ORDER_PAGE, carId, null, e.getMessage()));
+            commandResult = String.format(GO_TO_ORDER_PAGE, carId, null, e.getMessage());
         }
+        response.sendRedirect(commandResult);
     }
 }

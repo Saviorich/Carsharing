@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-import static by.epam.carsharing.util.RequestUtil.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToOrderPage implements Command {
 
@@ -27,6 +27,7 @@ public class GoToOrderPage implements Command {
     private static final Logger logger = LogManager.getLogger(GoToOrderPage.class);
     private static final String ORDER_PAGE = "/WEB-INF/jsp/order.jsp";
     private static final String LOGIN_PAGE = "/login";
+    private static final String ERROR_PAGE = "error.jsp";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,10 +45,11 @@ public class GoToOrderPage implements Command {
             } else {
                 requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
             }
-            processRequest(request);
-            requestDispatcher.forward(request, response);
+            processRequestErrors(request);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
+            requestDispatcher = request.getRequestDispatcher(ERROR_PAGE);
         }
+        requestDispatcher.forward(request, response);
     }
 }

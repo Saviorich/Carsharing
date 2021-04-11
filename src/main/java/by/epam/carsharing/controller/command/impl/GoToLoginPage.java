@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static by.epam.carsharing.util.RequestUtil.processRequest;
+import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToLoginPage implements Command {
 
@@ -20,7 +20,7 @@ public class GoToLoginPage implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request);
+        processRequestErrors(request);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(LOGIN_PAGE);
         requestDispatcher.forward(request, response);

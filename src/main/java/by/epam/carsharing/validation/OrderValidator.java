@@ -41,15 +41,16 @@ public class OrderValidator extends Validator {
         return isMade;
     }
 
-    public boolean isDatesValid(Date startDate, Date endDate) {
+    public boolean areDatesValid(Date startDate, Date endDate) {
+        boolean isValid = true;
         if (startDate.before(DATE_UTILS.getCurrentDateWithoutTime())) {
             message = "Start date is earlier than todays date";
-            return false;
+            isValid = false;
         } else if (startDate.after(endDate)) {
             message = "Start date is earlier than end date";
-            return false;
+            isValid = false;
         }
-        return true;
+        return isValid;
     }
 
 }

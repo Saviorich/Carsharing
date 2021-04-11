@@ -65,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = getAll();
 
         if (!validator.isCarAvailableForDates(orders, carId, startDate, endDate)
-                || !validator.isDatesValid(startDate, endDate)
+                || !validator.areDatesValid(startDate, endDate)
                 || validator.isAlreadyMade(orders, entity)) {
             throw new InvalidDataException(validator.getMessage());
         }

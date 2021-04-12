@@ -59,7 +59,7 @@ class OrderValidatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"2021-04-11,2021-04-11", "2021-04-11,2021-04-12", "2021-05-11,2021-06-11"})
+    @CsvSource({"2021-05-11,2021-05-11", "2021-05-11,2021-05-12", "2021-05-11,2021-06-11"})
     void testAreDatesValidShouldReturnTrue(String startDate, String endDate) throws InvalidDataException{
         Date date1 = DATE_UTILS.parseDate(startDate);
         Date date2 = DATE_UTILS.parseDate(endDate);

@@ -128,69 +128,69 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> getById(int id) throws DaoException {
-        Optional<User> user = Optional.empty();
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_BY_ID_QUERY)
         ){
             statement.setInt(1, id);
 
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                String email = resultSet.getString(2);
-                String password = resultSet.getString(3);
-                Role role = Role.valueOf(resultSet.getString(4).toUpperCase());
-
-                user = Optional.of(new User(id, email, password, role));
-            }
+            return executeForSingleResult(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-        return user;
     }
 
     @Override
     public List<User> getAll() throws DaoException {
-        List<User> users = new ArrayList<>();
-
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_ALL_QUERY);
         ){
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String email = resultSet.getString(2);
-                String password = resultSet.getString(3);
-                Role role = Role.valueOf(resultSet.getString(4).toUpperCase());
-
-                users.add(new User(id, email, password, role));
-            }
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
-        return users;
     }
 
     @Override
     public void add(User entity) throws DaoException {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void deleteById(int id) throws DaoException {
-        try (
-                Connection connection = pool.takeConnection();
-                PreparedStatement statement = connection.prepareStatement(DELETE_BY_ID_QUERY)
-        ){
-            statement.setInt(1, id);
+        throw new UnsupportedOperationException();
+    }
 
-            statement.execute();
-        } catch (SQLException | ConnectionPoolException e) {
-            throw new DaoException(e);
+    public List<User> executeForManyResults(PreparedStatement statement) throws SQLException {
+        List<User> users = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            int id = resultSet.getInt(1);
+            String email = resultSet.getString(2);
+            String password = resultSet.getString(3);
+            Role role = Role.valueOf(resultSet.getString(4).toUpperCase());
+
+            users.add(new User(id, email, password, role));
         }
+        return users;
+    }
+
+    public Optional<User> executeForSingleResult(PreparedStatement statement) throws SQLException {
+        Optional<User> user = Optional.empty();
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt(1);
+            String email = resultSet.getString(2);
+            String password = resultSet.getString(3);
+            Role role = Role.valueOf(resultSet.getString(4).toUpperCase());
+
+            user = Optional.of(new User(id, email, password, role));
+        }
+        return user;
     }
 }

@@ -21,7 +21,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Override
     public Optional<Payment> getById(int id) throws DaoException {
-        return Optional.empty();
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -40,7 +40,6 @@ public class PaymentDaoImpl implements PaymentDao {
             statement.setBigDecimal(3, entity.getTotalPrice());
 
             statement.execute();
-
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
@@ -48,6 +47,16 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Override
     public void deleteById(int id) throws DaoException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<Payment> executeForManyResults(PreparedStatement statement) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Optional<Payment> executeForSingleResult(PreparedStatement statement) throws SQLException {
         throw new UnsupportedOperationException();
     }
 }

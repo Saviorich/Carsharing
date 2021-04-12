@@ -44,17 +44,15 @@ public class CarCommentDaoImpl implements CarCommentDao {
 
     @Override
     public List<CarComment> getAllByCarId(int carId) throws DaoException {
-        List<CarComment> comments;
         try (
                 Connection connection = POOL.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_ALL_BY_CAR_QUERY);
         ) {
             statement.setInt(1, carId);
-            comments = executeForManyResults(statement);
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-        return comments;
     }
 
     @Override
@@ -64,18 +62,14 @@ public class CarCommentDaoImpl implements CarCommentDao {
 
     @Override
     public List<CarComment> getAll() throws DaoException {
-        List<CarComment> comments;
-
         try (
                 Connection connection = POOL.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_ALL_QUERY);
         ) {
-            comments = executeForManyResults(statement);
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
-        return comments;
     }
 
     @Override
@@ -142,7 +136,8 @@ public class CarCommentDaoImpl implements CarCommentDao {
         return comments;
     }
 
-    private List<CarComment> executeForManyResults(PreparedStatement statement) throws SQLException {
+    @Override
+    public List<CarComment> executeForManyResults(PreparedStatement statement) throws SQLException {
         List<CarComment> comments = new ArrayList<>();
         ResultSet resultSet = statement.executeQuery();
 
@@ -181,10 +176,8 @@ public class CarCommentDaoImpl implements CarCommentDao {
         return comments;
     }
 
-//    public static void main(String[] args) throws ConnectionPoolException, DaoException {
-//        ConnectionPool.getInstance().initPoolData();
-//        CarCommentDaoImpl dao =  new CarCommentDaoImpl();
-//
-//        System.out.println(dao.getCommentsForPage(3, 2, 1));
-//    }
+    @Override
+    public Optional<CarComment> executeForSingleResult(PreparedStatement statement) throws SQLException {
+        throw new UnsupportedOperationException();
+    }
 }

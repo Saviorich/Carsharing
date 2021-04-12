@@ -54,10 +54,8 @@
 <jsp:include page="../jsp/header.jsp"/>
 <div class="user_panel">
     <form action="Controller?command=gotocarspage" method="post">
-        ${find}: <input name="search" type="text" placeholder="C5">
+        ${find}: <input name="search" type="text" placeholder="Citroen C5">
         <button type="submit">&hookleftarrow;</button>
-        <%--            Sort by: <select name="sort"><option value="priceup">Price &uparrow;</option><option value="pricedown">Price &downarrow;</option></select>--%>
-        <%--            <button type="submit">&hookleftarrow;</button>--%>
     </form>
 </div>
 <div class="admin_button_panel">

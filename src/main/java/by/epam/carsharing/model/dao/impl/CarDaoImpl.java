@@ -31,74 +31,27 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public Optional<Car> getById(int id) throws DaoException {
-        Optional<Car> car = Optional.empty();
-
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_BY_ID_QUERY)
         ) {
             statement.setInt(1, id);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                String brand = resultSet.getString(2);
-                String model = resultSet.getString(3);
-                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
-                int mileage = resultSet.getInt(5);
-                GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
-                String year = resultSet.getString(7);
-                EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
-                BigDecimal pricePerDay = resultSet.getBigDecimal(9);
-                String vin = resultSet.getString(10);
-                String plate = resultSet.getString(11);
-                CarClass carClass = CarClass.valueOf(resultSet.getString(12).toUpperCase());
-                String imagePath = resultSet.getString(13);
-
-                car = Optional.of(new Car(id, brand, model, color, mileage, gearboxType, year,
-                        engineType, pricePerDay, vin, plate, carClass, imagePath));
-            }
+            return executeForSingleResult(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
-        return car;
     }
 
     @Override
     public List<Car> getAll() throws DaoException {
-        List<Car> cars = new ArrayList<>();
-
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_ALL_QUERY)
         ) {
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String brand = resultSet.getString(2);
-                String model = resultSet.getString(3);
-                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
-                int mileage = resultSet.getInt(5);
-                GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
-                String year = resultSet.getString(7);
-                EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
-                BigDecimal pricePerDay = resultSet.getBigDecimal(9);
-                String vin = resultSet.getString(10);
-                String plate = resultSet.getString(11);
-                CarClass carClass = CarClass.valueOf(resultSet.getString(12).toUpperCase());
-                String imagePath = resultSet.getString(13);
-
-                Car car = new Car(id, brand, model, color, mileage, gearboxType, year,
-                        engineType, pricePerDay, vin, plate, carClass, imagePath);
-
-                cars.add(car);
-            }
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-        return cars;
     }
 
     @Override
@@ -142,114 +95,41 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public List<Car> getCarsByName(String criteria) throws DaoException {
-        List<Car> cars = new ArrayList<>();
-
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_BY_NAME)
         ) {
             statement.setString(1, criteria);
-
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String brand = resultSet.getString(2);
-                String model = resultSet.getString(3);
-                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
-                int mileage = resultSet.getInt(5);
-                GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
-                String year = resultSet.getString(7);
-                EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
-                BigDecimal pricePerDay = resultSet.getBigDecimal(9);
-                String vin = resultSet.getString(10);
-                String plate = resultSet.getString(11);
-                CarClass carClass = CarClass.valueOf(resultSet.getString(12).toUpperCase());
-                String imagePath = resultSet.getString(13);
-
-                Car car = new Car(id, brand, model, color, mileage, gearboxType, year,
-                        engineType, pricePerDay, vin, plate, carClass, imagePath);
-
-                cars.add(car);
-            }
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
-        return cars;
     }
 
     @Override
     public List<Car> getCarsByYear(String year) throws DaoException {
-        List<Car> cars = new ArrayList<>();
-
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_BY_YEAR)
         ) {
             statement.setString(1, year.toLowerCase());
-
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String brand = resultSet.getString(2);
-                String model = resultSet.getString(3);
-                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
-                int mileage = resultSet.getInt(5);
-                GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
-                EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
-                BigDecimal pricePerDay = resultSet.getBigDecimal(9);
-                String vin = resultSet.getString(10);
-                String plate = resultSet.getString(11);
-                CarClass carClass = CarClass.valueOf(resultSet.getString(12).toUpperCase());
-                String imagePath = resultSet.getString(13);
-
-                Car car = new Car(id, brand, model, color, mileage, gearboxType, year,
-                        engineType, pricePerDay, vin, plate, carClass, imagePath);
-
-                cars.add(car);
-            }
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
-        return cars;
     }
 
     @Override
     public List<Car> getCarsByClass(CarClass carClass) throws DaoException {
-        List<Car> cars = new ArrayList<>();
-
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(GET_BY_CLASS)
         ) {
             statement.setString(1, carClass.toString().toLowerCase());
-
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                String brand = resultSet.getString(2);
-                String model = resultSet.getString(3);
-                CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
-                int mileage = resultSet.getInt(5);
-                GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
-                String year = resultSet.getString(7);
-                EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
-                BigDecimal pricePerDay = resultSet.getBigDecimal(9);
-                String vin = resultSet.getString(10);
-                String plate = resultSet.getString(11);
-                String imagePath = resultSet.getString(13);
-
-                Car car = new Car(id, brand, model, color, mileage, gearboxType, year,
-                        engineType, pricePerDay, vin, plate, carClass, imagePath);
-
-                cars.add(car);
-            }
+            return executeForManyResults(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-
-        return cars;
     }
 
     @Override
@@ -275,5 +155,62 @@ public class CarDaoImpl implements CarDao {
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public List<Car> executeForManyResults(PreparedStatement statement) throws SQLException {
+        List<Car> cars = new ArrayList<>();
+
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            int id = resultSet.getInt(1);
+            String brand = resultSet.getString(2);
+            String model = resultSet.getString(3);
+            CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
+            int mileage = resultSet.getInt(5);
+            GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
+            String year = resultSet.getString(7);
+            EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
+            BigDecimal pricePerDay = resultSet.getBigDecimal(9);
+            String vin = resultSet.getString(10);
+            String plate = resultSet.getString(11);
+            CarClass carClass = CarClass.valueOf(resultSet.getString(12).toUpperCase());
+            String imagePath = resultSet.getString(13);
+
+            Car car = new Car(id, brand, model, color, mileage, gearboxType, year,
+                    engineType, pricePerDay, vin, plate, carClass, imagePath);
+
+            cars.add(car);
+        }
+
+        return cars;
+    }
+
+    @Override
+    public Optional<Car> executeForSingleResult(PreparedStatement statement) throws SQLException {
+        Optional<Car> car = Optional.empty();
+
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            int id = resultSet.getInt(1);
+            String brand = resultSet.getString(2);
+            String model = resultSet.getString(3);
+            CarColor color = CarColor.valueOf(resultSet.getString(4).toUpperCase());
+            int mileage = resultSet.getInt(5);
+            GearboxType gearboxType = GearboxType.valueOf(resultSet.getString(6).toUpperCase());
+            String year = resultSet.getString(7);
+            EngineType engineType = EngineType.valueOf(resultSet.getString(8).toUpperCase());
+            BigDecimal pricePerDay = resultSet.getBigDecimal(9);
+            String vin = resultSet.getString(10);
+            String plate = resultSet.getString(11);
+            CarClass carClass = CarClass.valueOf(resultSet.getString(12).toUpperCase());
+            String imagePath = resultSet.getString(13);
+
+            car = Optional.of(new Car(id, brand, model, color, mileage, gearboxType, year,
+                    engineType, pricePerDay, vin, plate, carClass, imagePath));
+        }
+
+        return car;
     }
 }

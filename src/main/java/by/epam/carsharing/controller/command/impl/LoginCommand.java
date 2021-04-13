@@ -43,6 +43,9 @@ public class LoginCommand implements Command {
 
         try {
             user = userService.findUserByEmailAndPassword(email, password);
+            if (!user.isPresent()) {
+                throw new InvalidDataException();
+            }
             session.setAttribute(SessionAttribute.USER, user.get());
         } catch (ServiceException e) {
             logger.error(Level.FATAL, e);

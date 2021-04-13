@@ -101,7 +101,7 @@
             <c:forEach var="c" items="${comments}">
                 <div class="comment">
                     <div class="comment__header">
-                        <h4>${c.user.email}</h4>
+                        <h4>${c.user.email.split('@')[0]}</h4>
                         <div class="comment__header__admin_panel">
                             <c:if test="${sessionScope.user.role eq 'ADMIN' or sessionScope.user eq c.user}">
                                 <a href="Controller?command=deletecomment&data_id=${c.id}" title="${delete}">&times;</a>

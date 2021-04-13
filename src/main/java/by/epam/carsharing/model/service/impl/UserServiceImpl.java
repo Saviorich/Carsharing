@@ -16,49 +16,41 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
-    private static final DaoHelper daoHelper = DaoHelper.getInstance();
-    private static final UserValidator validator = new UserValidator();
+    private static final UserDao USER_DAO = DaoHelper.getInstance().getUserDao();
+    private static final UserValidator VALIDATOR = new UserValidator();
 
     @Override
     public Optional<User> getById(Integer id) throws ServiceException {
-        Optional<User> user;
         try {
-            user = daoHelper.getUserDao().getById(id);
+            return USER_DAO.getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-        return user;
     }
 
     @Override
     public Optional<User> findUserByEmailAndPassword(String email, String password) throws ServiceException, InvalidDataException {
-        if (!validator.isValidEmail(email) || !validator.isValidPassword(password)) {
-            throw new InvalidDataException(validator.getMessage());
+        if (!VALIDATOR.isValidEmail(email) || !VALIDATOR.isValidPassword(password)) {
+            throw new InvalidDataException(VALIDATOR.getMessage());
         }
 
-        UserDao userDao = daoHelper.getUserDao();
-
-        Optional<User> user = Optional.empty();
         try {
             password = DigestUtils.md5Hex(password);
-            user = userDao.findUserByEmailAndPassword(email, password);
+            return USER_DAO.findUserByEmailAndPassword(email, password);
         } catch (DaoException e) {
             throw new ServiceException();
         }
-
-        return user;
     }
 
     @Override
     public void registerUser(String email, String password, UserDetail details, Passport passport) throws ServiceException, InvalidDataException {
-        if (!validator.isValidEmail(email) || !validator.isValidPassword(password)) {
-            throw new InvalidDataException(validator.getMessage());
+        if (!VALIDATOR.isValidEmail(email) || !VALIDATOR.isValidPassword(password)) {
+            throw new InvalidDataException(VALIDATOR.getMessage());
         }
 
-        UserDao userDao = daoHelper.getUserDao();
         try {
             password = DigestUtils.md5Hex(password);
-            userDao.registerUser(email, password, details, passport);
+            USER_DAO.registerUser(email, password, details, passport);
         } catch (DaoException e) {
             throw new ServiceException();
         }

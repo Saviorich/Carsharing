@@ -2,7 +2,7 @@ package by.epam.carsharing.controller.command.impl.comment;
 
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.service.CarCommentService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.Level;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class DeleteComment implements Command {
 
     private static final Logger logger = LogManager.getLogger(DeleteComment.class);
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final String ERROR_PARAMETER = "&error=true";
     private static final String REFERER = "referer";
 
@@ -27,7 +27,7 @@ public class DeleteComment implements Command {
 
         int commentId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
-        CarCommentService commentService = serviceFactory.getCommentService();
+        CarCommentService commentService = SERVICE_PROVIDER.getCommentService();
         try {
             commentService.deleteById(commentId);
         } catch (ServiceException e) {

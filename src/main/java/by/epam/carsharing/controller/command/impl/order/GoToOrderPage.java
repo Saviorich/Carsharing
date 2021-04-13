@@ -4,7 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
@@ -23,7 +23,7 @@ import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToOrderPage implements Command {
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final Logger logger = LogManager.getLogger(GoToOrderPage.class);
     private static final String ORDER_PAGE = "/WEB-INF/jsp/order.jsp";
     private static final String LOGIN_PAGE = "/login";
@@ -34,7 +34,7 @@ public class GoToOrderPage implements Command {
         RequestDispatcher requestDispatcher;
 
         try {
-            CarService carService = serviceFactory.getCarService();
+            CarService carService = SERVICE_PROVIDER.getCarService();
             Optional<Car> car = carService.getById(Integer.parseInt(request.getParameter(RequestParameter.DATA_ID)));
 
             car.ifPresent(value -> request.setAttribute(RequestParameter.CAR, value));

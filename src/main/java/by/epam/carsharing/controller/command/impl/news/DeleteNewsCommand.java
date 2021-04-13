@@ -3,7 +3,7 @@ package by.epam.carsharing.controller.command.impl.news;
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class DeleteNewsCommand implements Command {
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final String REFERER = "referer";
     private static final Logger logger = LogManager.getLogger(DeleteNewsCommand.class);
 
@@ -24,7 +24,7 @@ public class DeleteNewsCommand implements Command {
         int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
         try {
-            NewsService newsService = serviceFactory.getNewsService();
+            NewsService newsService = SERVICE_PROVIDER.getNewsService();
             newsService.deleteById(id);
         } catch (ServiceException e) {
             logger.error(e);

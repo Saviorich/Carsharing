@@ -2,10 +2,8 @@ package by.epam.carsharing.util;
 
 public final class RequestParameter {
     public static final String NEWS = "news";
-    public static final String LOGIN = "login";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
-    public static final String NAME = "name";
     public static final String LOCALE = "locale";
     public static final String ERROR = "error";
     public static final String COMMAND = "command";
@@ -44,7 +42,6 @@ public final class RequestParameter {
     public static final String TOTAL_PRICE = "total_price";
     public static final String CARD_NUMBER = "card_number";
     public static final String EXPIRY_DATE = "expiry_date";
-    public static final String HOLDER = "holder";
     public static final String CVV = "cvv";
     public static final String SEARCH = "search";
     public static final String ABLE_TO_COMMENT = "able_to_comment";

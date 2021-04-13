@@ -6,7 +6,7 @@ import by.epam.carsharing.model.entity.car.CarColor;
 import by.epam.carsharing.model.entity.car.EngineType;
 import by.epam.carsharing.model.entity.car.GearboxType;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 public class EditCarCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(EditCarCommand.class);
-    private static final ServiceFactory serviceFactor = ServiceFactory.getInstance();
+    private static final ServiceProvider serviceFactor = ServiceProvider.getInstance();
     private static final String GO_TO_CARS_PAGE = "Controller?command=gotocarspage";
     private static final String GO_TO_CAR_EDIT_PAGE = "Controller?command=gotocareditpage&data_id=%d&error=%s&validation=%s";
     private static final String ERROR_MESSAGE = "Something went wrong";

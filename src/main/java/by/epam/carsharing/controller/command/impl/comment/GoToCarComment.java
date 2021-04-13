@@ -5,7 +5,7 @@ import by.epam.carsharing.model.entity.car.Car;
 import by.epam.carsharing.model.entity.car.CarComment;
 import by.epam.carsharing.model.service.CarCommentService;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.Level;
@@ -27,10 +27,10 @@ public class GoToCarComment implements Command {
 
     private static final String COMMENTS_PAGE = "/WEB-INF/jsp/comments.jsp";
     private static final String ERROR_PAGE = "error.jsp";
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final String REFERER = "referer";
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage";
-    private static final CarCommentService COMMENT_SERVICE = serviceFactory.getCommentService();
+    private static final CarCommentService COMMENT_SERVICE = SERVICE_PROVIDER.getCommentService();
 
     private static final int RECORDS_PER_PAGE = 3;
 
@@ -39,7 +39,7 @@ public class GoToCarComment implements Command {
         RequestDispatcher dispatcher;
         int carId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
-        CarService carService = serviceFactory.getCarService();
+        CarService carService = SERVICE_PROVIDER.getCarService();
         try {
             /*
               If the request came from the orders page,

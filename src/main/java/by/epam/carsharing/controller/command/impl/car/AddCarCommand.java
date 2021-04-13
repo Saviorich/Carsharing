@@ -3,7 +3,7 @@ package by.epam.carsharing.controller.command.impl.car;
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 
 public class AddCarCommand implements Command {
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final Logger logger = LogManager.getLogger(AddCarCommand.class);
     private static final String GO_TO_CARS_PAGE = "Controller?command=gotocarspage";
     private static final String GO_TO_CAR_EDIT_PAGE = "Controller?command=gotocareditpage&error=%s&validation=%s";
@@ -43,7 +43,7 @@ public class AddCarCommand implements Command {
         String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {
-            CarService carService = serviceFactory.getCarService();
+            CarService carService = SERVICE_PROVIDER.getCarService();
             Car car = new Car(brand, model, color, mileage, gearbox, year, engine, price, vin, plate, carClass, imagePath);
             carService.add(car);
         } catch (ServiceException e) {

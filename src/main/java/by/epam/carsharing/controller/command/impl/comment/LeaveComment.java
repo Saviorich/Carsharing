@@ -6,7 +6,7 @@ import by.epam.carsharing.model.entity.car.CarComment;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.CarCommentService;
 import by.epam.carsharing.model.service.CarService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
@@ -23,7 +23,7 @@ import java.io.IOException;
 public class LeaveComment implements Command {
 
     private static final Logger logger = LogManager.getLogger(LeaveComment.class);
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
 
     private static final String GO_TO_COMMENTS_PAGE = "Controller?command=gotocarcommentspage&data_id=%d&error=%s&validation=%s";
     private static final String REFERER = "referer";
@@ -35,8 +35,8 @@ public class LeaveComment implements Command {
         String content = request.getParameter(RequestParameter.CONTENT_EDITOR);
         int carId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
 
-        CarService carService = serviceFactory.getCarService();
-        CarCommentService commentService = serviceFactory.getCommentService();
+        CarService carService = SERVICE_PROVIDER.getCarService();
+        CarCommentService commentService = SERVICE_PROVIDER.getCommentService();
         try {
             Car car = carService.getById(carId).get();
             User user = (User) request.getSession().getAttribute(SessionAttribute.USER);

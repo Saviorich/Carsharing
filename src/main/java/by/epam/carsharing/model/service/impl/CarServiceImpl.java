@@ -16,68 +16,51 @@ import java.util.Optional;
 public class CarServiceImpl implements CarService {
 
     private static final CarValidator VALIDATOR = new CarValidator();
-    private static final CarDao carDao = DaoHelper.getInstance().getCarDao();
+    private static final CarDao CAR_DAO = DaoHelper.getInstance().getCarDao();
 
     @Override
     public Optional<Car> getById(int id) throws ServiceException {
-        Optional<Car> car;
         try {
-            car = carDao.getById(id);
+            return CAR_DAO.getById(id);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        return car;
     }
 
     @Override
     public List<Car> getAll() throws ServiceException {
-        List<Car> cars;
-
         try {
-            cars = carDao.getAll();
+            return CAR_DAO.getAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-        return cars;
     }
 
     @Override
     public List<Car> getCarsByName(String criteria) throws ServiceException {
-        List<Car> cars;
-
         try {
-            cars = carDao.getCarsByName(criteria);
+            return CAR_DAO.getCarsByName(criteria);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-
-        return cars;
     }
 
     @Override
     public List<Car> getCarsByYear(String year) throws ServiceException {
-        List<Car> cars;
-
         try {
-            cars = carDao.getCarsByYear(year);
+            return CAR_DAO.getCarsByYear(year);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-
-        return cars;
     }
 
     @Override
     public List<Car> getCarsByClass(CarClass carClass) throws ServiceException {
-        List<Car> cars;
-
         try {
-            cars = carDao.getCarsByClass(carClass);
+            return CAR_DAO.getCarsByClass(carClass);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-
-        return cars;
     }
 
     @Override
@@ -93,7 +76,7 @@ public class CarServiceImpl implements CarService {
         }
 
         try {
-            carDao.update(id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, imagePath);
+            CAR_DAO.update(id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, imagePath);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -117,7 +100,7 @@ public class CarServiceImpl implements CarService {
         }
         
         try {
-            carDao.add(car);
+            CAR_DAO.add(car);
         } catch (DaoException e){
             throw new ServiceException(e);
         }
@@ -127,7 +110,7 @@ public class CarServiceImpl implements CarService {
     public void deleteById(int id) throws ServiceException {
 
         try {
-            carDao.deleteById(id);
+            CAR_DAO.deleteById(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

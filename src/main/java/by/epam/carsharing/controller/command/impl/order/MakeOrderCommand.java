@@ -7,7 +7,7 @@ import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.OrderService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.DateUtil;
@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class MakeOrderCommand implements Command {
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final Logger logger = LogManager.getLogger(MakeOrderCommand.class);
     private static final DateUtil DATE_UTILS = new DateUtil();
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage";
@@ -37,8 +37,8 @@ public class MakeOrderCommand implements Command {
         String commandResult = GO_TO_ORDERS_PAGE;
 
         int carId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
-        OrderService orderService = serviceFactory.getOrderService();
-        CarService carService = serviceFactory.getCarService();
+        OrderService orderService = SERVICE_PROVIDER.getOrderService();
+        CarService carService = SERVICE_PROVIDER.getCarService();
         User user = ((User) request.getSession().getAttribute(SessionAttribute.USER));
 
         try {

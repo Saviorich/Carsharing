@@ -4,7 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class EditNewsCommand implements Command {
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final Logger logger = LogManager.getLogger(EditNewsCommand.class);
     private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
     private static final String GO_TO_NEWS_EDIT_PAGE = "Controller?command=gotonewseditpage&data_id=%d&validation=%s&error=%s";
@@ -32,7 +32,7 @@ public class EditNewsCommand implements Command {
         String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {
-            NewsService newsService = serviceFactory.getNewsService();
+            NewsService newsService = SERVICE_PROVIDER.getNewsService();
             newsService.update(id, header, content, imagePath);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);

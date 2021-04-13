@@ -14,8 +14,6 @@ import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToLoginPage implements Command {
 
-    private static final Logger logger = LogManager.getLogger(GoToLoginPage.class);
-
     private static final String LOGIN_PAGE = "/login";
 
     @Override

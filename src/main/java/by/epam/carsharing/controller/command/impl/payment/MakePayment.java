@@ -4,7 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.Payment;
 import by.epam.carsharing.model.entity.status.PaymentStatus;
 import by.epam.carsharing.model.service.PaymentService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.DateUtil;
@@ -52,7 +52,7 @@ public class MakePayment implements Command {
 
             // here should be actual payment process
 
-            PaymentService paymentService = ServiceFactory.getInstance().getPaymentService();
+            PaymentService paymentService = ServiceProvider.getInstance().getPaymentService();
             Payment payment = new Payment(orderId, PaymentStatus.APPROVED, totalPrice, null);
             paymentService.add(payment);
             commandResult = String.format(CHANGE_STATUS, orderId);

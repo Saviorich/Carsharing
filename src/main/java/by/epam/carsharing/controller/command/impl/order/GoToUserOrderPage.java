@@ -5,7 +5,7 @@ import by.epam.carsharing.model.entity.Order;
 import by.epam.carsharing.model.entity.Role;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.OrderService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class GoToUserOrderPage implements Command {
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final Logger logger = LogManager.getLogger(GoToUserOrderPage.class);
     private static final String ORDERS_PAGE = "/WEB-INF/jsp/user_orders.jsp";
     private static final String LOGIN_PAGE = "/login";
@@ -32,7 +32,7 @@ public class GoToUserOrderPage implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Order> orders;
         RequestDispatcher requestDispatcher;
-        OrderService orderService = serviceFactory.getOrderService();
+        OrderService orderService = SERVICE_PROVIDER.getOrderService();
         User user = (User) request.getSession().getAttribute(SessionAttribute.USER);
 
         try {

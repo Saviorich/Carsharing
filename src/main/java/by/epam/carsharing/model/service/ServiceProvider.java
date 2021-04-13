@@ -2,11 +2,11 @@ package by.epam.carsharing.model.service;
 
 import by.epam.carsharing.model.service.impl.*;
 
-public final class ServiceFactory {
+public final class ServiceProvider {
 
-    private static final ServiceFactory instance = new ServiceFactory();
+    private static final ServiceProvider instance = new ServiceProvider();
 
-    private ServiceFactory() {}
+    private ServiceProvider() {}
 
     private final NewsService newsService = new NewsServiceImpl();
     private final UserService userService = new UserServiceImpl();
@@ -15,7 +15,7 @@ public final class ServiceFactory {
     private final PaymentService paymentService = new PaymentServiceImpl();
     private final CarCommentService commentService = new CarCommentServiceImpl();
 
-    public static ServiceFactory getInstance() {
+    public static ServiceProvider getInstance() {
         return instance;
     }
 

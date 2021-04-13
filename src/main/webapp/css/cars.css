@@ -121,4 +121,8 @@
         justify-content: center;
         text-align: center;
     }
+
+    .user_panel button[type=submit] {
+        height: auto;
+    }
 }

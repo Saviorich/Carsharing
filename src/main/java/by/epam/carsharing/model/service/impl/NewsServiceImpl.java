@@ -14,45 +14,34 @@ import java.util.Optional;
 
 public class NewsServiceImpl implements NewsService {
 
-    private static final DaoHelper daoHelper = DaoHelper.getInstance();
+    private static final NewsDao NEWS_DAO = DaoHelper.getInstance().getNewsDao();
     private static final NewsValidator VALIDATOR = new NewsValidator();
 
     @Override
     public Optional<News> findNewsById(int id) throws ServiceException {
-        NewsDao dao = daoHelper.getNewsDao();
-        Optional<News> news;
         try {
-            news = dao.getById(id);
+            return NEWS_DAO.getById(id);
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException(e);
         }
-        return news;
     }
 
-    @Override
-    public List<News> findNewsByUser(int userId) throws ServiceException {
-        return null;
-    }
 
     @Override
     public List<News> getAll() throws ServiceException {
-        NewsDao newsDao = daoHelper.getNewsDao();
-        List<News> news;
         try {
-            news = newsDao.getAll();
+            return NEWS_DAO.getAll();
         } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
+            throw new ServiceException(e);
         }
-        return news;
     }
 
     @Override
     public void deleteById(int id) throws ServiceException {
-        NewsDao newsDao = daoHelper.getNewsDao();
         try {
-            newsDao.deleteById(id);
+            NEWS_DAO.deleteById(id);
         } catch (DaoException e) {
-            throw new ServiceException("Exception in update", e);
+            throw new ServiceException(e);
         }
     }
 
@@ -62,32 +51,27 @@ public class NewsServiceImpl implements NewsService {
                 || !VALIDATOR.isValidContent(content)) {
             throw new InvalidDataException(VALIDATOR.getMessage());
         }
-        NewsDao newsDao = daoHelper.getNewsDao();
+
         try {
-            newsDao.update(id, header, content, imagePath);
+            NEWS_DAO.update(id, header, content, imagePath);
         } catch (DaoException e){
-            throw new ServiceException("Exception in update", e);
+            throw new ServiceException(e);
         }
     }
 
     @Override
     public void add(News entity) throws ServiceException, InvalidDataException {
-        NewsValidator newsValidator = new NewsValidator();
-
         String header = entity.getHeader();
         String content = entity.getContent();
 
-        if (!newsValidator.isValidHeader(header)
-                || !newsValidator.isValidContent(content)) {
-            throw new InvalidDataException(newsValidator.getMessage());
+        if (!VALIDATOR.isValidHeader(header) || !VALIDATOR.isValidContent(content)) {
+            throw new InvalidDataException(VALIDATOR.getMessage());
         }
 
-        NewsDao newsDao = daoHelper.getNewsDao();
         try {
-            newsDao.add(entity);
+            NEWS_DAO.add(entity);
         } catch (DaoException e){
-            throw new ServiceException("Exception in add", e);
+            throw new ServiceException(e);
         }
     }
-
 }

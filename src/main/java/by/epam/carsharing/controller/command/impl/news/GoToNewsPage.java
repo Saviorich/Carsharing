@@ -4,7 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.News;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +20,7 @@ public class GoToNewsPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToNewsPage.class);
 
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
 
     private static final String NEWS_PAGE = "/WEB-INF/jsp/news.jsp";
     private static final String ERROR_PAGE = "/WEB-INF/jsp/error.jsp";
@@ -30,7 +30,7 @@ public class GoToNewsPage implements Command {
         RequestDispatcher requestDispatcher;
 
         try {
-            NewsService newsService = serviceFactory.getNewsService();
+            NewsService newsService = SERVICE_PROVIDER.getNewsService();
             List<News> news = newsService.getAll();
             request.setAttribute(RequestParameter.NEWS, news);
             requestDispatcher = request.getRequestDispatcher(NEWS_PAGE);

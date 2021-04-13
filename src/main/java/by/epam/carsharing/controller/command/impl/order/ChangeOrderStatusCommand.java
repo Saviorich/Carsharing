@@ -3,7 +3,7 @@ package by.epam.carsharing.controller.command.impl.order;
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.status.OrderStatus;
 import by.epam.carsharing.model.service.OrderService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.RequestParameter;
 import org.apache.logging.log4j.Level;
@@ -18,12 +18,13 @@ import java.io.IOException;
 public class ChangeOrderStatusCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(ChangeOrderStatusCommand.class);
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage&error=%s&validation=%s";
+    private static final String REFERER = "referer";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandResult = String.format(GO_TO_ORDERS_PAGE, null, null);
+        String commandResult = request.getHeader(REFERER);
 
         OrderStatus status = OrderStatus.valueOf(request.getParameter(RequestParameter.STATUS).toUpperCase());
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
@@ -31,7 +32,7 @@ public class ChangeOrderStatusCommand implements Command {
         String rejectionComment = request.getParameter(RequestParameter.REJECTION_COMMENT);
         String returnComment = request.getParameter(RequestParameter.RETURN_COMMENT);
 
-        OrderService orderService = serviceFactory.getOrderService();
+        OrderService orderService = SERVICE_PROVIDER.getOrderService();
         try {
             orderService.changeStatus(orderId, status);
             if (rejectionComment != null) {

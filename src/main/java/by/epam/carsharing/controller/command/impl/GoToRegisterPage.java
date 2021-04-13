@@ -13,7 +13,6 @@ import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
 public class GoToRegisterPage implements by.epam.carsharing.controller.command.Command {
 
-    private static final Logger logger = LogManager.getLogger(GoToRegisterPage.class);
     private static final String REGISTER_PAGE = "/register";
 
     @Override

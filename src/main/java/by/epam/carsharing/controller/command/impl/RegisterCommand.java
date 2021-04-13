@@ -4,7 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.user.Passport;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.entity.user.UserDetail;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RegisterCommand implements Command {
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
 
     private static final DateUtil DATE_UTILS = new DateUtil();
     private static final Logger logger = LogManager.getLogger(RegisterCommand.class);
@@ -50,7 +50,7 @@ public class RegisterCommand implements Command {
         String issueDateParameter = request.getParameter(RequestParameter.ISSUE_DATE);
 
         HttpSession session = request.getSession();
-        UserService userService = serviceFactory.getUserService();
+        UserService userService = SERVICE_PROVIDER.getUserService();
 
         try {
             Date issueDate = DATE_UTILS.parseDate(issueDateParameter);

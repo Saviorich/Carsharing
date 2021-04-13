@@ -18,24 +18,20 @@ public class CarCommentServiceImpl implements CarCommentService {
 
     @Override
     public List<CarComment> getAll() throws ServiceException {
-        List<CarComment> comments;
         try {
-            comments = COMMENT_DAO.getAll();
+            return COMMENT_DAO.getAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-        return comments;
     }
 
     @Override
     public List<CarComment> getAllByCarId(int carId) throws ServiceException {
-        List<CarComment> comments;
         try {
-            comments = COMMENT_DAO.getAllByCarId(carId);
+            return COMMENT_DAO.getAllByCarId(carId);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
-        return comments;
     }
 
     @Override

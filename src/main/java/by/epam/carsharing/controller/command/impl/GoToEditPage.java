@@ -9,7 +9,7 @@ import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.NewsService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
 import org.apache.logging.log4j.Level;
@@ -39,8 +39,8 @@ public class GoToEditPage implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
 
-        CarService carService = ServiceFactory.getInstance().getCarService();
-        NewsService newsService = ServiceFactory.getInstance().getNewsService();
+        CarService carService = ServiceProvider.getInstance().getCarService();
+        NewsService newsService = ServiceProvider.getInstance().getNewsService();
 
         String dataId = request.getParameter(RequestParameter.DATA_ID);
 

@@ -3,7 +3,7 @@ package by.epam.carsharing.controller.command.impl.payment;
 import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.Order;
 import by.epam.carsharing.model.service.OrderService;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.util.PriceCalculator;
 import by.epam.carsharing.util.RequestParameter;
@@ -25,14 +25,14 @@ public class GoToPaymentPage implements Command {
     private static final Logger logger = LogManager.getLogger(GoToPaymentPage.class);
     private static final String PAYMENT_PAGE  = "/WEB-INF/jsp/payment.jsp";
     private static final String ERROR_PAGE = "error.jsp";
-    private static final ServiceFactory serviceFactory = ServiceFactory.getInstance();
+    private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher;
 
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
-        OrderService orderService = serviceFactory.getOrderService();
+        OrderService orderService = SERVICE_PROVIDER.getOrderService();
         PriceCalculator priceCalculator = new PriceCalculator();
 
         processRequestErrors(request);

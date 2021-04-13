@@ -4,7 +4,7 @@ import by.epam.carsharing.controller.command.Command;
 import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
-import by.epam.carsharing.model.service.ServiceFactory;
+import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.UserService;
 import by.epam.carsharing.util.RequestParameter;
 import by.epam.carsharing.util.SessionAttribute;
@@ -34,8 +34,8 @@ public class LoginCommand implements Command {
         email = request.getParameter(RequestParameter.EMAIL);
         password = request.getParameter(RequestParameter.PASSWORD);
 
-        ServiceFactory serviceFactory = ServiceFactory.getInstance();
-        UserService userService = serviceFactory.getUserService();
+        ServiceProvider serviceProvider = ServiceProvider.getInstance();
+        UserService userService = serviceProvider.getUserService();
 
         HttpSession session = request.getSession();
 
@@ -52,7 +52,7 @@ public class LoginCommand implements Command {
             commandResult = String.format(GO_TO_LOGIN_PAGE, true, null);
         } catch (InvalidDataException e) {
             logger.log(Level.ERROR, e);
-            commandResult = String.format(GO_TO_LOGIN_PAGE, null, true);
+            commandResult = String.format(GO_TO_LOGIN_PAGE, null, e.getMessage());
         }
         response.sendRedirect(commandResult);
     }

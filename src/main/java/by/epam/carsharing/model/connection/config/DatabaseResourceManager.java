@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class DatabaseResourceManager {
+public final class DatabaseResourceManager {
 
-    private static DatabaseResourceManager instance = new DatabaseResourceManager();
+    private static final DatabaseResourceManager INSTANCE = new DatabaseResourceManager();
     private static final Logger logger = LogManager.getLogger(DatabaseResourceManager.class);
 
     private static final String PROPERTIES = "database.properties";
@@ -40,7 +40,7 @@ public class DatabaseResourceManager {
     private DatabaseResourceManager() {}
 
     public static DatabaseResourceManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     public String getValue(String key) {

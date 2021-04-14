@@ -32,9 +32,9 @@ public class MakePayment implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandResult;
-
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
+
+        String commandResult = String.format(CHANGE_STATUS, orderId);
 
         try {
             String cardNumber = request.getParameter(RequestParameter.CARD_NUMBER);
@@ -55,7 +55,7 @@ public class MakePayment implements Command {
             PaymentService paymentService = ServiceProvider.getInstance().getPaymentService();
             Payment payment = new Payment(orderId, PaymentStatus.APPROVED, totalPrice, null);
             paymentService.add(payment);
-            commandResult = String.format(CHANGE_STATUS, orderId);
+            logger.log(Level.DEBUG, "Payment added: ");
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             commandResult = String.format(GO_TO_PAYMENT_PAGE, orderId, true, null);
@@ -63,6 +63,7 @@ public class MakePayment implements Command {
             logger.log(Level.ERROR, e);
             commandResult = String.format(GO_TO_PAYMENT_PAGE, orderId, null, e.getMessage());
         }
+        logger.log(Level.DEBUG, "Command result: " + commandResult);
         response.sendRedirect(commandResult);
     }
 }

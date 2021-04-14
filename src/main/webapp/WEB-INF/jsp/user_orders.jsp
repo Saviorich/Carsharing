@@ -35,6 +35,7 @@
         <fmt:message key="orders.returned_status" var="returned_status"/>
         <fmt:message key="orders.rejected_status" var="rejected_status"/>
         <fmt:message key="orders.cancel" var="cancel"/>
+        <fmt:message key="orders.leave_comment" var="leave_comment"/>
         <fmt:message key="admin.edit" var="edit"/>
     </fmt:bundle>
 </head>
@@ -115,7 +116,7 @@
                                 <a id="reject" href="Controller?command=changeorderstatus&status=cancelled&data_id=${order.id}">${cancel}</a><br/>
                             </c:if>
                             <c:if test="${order.status eq 'RETURNED'}">
-                                <a id="approve" href="Controller?command=gotocarcommentspage&data_id=${order.car.id}&current_page=1">Leave comment</a>
+                                <a id="approve" href="Controller?command=gotocarcommentspage&data_id=${order.car.id}&current_page=1">${leave_comment}</a>
                             </c:if>
                         </c:otherwise>
                     </c:choose>

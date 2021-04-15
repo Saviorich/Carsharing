@@ -36,15 +36,15 @@
         </label>
         <label>
             ${card_number}
-            <input name="card_number" type="number" placeholder="1234567891234567"  required>
+            <input name="card_number" type="number" placeholder="1234567891234567"  pattern="[0-9]{16}" required>
         </label>
         <label>
             ${expiry}
-            <input name="expiry_date" type="date"  required>
+            <input name="expiry_date" type="date" required>
         </label>
         <label>
             CVV
-            <input type="number" name="cvv" placeholder="123" required>
+            <input type="number" name="cvv" placeholder="123" pattern="[0-9]{3}" required>
         </label>
         <c:out value="${total_price}: ${requestScope.total_price}"/>
         <input class="button" type="submit" value="${pay}">

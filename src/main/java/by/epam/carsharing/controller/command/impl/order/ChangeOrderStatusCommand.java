@@ -20,11 +20,13 @@ public class ChangeOrderStatusCommand implements Command {
     private static final Logger logger = LogManager.getLogger(ChangeOrderStatusCommand.class);
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
     private static final String GO_TO_ORDERS_PAGE = "Controller?command=gotoorderspage&error=%s&validation=%s";
+    private static final String GO_TO_ORDERS_COMMAND = "command=gotoorderspage";
     private static final String REFERER = "referer";
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandResult = request.getHeader(REFERER);
+        String header = request.getHeader(REFERER);
+        String commandResult = header.contains(GO_TO_ORDERS_COMMAND) ? header : GO_TO_ORDERS_PAGE;
 
         OrderStatus status = OrderStatus.valueOf(request.getParameter(RequestParameter.STATUS).toUpperCase());
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));

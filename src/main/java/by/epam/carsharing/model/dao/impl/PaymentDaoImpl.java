@@ -26,7 +26,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Override
     public List<Payment> getAll() throws DaoException {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

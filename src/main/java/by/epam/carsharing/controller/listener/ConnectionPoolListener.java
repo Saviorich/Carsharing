@@ -14,6 +14,10 @@ public class ConnectionPoolListener implements ServletContextListener {
 
     private static final Logger logger = LogManager.getLogger(ConnectionPoolListener.class);
 
+    /**
+     * Initializes connection pool when application is starting
+     * @see ConnectionPool
+     * */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         try {
@@ -24,6 +28,10 @@ public class ConnectionPoolListener implements ServletContextListener {
         }
     }
 
+    /**
+     * Disposing the connection pool when application is finished
+     * @see ConnectionPool
+     * */
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         ConnectionPool.getInstance().dispose();

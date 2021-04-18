@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Class that read {@link Properties} from database.properties file
+ */
 public final class DatabaseResourceManager {
 
     private static final DatabaseResourceManager INSTANCE = new DatabaseResourceManager();
@@ -16,10 +19,6 @@ public final class DatabaseResourceManager {
 
     private Properties properties;
 
-    /**
-    * Initialize a {@link Properties} object
-    * Read properties from database.properties file with using {@link ClassLoader}
-    */
     {
         ClassLoader loader = DatabaseResourceManager.class.getClassLoader();
         try (InputStream inputStream = loader.getResourceAsStream(PROPERTIES)) {
@@ -43,6 +42,10 @@ public final class DatabaseResourceManager {
         return INSTANCE;
     }
 
+    /**
+     * Finds a value by key and returns it
+     * @return the {@link String} value of property
+     * */
     public String getValue(String key) {
         return properties.getProperty(key);
     }

@@ -1,5 +1,8 @@
 package by.epam.carsharing.model.connection.config;
 
+/**
+* Contains keys for database properties that used in {@link by.epam.carsharing.model.connection.ConnectionPool}
+* */
 public final class DatabaseParameter {
     public static final String DRIVER = "driver";
     public static final String URL = "url";

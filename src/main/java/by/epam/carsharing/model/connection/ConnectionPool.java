@@ -13,6 +13,14 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
+/**
+ * <P>A pool of fixed amount of connections to a database.</P>
+ *
+ * Pool size should be configured in {@link DatabaseParameter}.
+ *
+ * @see DatabaseParameter
+ * @see java.sql.Connection
+ */
 public class ConnectionPool {
 
     private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
@@ -45,10 +53,20 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Returns the instance of {@link ConnectionPool}
+     *
+     * @return the {@link ConnectionPool} instance
+     */
     public static ConnectionPool getInstance() {
         return pool;
     }
 
+    /**
+     * Initializes {@link ConnectionPool} with amount of connections specified in poolSize field
+     * @see PooledConnection
+     * @see BlockingQueue
+     * */
     public void initPoolData() throws ConnectionPoolException {
         try {
             Class.forName(driverName);
@@ -82,6 +100,12 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * Returns a {@link Connection} object from the pool. If connection waiting timed out, then exception is thrown.
+     *
+     * @return {@link Connection} object
+     * @throws ConnectionPoolException if connection waiting timed out
+     */
     public Connection takeConnection() throws ConnectionPoolException {
         Connection connection;
 
@@ -105,7 +129,11 @@ public class ConnectionPool {
     }
 
     /**
-     * Proxy connection
+     * <P>A proxy class for any class, that implements java.sql.Connection.</P>
+     * <P>When a {@link PooledConnection} is closed by {@link #close()}, it is returned to the {@link ConnectionPool}.</P>
+     *
+     * @see Connection
+     * @see ConnectionPool
      */
     private class PooledConnection implements Connection {
         private Connection connection;
@@ -115,6 +143,10 @@ public class ConnectionPool {
             this.connection.setAutoCommit(true);
         }
 
+        /**
+         * Actually closes connection
+         * @see Connection
+         * */
         public void reallyClose() throws SQLException {
             connection.close();
         }

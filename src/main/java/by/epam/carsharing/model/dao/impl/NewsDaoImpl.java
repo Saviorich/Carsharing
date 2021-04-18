@@ -95,7 +95,6 @@ public class NewsDaoImpl implements NewsDao {
             statement.setString(1, entity.getHeader());
             statement.setString(2, entity.getContent());
             statement.setString(3, entity.getImagePath());
-            logger.log(Level.DEBUG, entity);
             statement.setInt(4, entity.getId());
 
             statement.execute();

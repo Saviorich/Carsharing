@@ -105,7 +105,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findUserByEmailAndPassword(String email, String password) throws DaoException {
-        Optional<User> user = Optional.empty();
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(LOGIN_QUERY)
@@ -113,17 +112,10 @@ public class UserDaoImpl implements UserDao {
             statement.setString(1, email);
             statement.setString(2, password);
 
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                Integer id = (Integer) resultSet.getObject(1);
-
-                Role role = Role.valueOf(resultSet.getString(4).toUpperCase());
-                user = Optional.of(new User(id, email, password, role));
-            }
+            return executeForSingleResult(statement);
         } catch (SQLException | ConnectionPoolException e) {
             throw new DaoException(e);
         }
-        return user;
     }
 
     @Override

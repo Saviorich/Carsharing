@@ -46,14 +46,14 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void update(int id, String header, String content, String imagePath) throws ServiceException, InvalidDataException {
-        if (!VALIDATOR.isValidHeader(header)
-                || !VALIDATOR.isValidContent(content)) {
+    public void update(News entity) throws ServiceException, InvalidDataException {
+        if (!VALIDATOR.isValidHeader(entity.getHeader())
+                || !VALIDATOR.isValidContent(entity.getContent())) {
             throw new InvalidDataException(VALIDATOR.getMessage());
         }
 
         try {
-            NEWS_DAO.update(id, header, content, imagePath);
+            NEWS_DAO.update(entity);
         } catch (DaoException e){
             throw new ServiceException(e);
         }

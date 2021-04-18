@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface NewsService {
     Optional<News> findNewsById(int id) throws ServiceException;
     List<News> getAll() throws ServiceException;
-    void update(int id, String header, String content, String imagePath) throws ServiceException, InvalidDataException;
+    void update(News entity) throws ServiceException, InvalidDataException;
     void add(News news) throws ServiceException, InvalidDataException;
     void deleteById(int id) throws ServiceException;
 }

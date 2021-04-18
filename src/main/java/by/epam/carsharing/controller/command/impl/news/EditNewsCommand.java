@@ -1,11 +1,14 @@
 package by.epam.carsharing.controller.command.impl.news;
 
 import by.epam.carsharing.controller.command.Command;
+import by.epam.carsharing.model.entity.News;
+import by.epam.carsharing.model.entity.user.User;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
 import by.epam.carsharing.model.service.exception.ServiceException;
 import by.epam.carsharing.model.service.NewsService;
 import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.util.RequestParameter;
+import by.epam.carsharing.util.SessionAttribute;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,13 +30,14 @@ public class EditNewsCommand implements Command {
         String commandResult = GO_TO_NEWS_PAGE;
 
         int id = Integer.parseInt(request.getParameter(RequestParameter.DATA_ID));
+        int userId = ((User) request.getSession().getAttribute(SessionAttribute.USER)).getId();
         String header = request.getParameter(RequestParameter.HEADER_EDITOR);
         String content = request.getParameter(RequestParameter.CONTENT_EDITOR);
         String imagePath = (String) request.getAttribute(RequestParameter.IMAGE_PATH);
 
         try {
             NewsService newsService = SERVICE_PROVIDER.getNewsService();
-            newsService.update(id, header, content, imagePath);
+            newsService.update(new News(id, userId, header, content, imagePath));
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             commandResult = String.format(GO_TO_NEWS_EDIT_PAGE, id, null, e.getMessage());

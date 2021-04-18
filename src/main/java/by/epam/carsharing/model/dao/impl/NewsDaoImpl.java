@@ -5,6 +5,7 @@ import by.epam.carsharing.model.dao.NewsDao;
 import by.epam.carsharing.model.entity.News;
 import by.epam.carsharing.model.connection.exception.ConnectionPoolException;
 import by.epam.carsharing.model.dao.exception.DaoException;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -86,15 +87,16 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public void update(int id, String header, String content, String imagePath) throws DaoException {
+    public void update(News entity) throws DaoException {
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_NEWS_QUERY)
         ){
-            statement.setString(1, header);
-            statement.setString(2, content);
-            statement.setString(3, imagePath);
-            statement.setInt(4, id);
+            statement.setString(1, entity.getHeader());
+            statement.setString(2, entity.getContent());
+            statement.setString(3, entity.getImagePath());
+            logger.log(Level.DEBUG, entity);
+            statement.setInt(4, entity.getId());
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {

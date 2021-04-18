@@ -7,8 +7,8 @@ public class News implements Identifiable, Serializable {
 
     private static final long serialVersionUID = -4657136872925977530L;
 
-    private Integer id;
-    private Integer userId;
+    private int id;
+    private int userId;
     private String header;
     private String content;
     private Date publicationDate;
@@ -17,20 +17,22 @@ public class News implements Identifiable, Serializable {
     public News() {
     }
 
-    public News(Integer userId, String header, String content, String imagePath) {
-        this.userId = userId;
-        this.header = header;
-        this.content = content;
-        this.imagePath = imagePath;
-    }
 
-    public News(Integer id, Integer userId, String header, String content, Date publicationDate, String imagePath) {
+    public News(int id, int userId, String header, String content, Date publicationDate, String imagePath) {
         this.id = id;
         this.userId = userId;
         this.header = header;
         this.content = content;
         this.publicationDate = publicationDate;
         this.imagePath = imagePath;
+    }
+
+    public News(int userId, String header, String content, String imagePath) {
+        this(-1, userId, header, content, null, imagePath);
+    }
+
+    public News(int id, int userId, String header, String content, String imagePath) {
+        this(id, userId, header, content, null, imagePath);
     }
 
     @Override
@@ -65,10 +67,10 @@ public class News implements Identifiable, Serializable {
 
         News news = (News) o;
 
-        if (id != null ? !id.equals(news.id) : news.id != null) return false;
-        if (userId != null ? !userId.equals(news.userId) : news.userId != null) return false;
-        if (header != null ? !header.equals(news.header) : news.header != null) return false;
-        if (content != null ? !content.equals(news.content) : news.content != null) return false;
+        if (id != news.id) return false;
+        if (userId != news.userId) return false;
+        if (!header.equals(news.header)) return false;
+        if (!content.equals(news.content)) return false;
         if (publicationDate != null ? !publicationDate.equals(news.publicationDate) : news.publicationDate != null)
             return false;
         return imagePath != null ? imagePath.equals(news.imagePath) : news.imagePath == null;
@@ -76,8 +78,8 @@ public class News implements Identifiable, Serializable {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        int result = id;
+        result = 31 * result + userId;
         result = 31 * result + (header != null ? header.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         result = 31 * result + (publicationDate != null ? publicationDate.hashCode() : 0);

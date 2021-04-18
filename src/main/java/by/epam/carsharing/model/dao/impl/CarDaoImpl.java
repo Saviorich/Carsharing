@@ -133,23 +133,22 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
-                       String year, EngineType engineType, CarClass carClass, BigDecimal price, String imagePath) throws DaoException {
+    public void update(Car entity) throws DaoException {
         try (
                 Connection connection = pool.takeConnection();
                 PreparedStatement statement = connection.prepareStatement(UPDATE_CAR_QUERY)
         ) {
-            statement.setString(1, brand);
-            statement.setString(2, model);
-            statement.setString(3, color.toString().toLowerCase());
-            statement.setInt(4, mileage);
-            statement.setString(5, gearbox.toString().toLowerCase());
-            statement.setString(6, year);
-            statement.setString(7, engineType.toString().toLowerCase());
-            statement.setString(8, carClass.toString().toLowerCase());
-            statement.setBigDecimal(9, price);
-            statement.setString(10, imagePath);
-            statement.setInt(11, id);
+            statement.setString(1, entity.getBrand());
+            statement.setString(2, entity.getModel());
+            statement.setString(3, entity.getColor().toString().toLowerCase());
+            statement.setInt(4, entity.getMileage());
+            statement.setString(5, entity.getGearbox().toString().toLowerCase());
+            statement.setString(6, entity.getManufacturedYear());
+            statement.setString(7, entity.getEngineType().toString().toLowerCase());
+            statement.setString(8, entity.getCarClass().toString().toLowerCase());
+            statement.setBigDecimal(9, entity.getPricePerDay());
+            statement.setString(10, entity.getImagePath());
+            statement.setInt(11, entity.getId());
 
             statement.execute();
         } catch (SQLException | ConnectionPoolException e) {

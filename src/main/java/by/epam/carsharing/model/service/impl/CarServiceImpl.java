@@ -64,19 +64,18 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
-                       String year, EngineType engineType, CarClass carClass, BigDecimal price, String vin, String plate, String imagePath) throws ServiceException, InvalidDataException {
+    public void update(Car entity) throws ServiceException, InvalidDataException {
 
-        if (!VALIDATOR.isMileageValid(mileage)
-                || !VALIDATOR.isPlateValid(plate)
-                || !VALIDATOR.isPriceValid(price)
-                || !VALIDATOR.isVinValid(vin)
-                || !VALIDATOR.isYearValid(year)) {
+        if (!VALIDATOR.isMileageValid(entity.getMileage())
+                || !VALIDATOR.isPlateValid(entity.getPlate())
+                || !VALIDATOR.isPriceValid(entity.getPricePerDay())
+                || !VALIDATOR.isVinValid(entity.getVin())
+                || !VALIDATOR.isYearValid(entity.getManufacturedYear())) {
             throw new InvalidDataException(VALIDATOR.getMessage());
         }
 
         try {
-            CAR_DAO.update(id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, imagePath);
+            CAR_DAO.update(entity);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

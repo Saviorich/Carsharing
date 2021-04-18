@@ -16,8 +16,7 @@ public interface CarService {
     List<Car> getCarsByYear(String year) throws ServiceException;
     List<Car> getCarsByClass(CarClass carClass) throws ServiceException;
 
-    void update(int id, String brand, String model, CarColor color, int mileage, GearboxType gearbox,
-                String year, EngineType engineType, CarClass carClass, BigDecimal price, String vin, String plate, String imagePath) throws ServiceException, InvalidDataException;
+    void update(Car entity) throws ServiceException, InvalidDataException;
 
     void add(Car car) throws ServiceException, InvalidDataException;
 

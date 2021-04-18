@@ -1,10 +1,7 @@
 package by.epam.carsharing.controller.command.impl.car;
 
 import by.epam.carsharing.controller.command.Command;
-import by.epam.carsharing.model.entity.car.CarClass;
-import by.epam.carsharing.model.entity.car.CarColor;
-import by.epam.carsharing.model.entity.car.EngineType;
-import by.epam.carsharing.model.entity.car.GearboxType;
+import by.epam.carsharing.model.entity.car.*;
 import by.epam.carsharing.model.service.CarService;
 import by.epam.carsharing.model.service.ServiceProvider;
 import by.epam.carsharing.model.service.exception.InvalidDataException;
@@ -48,9 +45,9 @@ public class EditCarCommand implements Command {
 
         try {
             CarService carService = serviceFactor.getCarService();
-            carService.update(
-                    id, brand, model, color, mileage, gearbox, year, engineType, carClass, price, vin, plate, imagePath
-            );
+            Car car;
+            car = new Car(id, brand, model, color, mileage, gearbox, year, engineType, price, vin, plate, carClass, imagePath);
+            carService.update(car);
         } catch (ServiceException e) {
             logger.log(Level.ERROR, e);
             commandResult =  String.format(GO_TO_CAR_EDIT_PAGE, id, ERROR_MESSAGE, null);

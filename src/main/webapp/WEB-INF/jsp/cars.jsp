@@ -47,6 +47,9 @@
         <fmt:message key="car.color_red" var="red_color"/>
         <fmt:message key="car.color_yellow" var="yellow_color"/>
         <fmt:message key="car.color_white" var="white_color"/>
+
+        <fmt:message key="cars.nothing_found" var="nothing_found"/>
+        <fmt:message key="cars.back" var="back"/>
     </fmt:bundle>
     <title>${cars}</title>
 </head>
@@ -57,6 +60,11 @@
         ${find}: <input name="search" type="text" placeholder="Citroen C5">
         <button type="submit">&hookleftarrow;</button>
     </form>
+</div>
+<div class="nothing_found">
+    <c:if test="${empty requestScope.cars}">
+        <h2>${nothing_found}. <a href="Controller?command=gotocarspage">${back}</a>.</h2>
+    </c:if>
 </div>
 <div class="admin_button_panel">
     <c:if test="${sessionScope.user.role eq 'ADMIN'}">

@@ -16,6 +16,15 @@
     opacity: .7;
 }
 
+.nothing_found {
+    color: red;
+    text-align: center;
+}
+
+.nothing_found a {
+    text-decoration: none;
+}
+
 .user_panel {
     margin: 10px 0 3px 15px;
     display: flex;

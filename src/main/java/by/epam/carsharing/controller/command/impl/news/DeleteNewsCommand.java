@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Deletes {@link by.epam.carsharing.model.entity.News} from the database
+ * @see Command
+ */
 public class DeleteNewsCommand implements Command {
 
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();

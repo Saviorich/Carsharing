@@ -21,6 +21,11 @@ import java.util.Optional;
 
 import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
+/**
+ * Forwards to order page where user choose the dates of order
+ * @see Command
+ * @see by.epam.carsharing.model.entity.Order
+ */
 public class GoToOrderPage implements Command {
 
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();

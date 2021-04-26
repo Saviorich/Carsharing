@@ -22,6 +22,10 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Servlet that used for uploading images
+ * @see HttpServlet
+ */
 @WebServlet(name = "FileUploadServlet", urlPatterns = "/Upload")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
         maxFileSize = 1024 * 1024 * 5,
@@ -61,6 +65,14 @@ public class FileUploadingServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Uploads image with stream
+     *
+     * @param inputStream stream taken from {@link Part}
+     * @param path directory where image will be stored
+     * @return true if file was successfully uploaded
+     * @throws ServletException if IOException was thrown while uploading
+     */
     private boolean uploadFile(InputStream inputStream, String path) throws ServletException {
         try {
             byte[] bytes = new byte[inputStream.available()];
@@ -77,6 +89,10 @@ public class FileUploadingServlet extends HttpServlet {
         return true;
     }
 
+    /**
+     * Process the request
+     * @param request contains the command that will be executed
+     */
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name;
         Command command;

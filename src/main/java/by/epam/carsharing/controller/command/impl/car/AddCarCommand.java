@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Adds car to the database
+ * @see Command
+ * @see Car
+ */
 public class AddCarCommand implements Command {
 
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();

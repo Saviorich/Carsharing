@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/**
+ * Edits car information and changes it in the database
+ * @see Command
+ * @see Car
+ */
 public class EditCarCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(EditCarCommand.class);

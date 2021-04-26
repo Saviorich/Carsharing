@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Deletes {@link by.epam.carsharing.model.entity.car.CarComment} from database
+ * @see Command
+ */
 public class DeleteComment implements Command {
 
     private static final Logger logger = LogManager.getLogger(DeleteComment.class);

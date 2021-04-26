@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Removes user from the session and redirects to the news page
+ * @see Command
+ * @see javax.servlet.http.HttpSession
+ * @see HttpServletResponse
+ */
 public class SignOutCommand implements Command {
     private static final String GO_TO_NEWS_PAGE = "Controller?command=gotonewspage";
 

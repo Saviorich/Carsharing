@@ -18,6 +18,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * Take {@link User} from database and adds him to the session
+ * and redirects to the referer from the request
+ * @see Command
+ * @see HttpServletRequest
+ * @see HttpServletResponse
+ * @see HttpSession
+ */
 public class LoginCommand implements Command {
     private static final Logger logger = LogManager.getLogger(LoginCommand.class);
 

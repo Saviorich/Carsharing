@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Forwards to the page with all news
+ * @see News
+ * @see Command
+ * @see RequestDispatcher
+ */
 public class GoToNewsPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToNewsPage.class);

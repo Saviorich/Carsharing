@@ -20,6 +20,12 @@ import java.math.BigDecimal;
 
 import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
+/**
+ * Forwards to the payment page
+ * @see by.epam.carsharing.model.entity.Payment
+ * @see Command
+ * @see RequestDispatcher
+ */
 public class GoToPaymentPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToPaymentPage.class);

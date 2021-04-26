@@ -23,6 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
+/**
+ * Create and saves {@link Order} in the database
+ * @see Command
+ */
 public class MakeOrderCommand implements Command {
 
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();

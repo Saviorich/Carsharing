@@ -12,6 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Locale;
 
+/**
+ * Change locale in the session and redirects to the referer from request
+ * @see Command
+ * @see HttpServletResponse
+ * @see HttpServletRequest
+ */
 public class ChangeLanguageCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(ChangeLanguageCommand.class);

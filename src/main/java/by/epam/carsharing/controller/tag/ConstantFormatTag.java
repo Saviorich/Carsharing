@@ -12,6 +12,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
+/**
+ * Class that used in custom tag
+ * Formatting the given enum constant to the attribute in the jsp
+ * @see TagSupport
+ */
 public class ConstantFormatTag extends TagSupport {
 
     private static final Logger logger = LogManager.getLogger(ConstantFormatTag.class);

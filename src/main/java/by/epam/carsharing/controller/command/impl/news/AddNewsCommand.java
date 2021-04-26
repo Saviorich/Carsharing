@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * Adds {@link News} to the database
+ * @see Command
+ */
 public class AddNewsCommand implements Command {
 
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();

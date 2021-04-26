@@ -17,6 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Forwards to the page with cars
+ * @see Command
+ * @see Car
+ * @see RequestDispatcher
+ */
 public class GoToCarPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToNewsPage.class);

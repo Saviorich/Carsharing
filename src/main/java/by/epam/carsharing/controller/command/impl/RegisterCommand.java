@@ -23,6 +23,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Creates {@link User} and saves it in the database and in the session
+ * @see Command
+ * @see HttpSession
+ */
 public class RegisterCommand implements Command {
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
 

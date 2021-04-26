@@ -21,6 +21,11 @@ import java.util.List;
 
 import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
+/**
+ * Forwards to the page with car comments
+ * @see CarComment
+ * @see Command
+ */
 public class GoToCarComment implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToCarComment.class);

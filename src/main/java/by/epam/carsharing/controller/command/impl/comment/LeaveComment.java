@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Adds user's car comment in the database
+ * @see Command
+ * @see CarComment
+ */
 public class LeaveComment implements Command {
 
     private static final Logger logger = LogManager.getLogger(LeaveComment.class);

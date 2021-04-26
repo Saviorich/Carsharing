@@ -12,6 +12,11 @@ import java.io.IOException;
 
 import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
+/**
+ * Forwards to the login page
+ * @see Command
+ * @see RequestDispatcher
+ */
 public class GoToLoginPage implements Command {
 
     private static final String LOGIN_PAGE = "/login";

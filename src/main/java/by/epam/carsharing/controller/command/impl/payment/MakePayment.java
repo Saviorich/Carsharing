@@ -22,6 +22,10 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * Create and saves {@link Payment} in the database
+ * @see Command
+ */
 public class MakePayment implements Command {
 
     private static final Logger logger = LogManager.getLogger(MakePayment.class);

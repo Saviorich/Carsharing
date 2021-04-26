@@ -26,6 +26,11 @@ import java.util.Optional;
 
 import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
+/**
+ * Forwards to the editing pages for {@link News} or for {@link Car}
+ * depends on {@link Command} given in request
+ * @see HttpServletRequest
+ */
 public class GoToEditPage implements Command {
 
     private static final Logger logger = LogManager.getLogger(GoToEditPage.class);
@@ -72,6 +77,11 @@ public class GoToEditPage implements Command {
     }
 
 
+    /**
+     * Logic of command result
+     * @param user is used to choose the page to forward
+     * @param page page path
+     */
     private void executeCommandResult(HttpServletRequest request, HttpServletResponse response, User user, String page)
             throws ServletException, IOException {
         RequestDispatcher requestDispatcher;

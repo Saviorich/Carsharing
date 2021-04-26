@@ -11,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
+/**
+ * Represents main controller of the application as the {@link HttpServlet}
+ */
 @WebServlet(name = "Controller", value = "/Controller")
 public class Controller extends HttpServlet {
 
@@ -31,6 +34,10 @@ public class Controller extends HttpServlet {
         process(request, response);
     }
 
+    /**
+     * Process the request
+     * @param request contains the command that will be executed
+     */
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name;
         Command command;

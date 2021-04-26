@@ -1,5 +1,6 @@
 package by.epam.carsharing.controller.command.impl;
 
+import by.epam.carsharing.controller.command.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +12,12 @@ import java.io.IOException;
 
 import static by.epam.carsharing.util.RequestUtil.processRequestErrors;
 
-public class GoToRegisterPage implements by.epam.carsharing.controller.command.Command {
+/**
+ * Forwards to the register page
+ * @see Command
+ * @see RequestDispatcher
+ */
+public class GoToRegisterPage implements Command {
 
     private static final String REGISTER_PAGE = "/register";
 

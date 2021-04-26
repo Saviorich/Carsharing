@@ -15,6 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Changes order status and
+ * saves return comments and rejection comments in the database
+ * @see Command
+ * @see OrderStatus
+ * @see by.epam.carsharing.model.entity.Order
+ */
 public class ChangeOrderStatusCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger(ChangeOrderStatusCommand.class);

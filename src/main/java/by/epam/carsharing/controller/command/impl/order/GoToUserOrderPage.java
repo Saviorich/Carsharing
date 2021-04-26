@@ -20,6 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Forwards to the page with all orders if user's role is admin
+ * and only orders that made by user itself if role is user
+ * @see Command
+ * @see Role
+ * @see Order
+ */
 public class GoToUserOrderPage implements Command {
 
     private static final ServiceProvider SERVICE_PROVIDER = ServiceProvider.getInstance();
